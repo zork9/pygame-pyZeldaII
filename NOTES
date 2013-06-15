@@ -1,0 +1,2 @@
+- do not collide gameobject with itself
+- remember that creatures can be made by wizards, such as a beholderbat crossing
