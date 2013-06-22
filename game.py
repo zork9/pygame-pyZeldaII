@@ -33,7 +33,7 @@ class Game:
         pygame.init()
         pygame.font.init()
         screen = pygame.display.set_mode((640, 480))
-        font = pygame.font.SysFont("Times", 14)
+        font = pygame.font.SysFont("Times", 32)
         gameover = 0
 
         askplayers = 0 # NOTE: 2 Player flag
@@ -113,12 +113,12 @@ class Game:
             	    self.keydown = 1
                     # player 1 key controls
                     
-##                    if event.key == K_x:
-##                        if self.room.collide(player) == 2:
-##                            self.talker = self.room.talkto() # FIX
-##                            print "self.talker=%s" % self.talker
+                    if event.key == K_t:
+                        if self.room.collide(player) == 2:
+                            self.talker = self.room.talkto() # FIX
+                            print "self.talker=%s" % self.talker
 ##			if self.talker == None:
-##                        	id = player.pickup(self.room)
+##                       	id = player.pickup(self.room)
 ##				if id == 5:
 ##		                	self.taskbar.setrubysword()
 ##					player.setrubysword()

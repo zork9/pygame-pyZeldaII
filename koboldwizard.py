@@ -44,27 +44,35 @@ class KoboldWizard(Gameobject):
 	player.x < self.x+room.relativex+self.w and 
 	player.y > self.y+room.relativey and 
             player.y < self.y+room.relativey + self.h):
-            #print "collision with Kobold Wizard!"
+            print "collision with Kobold Wizard!"
             return 2 ## NOTE 2 for talker
 	else:
 	    return 0
 
-    def talk(self, screen):
+    def talk(self, screen,font):
         self.talkcounter += 1
         if self.talkcounter > 2:
                 self.talkcounter = 0
-        if self.talkcounter == 0:
-            return
         if self.talkcounter == 1:
-            screen.blit(self.font.render("Watch out for Gohma. He spits venom!", 8, (255,255,255)), (100,100))
-        elif self.talkcounter == 2:
-            screen.blit(self.font.render("Ask the alchemist for poison.", 8, (255,255,255)), (100,100))
-        for event in pygame.event.get():
-                if event.type == QUIT:
-                    return
-                elif event.type == KEYDOWN:
-            	    if event.key == K_z:
+            screen.blit(font.render("Watch out for Gohma. He spits venom!", 8, (255,255,255)), (100,100))
+	    talkflag = 1
+	    while talkflag == 1:
+                for event in pygame.event.get():
+                    if event.type == QUIT:
                         return
+                    elif event.type == KEYDOWN:
+            	        if event.key == K_t:
+                            return
+        elif self.talkcounter == 2:
+            screen.blit(font.render("Ask the alchemist for poison.", 8, (255,255,255)), (100,100))
+	    talkflag = 1
+	    while talkflag == 1:
+                for event in pygame.event.get():
+                    if event.type == QUIT:
+                        return
+                    elif event.type == KEYDOWN:
+            	        if event.key == K_t:
+                            return
        
 ##        screen.blit(font.render("Watch out for Gohma. He spits venom!",4, (255,255,255)), (10,100))
 ##        pygame.display.update()

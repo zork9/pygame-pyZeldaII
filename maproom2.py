@@ -41,10 +41,11 @@ class Maproom2(MaproomDungeon):
         self.eastwall1 = Tilebox(775,1,48,60,1,14,'./pics/walldungeoneast1-48x60.bmp')
         self.tileboxes.append(self.westwall1)
         self.tileboxes.append(self.eastwall1)
-	# ground level
-        self.gameobjects.append(Box(0,375,2400,400))
 
-        #self.gameobjects.append(KoboldWizard(540,120))
+	# ground level
+        self.gameobjects.append(Box(0,365,2400,400))
+        self.gameobjects.append(KoboldWizard(540,300))
+
         #self.gameobjects.append(Snake1(680,140))
         #self.gameobjects.append(Beholder(300,100))
         #self.gameobjects.append(BeholderBat(300,100))
@@ -111,6 +112,8 @@ class Maproom2(MaproomDungeon):
 		return i ## NOTE : returns collided entity (single)
 	return None
 
+    def talkto(self):
+        return self.gameobjects[1] 
 
     def removeobject(self, o):
         for i in range(0,len(self.gameobjects)):

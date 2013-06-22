@@ -98,7 +98,7 @@ class Maproom1(MaproomDungeon):
 		i.draw(screen,self)
 		
     def isroomdownexit(self):
-	if self.relativex  < -1000:
+	if self.relativex  < -500:
 		return 1
 	return 0
 
