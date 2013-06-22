@@ -65,6 +65,7 @@ class Maproom1(MaproomDungeon):
         
         
         # left NOTE : boxes collide so put them after enemies !
+        self.gameobjects.append(Box(0,75,2400,40))
         self.gameobjects.append(Box(0,375,2400,400))
 ##        self.gameobjects.append(Bullfrog(500,225))
 ##        self.gameobjects.append(Bullfrog(600,225))

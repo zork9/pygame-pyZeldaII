@@ -61,6 +61,13 @@ class MaproomDungeon(MaproomBase):
 		return 2
 	return 0
 
+	## NOTE override gameobj with i.collideup() == 2 when jumping high onto a platform
+    def collideup(self, player):	
+	for i in self.gameobjects:
+	    if i != None and i.collideup(self, player) == 1:
+		return 2
+	return 0
+
       
 # NOTE player can be enemy 
     def collide(self, player):	

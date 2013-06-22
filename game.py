@@ -114,7 +114,7 @@ class Game:
                     # player 1 key controls
                     
                     if event.key == K_t:
-                        if self.room.collide(player) == 2:
+                        if self.room.collide(player) == 4:
                             self.talker = self.room.talkto() # FIX
                             print "self.talker=%s" % self.talker
 ##			if self.talker == None:
@@ -214,6 +214,12 @@ class Game:
                 gameflag = 0
             elif f == 0:
                 1#gameflag = 1
+            if self.room.collideup(player) == 2:
+		self.room.moveup()
+		self.room.moveup()
+		self.room.moveup()
+		self.room.moveup()
+
             if self.room.collidewithropes(player) == 2:
                 
                 while gameflag == 0:
