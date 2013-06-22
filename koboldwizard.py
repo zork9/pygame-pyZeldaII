@@ -51,29 +51,36 @@ class KoboldWizard(Gameobject):
 
     def talk(self, screen,font):
         self.talkcounter += 1
-        if self.talkcounter > 2:
-                self.talkcounter = 0
-        if self.talkcounter == 1:
+        if self.talkcounter == 0:
+           return -1 
+        elif self.talkcounter == 1:
             screen.blit(font.render("Watch out for Gohma. He spits venom!", 8, (255,255,255)), (100,100))
 	    talkflag = 1
 	    while talkflag == 1:
                 for event in pygame.event.get():
                     if event.type == QUIT:
-                        return
+        	        pygame.key.set_repeat(10,100)
+                        talkflag = 0
                     elif event.type == KEYDOWN:
             	        if event.key == K_t:
-                            return
+        		    pygame.key.set_repeat(10,100)
+                            talkflag = 0
         elif self.talkcounter == 2:
+            # FIXME 
+	    pygame.key.set_repeat(1000,1000)
             screen.blit(font.render("Ask the alchemist for poison.", 8, (255,255,255)), (100,100))
 	    talkflag = 1
 	    while talkflag == 1:
                 for event in pygame.event.get():
                     if event.type == QUIT:
-                        return
+                        talkflag = 0
                     elif event.type == KEYDOWN:
             	        if event.key == K_t:
-                            return
-       
+                            talkflag = 0
+            pygame.key.set_repeat(10,100)
+      	    self.talkcounter = -1
+        return 1
+ 
 ##        screen.blit(font.render("Watch out for Gohma. He spits venom!",4, (255,255,255)), (10,100))
 ##        pygame.display.update()
 ##        sleep(1)

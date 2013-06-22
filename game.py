@@ -281,7 +281,8 @@ class Game:
                         self.room.removeobject(o)
 
             if self.talker != None:
-                self.talker.talk(screen,font)
+                if self.talker.talk(screen,font) < 0:
+			self.talker = None
 
             self.taskbar.draw()
             heartmeter.draw(screen)
