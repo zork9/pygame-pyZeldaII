@@ -53,7 +53,7 @@ class Maproom1(MaproomDungeon):
 
         self.gameobjects.append(Digdogger(1200,280))
         self.gameobjects.append(Digdogger(1970,320))
-        self.gameobjects.append(Ironknuckle(600,300))
+        ### self.gameobjects.append(Ironknuckle(600,300))
         self.gameobjects.append(Daira(100,300))
         self.gameobjects.append(Daira(900,300))
         self.gameobjects.append(Daira(1400,300))
@@ -98,7 +98,7 @@ class Maproom1(MaproomDungeon):
 		i.draw(screen,self)
 		
     def isroomdownexit(self):
-	if self.relativex  < -250 and self.relativex > -650 and self.relativey < -650:
+	if self.relativex  < -1000:
 		return 1
 	return 0
 
@@ -109,7 +109,7 @@ class Maproom1(MaproomDungeon):
     def exit(self, game):
 	if self.isroomdownexit():
 		self.setxyfromdown()
-		return 2
+		return 2 
 	return 0 
  
     def collidesword(self,player):

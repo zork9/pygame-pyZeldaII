@@ -99,7 +99,7 @@ class Dealer(Gameobject):
 	player.x-room.relativex < self.x+self.w and 
 	player.y-room.relativey > self.y -self.h and 
 	player.y-room.relativey < self.y + self.h):
-	    print "collision with Sword Dealer!"
+	    #print "collision with Sword Dealer!"
 	    return 1 
 	else:
 	    return 0

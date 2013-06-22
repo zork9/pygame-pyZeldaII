@@ -25,6 +25,7 @@ from maproomdungeonnorthwall import *
 from goblin1 import *
 from goblin2 import *
 from goblin3 import *
+from koboldwizard import *
 from tilebox import *
 #from snake1 import *
 from rubysword import *
@@ -35,20 +36,15 @@ class Maproom2(MaproomDungeon):
     "Room with a (big) map"
     def __init__(self,x,y):
         MaproomDungeon.__init__(self,x,y)
-        self.background = pygame.image.load('./pics/room-bg2.bmp').convert()
+        self.background = pygame.image.load('./pics/bg2-2400x600.bmp').convert()
         self.westwall1 = Tilebox(1,1,48,60,1,14,'./pics/walldungeonwest2-48x60.bmp')
         self.eastwall1 = Tilebox(775,1,48,60,1,14,'./pics/walldungeoneast1-48x60.bmp')
         self.tileboxes.append(self.westwall1)
         self.tileboxes.append(self.eastwall1)
+	# ground level
+        self.gameobjects.append(Box(0,375,2400,400))
 
-        self.gameobjects.append(Goblin3(100,100))
-        self.gameobjects.append(Goblin3(150,100))
-        self.gameobjects.append(Goblin3(240,140))
-        self.gameobjects.append(Goblin3(350,180))
-        self.gameobjects.append(Goblin3(380,180))
-        self.gameobjects.append(Goblin3(400,100))
-        self.gameobjects.append(Goblin3(450,100))
-        self.gameobjects.append(Goblin3(540,120))
+        #self.gameobjects.append(KoboldWizard(540,120))
         #self.gameobjects.append(Snake1(680,140))
         #self.gameobjects.append(Beholder(300,100))
         #self.gameobjects.append(BeholderBat(300,100))
@@ -92,7 +88,7 @@ class Maproom2(MaproomDungeon):
 		i.draw(screen,self)
 	
     def isroomupexit(self):
-	if self.relativey  > 150:
+	if self.relativex  < -550:
 		return 1
 	return 0
 

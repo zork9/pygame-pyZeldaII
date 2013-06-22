@@ -116,7 +116,7 @@ class Goblin3(Gameobject):
 	    return 0 ## for game self.talker
 
 
-    def fight(self,room,player):
+    def fight(self,room,player,keydown):
         self.fightcounter = 1
         o = player.collidewithenemyweapon(room,self)
         if o:

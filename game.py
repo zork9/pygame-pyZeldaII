@@ -190,7 +190,7 @@ class Game:
 #                    self.taskbar.setrubysword()
                     
             if self.room.collide(player) == 1 or player.hitpoints <= 0: # NOTE: return 1 after player heartmeter runs out (player.hit)
-        	endingimage = pygame.image.load('./pics/endingscreen.bmp').convert()
+        	endingimage = pygame.image.load('./pics/endingscreen2.bmp').convert()
         	while gameover == 0:
 	            	pygame.display.update()
         	    	screen.blit(endingimage, (0,0))
@@ -304,7 +304,7 @@ class Game:
         if (roomnumber == 0):
             return
         # NOTE: 1_X  woods around haunted castle
-        elif (roomnumber == 1):
+        if (roomnumber == 1):
             self.talker = None
             self.room = Maproom1(self.x,self.y)
         elif (roomnumber == 1.1):

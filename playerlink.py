@@ -81,7 +81,6 @@ class PlayerLink(PlayerBase):
         for o in room.gameobjects:
             
             if o and o.collidewithsword(room,self):
-                print '123'
                 return self ## NOTE : returns collided entity (single)		
 	return None
 

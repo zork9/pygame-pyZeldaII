@@ -84,19 +84,19 @@ class Digdogger(Gameobject):
 	player.x-room.relativex < self.x+self.w+self.w and 
 	player.y-room.relativey > self.y-self.h and 
 	player.y-room.relativey < self.y + self.h +self.h):
-	    print "collision with Digdogger!"
+	    #print "collision with Digdogger!"
 	    return 1 
 	else:
 	    return 0 ## for game self.talker
 
 
     def collidewithsword(self, room, player):
-        print 'Digdogger x=%d y=%d player x=%d y=%d' % (self.x,self.y,player.x-room.relativex,player.y-room.relativey)
+        #print 'Digdogger x=%d y=%d player x=%d y=%d' % (self.x,self.y,player.x-room.relativex,player.y-room.relativey)
 	if (player.x-room.relativex > self.x -self.w  and 
 	player.x-room.relativex < self.x+self.w and 
 	player.y-room.relativey > self.y -self.h and 
 	player.y-room.relativey < self.y + self.h):
-	    print "collision with Sword Digdogger!"
+	    #print "collision with Sword Digdogger!"
 	    return 1 
 	else:
 	    return 0

@@ -32,7 +32,7 @@ class Maproom(MaproomBase):
 
         
     def draw(self,screen):
-	##print "x=%d" % self.relativex 
+	##print "x=%d" % self.relativex
         screen.blit(self.background, (0+self.relativex, 0+self.relativey))
 
     def pickup(self, player):
@@ -65,6 +65,7 @@ class Maproom(MaproomBase):
         self.relativey = self.relativey + 10
 
     def moveleft(self):
+	print "relx=%d" % self.relativex
         self.direction = "west"
 	self.prevx = self.relativex + 10
 	self.prevy = self.relativey
@@ -75,7 +76,6 @@ class Maproom(MaproomBase):
 	self.prevx = self.relativex - 10
 	self.prevy = self.relativey
         self.relativex = self.relativex + 10
-
         
     def setxyfromleft(self):
         self.relativex = 0 

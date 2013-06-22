@@ -65,12 +65,16 @@ class MaproomBase:
 	self.prevx = self.relativex + 1
 	self.prevy = self.relativey
         self.relativex = self.relativex - 10
-
+	### print "relx=%d" % self.relativex
+	
     def moveright(self):
+	if self.relativex >= 0:
+		self.moveleft()
         self.direction = "east"
 	self.prevx = self.relativex - 1
 	self.prevy = self.relativey
         self.relativex = self.relativex + 10
+	### print "relx=%d" % self.relativex
 
     def setxyup(self):
         self.x = -80 

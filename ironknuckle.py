@@ -248,12 +248,12 @@ class Ironknuckle(Gameobject):
 
 		 
     def collidewithsword(self, room, player):
-        print 'Ironknuckle x=%d y=%d player x=%d y=%d' % (self.x,self.y,player.x-room.relativex,player.y-room.relativey)
+        #print 'Ironknuckle x=%d y=%d player x=%d y=%d' % (self.x,self.y,player.x-room.relativex,player.y-room.relativey)
 	if (player.x-room.relativex > self.x  and 
 	player.x-room.relativex < self.x+self.w and 
 	player.y-room.relativey > self.y and 
 	player.y-room.relativey < self.y + self.h):
-	    print "collision with Sword Ironknuckle!"
+	    #print "collision with Sword Ironknuckle!"
 	    return 1 
 	else:
 	    return 0

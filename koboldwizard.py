@@ -36,7 +36,7 @@ class KoboldWizard(Gameobject):
     def draw(self, screen, room):
         self.stimlibleft.draw(screen, self.x+room.relativex,self.y+room.relativey)    
 	     
-    def update(self,room):
+    def update(self,room,player):
         1
 
     def collide(self, room, player):
