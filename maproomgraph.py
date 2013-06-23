@@ -44,4 +44,24 @@ class MaproomGraph:
     def adddownconnection(self, index, node):
 	self.graph[index].downconnections.append(node)
 
+    def moveup(self, index):
+	self.graph[index].current.moveup()
+	for i in self.graph[index].downconnections:
+		i.moveup()
+
+    def movedown(self, index):
+	self.graph[index].current.movedown()
+	for i in self.graph[index].upconnections:
+		i.movedown()
+
+    def moveleft(self, index):
+	self.graph[index].current.moveleft()
+	for i in self.graph[index].rightconnections:
+		i.moveleft()
+
+    def moveright(self, index):
+	self.graph[index].current.moveright()
+	for i in self.graph[index].leftconnections:
+		i.moveright()
+
  

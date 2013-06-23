@@ -40,9 +40,9 @@ from daira import *
 
 class MaproomCatCastle1(MaproomGraph, MaproomCat):
     "Room with a (big) map"
-    def __init__(self):
+    def __init__(self,xx,yy):
         MaproomGraph.__init__(self)
-        MaproomCat.__init__(self,0,0)
+        MaproomCat.__init__(self,xx,yy)
         #self.background = pygame.image.load('./pics/parapapalace-test.bmp').convert()
 	self.graph.append(MaproomGraphNode(MaproomCastle1(0,0)))
 
@@ -50,21 +50,38 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
  
     def draw(self,screen,player):
         # draw bg
-        screen.blit(self.background, (0+self.relativex, 0+self.relativey))
+        ###screen.blit(self.background, (0+self.relativex, 0+self.relativey))
+	self.graph[self.graphindex].current.draw(screen,player)
 	
 	print "dir = %s sidedir = %s" % (self.direction,self.sidedirection)
 	if self.direction == "south":
-		for c in self.graph[self.graphindex].downconnections:
-			c.draw(screen,player)
-	if self.direction == "north":
 		for c in self.graph[self.graphindex].upconnections:
 			c.draw(screen,player)
-	if self.sidedirection == "east":
-		for c in self.graph[self.graphindex].rightconnections:
+	if self.direction == "north":
+		for c in self.graph[self.graphindex].downconnections:
 			c.draw(screen,player)
-
-	if self.sidedirection == "west":
+	if self.sidedirection == "east":
 		for c in self.graph[self.graphindex].leftconnections:
 			c.draw(screen,player)
 
+	if self.sidedirection == "west":
+		for c in self.graph[self.graphindex].rightconnections:
+			c.draw(screen,player)
 
+    def moveup(self):
+        MaproomGraph.moveup(self,self.graphindex)
+        MaproomCat.moveup(self)
+
+    def movedown(self):
+        MaproomGraph.movedown(self,self.graphindex)
+        MaproomCat.movedown(self)
+
+    def moveleft(self):
+        MaproomGraph.moveleft(self,self.graphindex)
+        MaproomCat.moveleft(self)
+
+    def moveright(self):
+        MaproomGraph.moveright(self,self.graphindex)
+        MaproomCat.moveright(self)
+
+	

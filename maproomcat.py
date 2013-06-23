@@ -21,6 +21,7 @@ from tree import *
 from tree2 import *
 from dungeonentrance1 import *
 from maproomdungeon import *
+from maproomgraph import *
 from maproomdungeonnorthwall import *
 from goblin1 import *
 from goblin2 import *
@@ -37,21 +38,21 @@ from deeler import *
 from daira import *
 
 class MaproomCat(MaproomDungeon):
-    "Room with a (big) map"
-    def __init__(self,x,y):
-        MaproomDungeon.__init__(self,x,y)
-        self.background = pygame.image.load('./pics/parapapalace-test.bmp').convert()
+    "Room as part of a bigger map-room"
+    def __init__(self,xx,yy):
+        MaproomDungeon.__init__(self,xx,yy)
+	
        	self.WIDTH = 640
 	self.HEIGHT = 480 
         # left NOTE : boxes collide so put them after enemies !
 	# base
-        self.gameobjects.append(Box(0,65,self.WIDTH,50))
+#        self.gameobjects.append(Box(0,65,self.WIDTH,50))
 	# roof
-        self.gameobjects.append(Box(0,422,self.WIDTH,400))
+#        self.gameobjects.append(Box(0,422,self.WIDTH,400))
 
 	# castle floors
-        self.gameobjects.append(Box(200,390,self.WIDTH,400))
-        self.gameobjects.append(Box(280,360,self.WIDTH,400))
+#        self.gameobjects.append(Box(200,390,self.WIDTH,400))
+#        self.gameobjects.append(Box(280,360,self.WIDTH,400))
 
     def draw(self,screen,player):
         # draw bg
@@ -104,8 +105,50 @@ class MaproomCat(MaproomDungeon):
 		return i ## NOTE : returns collided entity (single), put enemies before walls in gameobjects
 	return None
 
+    def moveup(self):
+        self.direction = "north"
+	self.prevx = self.relativex
+	self.prevy = self.relativey + 1
+        self.relativey = self.relativey - 10
+
+    def movedown(self):
+        self.direction = "south"
+	self.prevx = self.relativex
+	self.prevy = self.relativey - 1
+        self.relativey = self.relativey + 10
+
+    def moveleft(self):
+        self.direction = "west"
+        self.sidedirection = "west"
+	self.prevx = self.relativex + 1
+	self.prevy = self.relativey
+        self.relativex = self.relativex - 10
+	### print "self.lx=%d" % self.self.lativex
+	
+    def moveright(self):
+	if self.relativex >= 0:
+		self.moveleft()
+        self.direction = "east"
+        self.sidedirection = "east"
+	self.prevx = self.relativex - 1
+	self.prevy = self.relativey
+        self.relativex = self.relativex + 10
+	### pself.nt "relx=%d" % self.relativex
+
 
     def removeobject(self, o):
         for i in range(0,len(self.gameobjects)):
             if self.gameobjects[i] == o:
                 self.gameobjects[i] = None
+
+
+    def fall(self, player):
+	### no connections fall
+        self.graph[self.graphindex].current.moveup()
+        for i in self.graph[self.graphindex].current.gameobjects:
+	    if i != None and i.fallcollide(self.graph[self.graphindex].current, player):
+                self.graph[self.graphindex].current.movedown()
+		return 2 # 1 kills game
+        
+        return 0
+

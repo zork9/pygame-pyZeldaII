@@ -48,7 +48,7 @@ class Game:
         self.x = 0
         self.y = 0
         
-        ### self.room = MaproomCatCastle1()
+        ###self.room = MaproomCatCastle1(0,0)
         self.room = Maproom1(0,0)
         lifemeter = LifeMeter(0,0)
         manameter = ManaMeter(250,0)

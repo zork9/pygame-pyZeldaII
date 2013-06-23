@@ -128,6 +128,36 @@ class MaproomCastle1(MaproomDungeon):
 		return i ## NOTE : returns collided entity (single), put enemies before walls in gameobjects
 	return None
 
+#    def moveup(self,r):
+#        r.direction = "north"
+#	r.prevx = r.relativex
+#	r.prevy = r.relativey + 1
+#        r.relativey = r.relativey - 10
+
+#    def movedown(self,r):
+#        r.direction = "south"
+#	r.prevx = r.relativex
+#	r.prevy = r.relativey - 1
+#        r.relativey = r.relativey + 10
+
+#    def moveleft(self,r):
+#        r.direction = "west"
+#        r.sidedirection = "west"
+#	r.prevx = r.relativex + 1
+#	r.prevy = r.relativey
+#        r.relativex = r.relativex - 10
+	### print "self.lx=%d" % self.self.lativex
+	
+#    def moveright(self,r):
+#	if r.relativex >= 0:
+#		r.moveleft()
+#        r.direction = "east"
+#        r.sidedirection = "east"
+#	r.prevx = r.relativex - 1
+#	r.prevy = r.relativey
+#        r.relativex = r.relativex + 10
+	### pr.nt "relx=%d" % r.relativex
+
 
     def removeobject(self, o):
         for i in range(0,len(self.gameobjects)):
