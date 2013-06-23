@@ -36,15 +36,17 @@ from ironknuckle import *
 from deeler import *
 from daira import *
 
-class MaproomCastle2(MaproomDungeon):
+class MaproomCastle1(MaproomDungeon):
     "Room with a (big) map"
     def __init__(self,x,y):
         MaproomDungeon.__init__(self,x,y)
-        #self.background = pygame.image.load('./pics/parapapalace-test.bmp').convert()
-        self.background = pygame.image.load('./pics/parapapalace-test.bmp').convert()
+        self.background = pygame.image.load('./pics/bg2-2400x600.bmp').convert()
 
 	self.WIDTH = 640
 
+
+        ### self.gameobjects.append(Ironknuckle(600,300))
+        
         # left NOTE : boxes collide so put them after enemies !
 	# roof
         self.gameobjects.append(Box(0,65,self.WIDTH,50))

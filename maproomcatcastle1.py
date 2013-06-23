@@ -22,6 +22,7 @@ from tree2 import *
 from dungeonentrance1 import *
 from maproomcat import *
 from maproomcastle1 import *
+from maproomcastle2 import *
 from maproomgraph import *
 from maproomdungeonnorthwall import *
 from goblin1 import *
@@ -43,32 +44,42 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
     def __init__(self,xx,yy):
         MaproomGraph.__init__(self)
         MaproomCat.__init__(self,xx,yy)
-	self.graph.append(MaproomGraphNode(MaproomCastle1(0,0)))
-
+	node1 = MaproomGraphNode(MaproomCastle1(0,0))
+	self.graph.append(node1)
+	node2 = MaproomGraphNode(MaproomCastle2(0,0))
+	self.graph.append(node2)
+	self.addrightconnection(0,node2)
 	self.graphindex = 0
  
     def draw(self,screen,player):
         # draw bg
-	print "789> rely=%d" % self.relativey
-        ###FIX NOTE 
-        ###FIXNOTE blit with these global relx rely 
-	screen.blit(self.graph[self.graphindex].current.background, (0+self.relativex, 0+self.relativey))
-	### self.graph[self.graphindex].current.draw(screen,player,self.relativex,self.relativey)
+	print "789> rely=%d %s" % (self.relativey,self)
+        ###FIX NOTE blit with these global relx rely 
+        ###FIX NOTE xset yset 
+	screen.blit(self.graph[self.graphindex].current.background, (self.graph[self.graphindex].current.relativex, self.graph[self.graphindex].current.relativey))
 	### self.graph[self.graphindex].current.draw(screen,player)
 	
-	print "dir = %s sidedir = %s" % (self.direction,self.sidedirection)
+	print "dir = %s sidedir = %s" % (self.direction, self.sidedirection)
 	if self.direction == "south":
 		for c in self.graph[self.graphindex].upconnections:
-			c.draw(screen,player)
+			c.current.xset(self.relativex-640)
+			c.current.yset(self.relativey)
+			c.current.draw(screen,player)
 	if self.direction == "north":
 		for c in self.graph[self.graphindex].downconnections:
-			c.draw(screen,player)
+			c.current.xset(self.relativex-640)
+			c.current.yset(self.relativey)
+			c.current.draw(screen,player)
 	if self.sidedirection == "east":
 		for c in self.graph[self.graphindex].leftconnections:
-			c.draw(screen,player)
+			c.current.xset(self.relativex-640)
+			c.current.yset(self.relativey)
+			c.current.draw(screen,player)
 	if self.sidedirection == "west":
 		for c in self.graph[self.graphindex].rightconnections:
-			c.draw(screen,player)
+			c.current.xset(self.relativex-640)
+			c.current.yset(self.relativey)
+			c.current.draw(screen,player)
 	
     def moveup(self):
         MaproomGraph.moveupnode(self, self.graphindex)
@@ -95,8 +106,28 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
         
         return 0
 
+    def collideup(self, player):	
+	for i in self.graph[self.graphindex].current.gameobjects:
+	    if i != None and i.collideup(self, player) == 1:
+		return 2
+	return 0
+
     def yplus(self,dy):
 	print "123> y=%d" % self.relativey
 	MaproomGraph.yplus(self,dy,self.graphindex)
 	MaproomCat.yplus(self,dy)
-	self.relativey += dy	
+	self.relativey += dy
+
+#    def yget(self):
+#	print "123> y=%d" % self.relativey
+#	MaproomGraph.yplus(self,dy,self.graphindex)
+#	MaproomCat.yplus(self,dy)
+#	self.relativey += dy
+
+    def yset(self,y):
+	self.relativey = dy
+
+    def xset(self,x):
+	self.relativex = dx
+
+	

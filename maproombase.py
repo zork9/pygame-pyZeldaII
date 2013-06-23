@@ -39,6 +39,20 @@ class MaproomBase:
 	self.prevy = self.relativey 
 	self.relativey += dy
  
+    def yget(self):
+	return self.relativey 
+ 
+    def yset(self, y):
+	self.prevy = self.relativey 
+	self.relativey = y
+ 
+    def xget(self):
+	return self.relativex 
+ 
+    def xset(self, x):
+	self.prevx = self.relativex 
+	self.relativey = x
+ 
     def draw(self,screen):
 	##print "x=%d" % self.relativex 
         screen.blit(self.background, (0+self.relativex, 0+self.relativey))
