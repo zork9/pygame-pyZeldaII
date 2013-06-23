@@ -50,8 +50,8 @@ class Game:
         
         self.room = MaproomCatCastle1(0,0)
         ### self.room = Maproom1(0,0)
-        lifemeter = LifeMeter(250,0)
         manameter = ManaMeter(0,0)
+        lifemeter = LifeMeter(250,0)
         player = PlayerLink(lifemeter,manameter)
 ##        selector = Selector(screen, font)
 ##

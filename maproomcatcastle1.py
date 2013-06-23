@@ -46,8 +46,8 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
         MaproomCat.__init__(self,xx,yy)
 	node1 = MaproomGraphNode(MaproomCastle1(0,0))
 	self.graph.append(node1)
-	node2 = MaproomGraphNode(MaproomCastle2(0,0))
-	self.graph.append(node2)
+	node2 = MaproomGraphNode(MaproomCastle2(640,0)) ## NOTE x=640
+	###self.graph.append(node2)
 	self.addrightconnection(0,node2)
 	self.graphindex = 0
  
@@ -62,22 +62,22 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
 	print "dir = %s sidedir = %s" % (self.direction, self.sidedirection)
 	if self.direction == "south":
 		for c in self.graph[self.graphindex].upconnections:
-			c.current.xset(self.relativex-640)
+			c.current.xset(self.relativex+0)
 			c.current.yset(self.relativey)
 			c.current.draw(screen,player)
 	if self.direction == "north":
 		for c in self.graph[self.graphindex].downconnections:
-			c.current.xset(self.relativex-640)
+			c.current.xset(self.relativex+0)
 			c.current.yset(self.relativey)
 			c.current.draw(screen,player)
 	if self.sidedirection == "east":
 		for c in self.graph[self.graphindex].leftconnections:
-			c.current.xset(self.relativex-640)
+			c.current.xset(self.relativex+0)
 			c.current.yset(self.relativey)
 			c.current.draw(screen,player)
 	if self.sidedirection == "west":
 		for c in self.graph[self.graphindex].rightconnections:
-			c.current.xset(self.relativex-640)
+			c.current.xset(self.relativex+0)
 			c.current.yset(self.relativey)
 			c.current.draw(screen,player)
 	
@@ -99,9 +99,33 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
 
     def fall(self, player):
         self.moveup()
+	if self.direction == "south":
+		for c in self.graph[self.graphindex].upconnections:
+			c.current.yset(self.relativey)
+	if self.direction == "north":
+		for c in self.graph[self.graphindex].downconnections:
+			c.current.yset(self.relativey)
+	if self.sidedirection == "east":
+		for c in self.graph[self.graphindex].leftconnections:
+			c.current.xset(self.relativex+0)
+	if self.sidedirection == "west":
+		for c in self.graph[self.graphindex].rightconnections:
+			c.current.xset(self.relativex+0)
         for i in self.graph[self.graphindex].current.gameobjects:
 	    if i != None and i.fallcollide(self, player):
                 self.movedown()
+		if self.direction == "south":
+			for c in self.graph[self.graphindex].upconnections:
+				c.current.yset(self.relativey)
+		if self.direction == "north":
+			for c in self.graph[self.graphindex].downconnections:
+				c.current.yset(self.relativey)
+		if self.sidedirection == "east":
+			for c in self.graph[self.graphindex].leftconnections:
+				c.current.xset(self.relativex+0)
+		if self.sidedirection == "west":
+			for c in self.graph[self.graphindex].rightconnections:
+				c.current.xset(self.relativex+0)
 		return 2 # 1 kills game
         
         return 0

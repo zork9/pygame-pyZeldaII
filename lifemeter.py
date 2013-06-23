@@ -69,5 +69,5 @@ class LifeMeter:
 	j = 0
 	for i in self.hearts:
 		#if i != None:
-        	screen.blit(i.image, (17+j*17, 26))
+        	screen.blit(i.image, (17+self.x+j*17, self.y+26))
 		j += 1

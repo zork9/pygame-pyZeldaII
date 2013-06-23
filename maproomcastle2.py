@@ -36,7 +36,7 @@ from ironknuckle import *
 from deeler import *
 from daira import *
 
-class MaproomCastle1(MaproomDungeon):
+class MaproomCastle2(MaproomDungeon):
     "Room with a (big) map"
     def __init__(self,x,y):
         MaproomDungeon.__init__(self,x,y)
