@@ -51,7 +51,8 @@ class MaproomDungeon(MaproomBase):
         
     def draw(self,screen):
 	##print "x=%d" % self.relativex 
-        screen.blit(self.background, (0+self.relativex, 0+self.relativey))
+        ###FIX NOTE 
+	### screen.blit(self.background, (0+self.relativex, 0+self.relativey))
         for w in self.northwalls:
             w.draw(screen,self.relativex,self.relativey)
 

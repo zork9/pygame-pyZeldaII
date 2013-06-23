@@ -40,6 +40,7 @@ class MaproomCastle1(MaproomDungeon):
     "Room with a (big) map"
     def __init__(self,x,y):
         MaproomDungeon.__init__(self,x,y)
+        #self.background = pygame.image.load('./pics/parapapalace-test.bmp').convert()
         self.background = pygame.image.load('./pics/parapapalace-test.bmp').convert()
 
 	self.WIDTH = 640
@@ -58,9 +59,9 @@ class MaproomCastle1(MaproomDungeon):
         ### self.gameobjects.append(Ironknuckle(600,300))
         
         # left NOTE : boxes collide so put them after enemies !
-	# base
-        self.gameobjects.append(Box(0,65,self.WIDTH,50))
 	# roof
+        # self.gameobjects.append(Box(0,65,self.WIDTH,50))
+	# base
         self.gameobjects.append(Box(0,422,self.WIDTH,400))
 
 	# castle floors
@@ -83,7 +84,9 @@ class MaproomCastle1(MaproomDungeon):
  
     def draw(self,screen,player):
         # draw bg
-        screen.blit(self.background, (0+self.relativex, 0+self.relativey))
+	print "abc> %d" % self.relativey
+        ### is in maproomdungeon screen.blit(self.background, (0+self.relativex, 0+self.relativey))
+	screen.blit(self.background, (0+self.relativex, 0+self.relativey))
         # draw walls
         MaproomDungeon.draw(self,screen)
         for t in self.tileboxes:
@@ -132,36 +135,35 @@ class MaproomCastle1(MaproomDungeon):
 		return i ## NOTE : returns collided entity (single), put enemies before walls in gameobjects
 	return None
 
-#    def moveup(self,r):
-#        r.direction = "north"
-#	r.prevx = r.relativex
-#	r.prevy = r.relativey + 1
-#        r.relativey = r.relativey - 10
+    def moveup(self):
+        self.direction = "north"
+	self.prevx = self.relativex
+	self.prevy = self.relativey + 1
+        self.relativey = self.relativey - 10
 
-#    def movedown(self,r):
-#        r.direction = "south"
-#	r.prevx = r.relativex
-#	r.prevy = r.relativey - 1
-#        r.relativey = r.relativey + 10
+    def movedown(self):
+        self.direction = "south"
+	self.prevx = self.relativex
+	self.prevy = self.relativey - 1
+        self.relativey = self.relativey + 10
 
-#    def moveleft(self,r):
-#        r.direction = "west"
-#        r.sidedirection = "west"
-#	r.prevx = r.relativex + 1
-#	r.prevy = r.relativey
-#        r.relativex = r.relativex - 10
+    def moveleft(self):
+        self.direction = "west"
+        self.sidedirection = "west"
+	self.prevx = self.relativex + 1
+	self.prevy = self.relativey
+        self.relativex = self.relativex - 10
 	### print "self.lx=%d" % self.self.lativex
 	
-#    def moveright(self,r):
-#	if r.relativex >= 0:
-#		r.moveleft()
-#        r.direction = "east"
-#        r.sidedirection = "east"
-#	r.prevx = r.relativex - 1
-#	r.prevy = r.relativey
-#        r.relativex = r.relativex + 10
+    def moveright(self):
+	if self.relativex >= 0:
+		self.moveleft()
+        self.direction = "east"
+        self.sidedirection = "east"
+	self.prevx = self.relativex - 1
+	self.prevy = self.relativey
+        self.relativex = self.relativex + 10
 	### pr.nt "relx=%d" % r.relativex
-
 
     def removeobject(self, o):
         for i in range(0,len(self.gameobjects)):

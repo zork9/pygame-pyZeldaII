@@ -1,5 +1,5 @@
 
-# Copyright (C) Johan Ceuppens 2010
+# Copyright (C) Johan Ceuppens 2010-2013
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -43,15 +43,18 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
     def __init__(self,xx,yy):
         MaproomGraph.__init__(self)
         MaproomCat.__init__(self,xx,yy)
-        #self.background = pygame.image.load('./pics/parapapalace-test.bmp').convert()
 	self.graph.append(MaproomGraphNode(MaproomCastle1(0,0)))
 
 	self.graphindex = 0
  
     def draw(self,screen,player):
         # draw bg
-        ###screen.blit(self.background, (0+self.relativex, 0+self.relativey))
-	self.graph[self.graphindex].current.draw(screen,player)
+	print "789> rely=%d" % self.relativey
+        ###FIX NOTE 
+        ###FIXNOTE blit with these global relx rely 
+	screen.blit(self.graph[self.graphindex].current.background, (0+self.relativex, 0+self.relativey))
+	### self.graph[self.graphindex].current.draw(screen,player,self.relativex,self.relativey)
+	### self.graph[self.graphindex].current.draw(screen,player)
 	
 	print "dir = %s sidedir = %s" % (self.direction,self.sidedirection)
 	if self.direction == "south":
@@ -63,25 +66,37 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
 	if self.sidedirection == "east":
 		for c in self.graph[self.graphindex].leftconnections:
 			c.draw(screen,player)
-
 	if self.sidedirection == "west":
 		for c in self.graph[self.graphindex].rightconnections:
 			c.draw(screen,player)
-
+	
     def moveup(self):
-        MaproomGraph.moveup(self,self.graphindex)
+        MaproomGraph.moveupnode(self, self.graphindex)
         MaproomCat.moveup(self)
 
     def movedown(self):
-        MaproomGraph.movedown(self,self.graphindex)
+        MaproomGraph.movedownnode(self, self.graphindex)
         MaproomCat.movedown(self)
 
     def moveleft(self):
-        MaproomGraph.moveleft(self,self.graphindex)
+        MaproomGraph.moveleftnode(self,self.graphindex)
         MaproomCat.moveleft(self)
 
     def moveright(self):
-        MaproomGraph.moveright(self,self.graphindex)
+        MaproomGraph.moverightnode(self,self.graphindex)
         MaproomCat.moveright(self)
 
-	
+    def fall(self, player):
+        self.moveup()
+        for i in self.graph[self.graphindex].current.gameobjects:
+	    if i != None and i.fallcollide(self, player):
+                self.movedown()
+		return 2 # 1 kills game
+        
+        return 0
+
+    def yplus(self,dy):
+	print "123> y=%d" % self.relativey
+	MaproomGraph.yplus(self,dy,self.graphindex)
+	MaproomCat.yplus(self,dy)
+	self.relativey += dy	

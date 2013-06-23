@@ -48,10 +48,10 @@ class Game:
         self.x = 0
         self.y = 0
         
-        ###self.room = MaproomCatCastle1(0,0)
+        ## self.room = MaproomCatCastle1(0,0)
         self.room = Maproom1(0,0)
-        lifemeter = LifeMeter(0,0)
-        manameter = ManaMeter(250,0)
+        lifemeter = LifeMeter(250,0)
+        manameter = ManaMeter(0,0)
         player = PlayerLink(lifemeter,manameter)
 ##        selector = Selector(screen, font)
 ##
@@ -225,7 +225,7 @@ class Game:
 		self.room.moveup()
 		self.room.moveup()
 		self.room.moveup()
-
+                         
             if self.room.collidewithropes(player) == 2:
                 
                 while gameflag == 0:

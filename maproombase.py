@@ -30,7 +30,15 @@ class MaproomBase:
         self.background = pygame.image.load('./pics/blank.bmp').convert()
         self.direction = "north"
         self.sidedirection = "north"
-        
+       
+    def yminus(self, dy):
+	self.prevy = self.relativey 
+	self.relativey -= dy
+ 
+    def yplus(self, dy):
+	self.prevy = self.relativey 
+	self.relativey += dy
+ 
     def draw(self,screen):
 	##print "x=%d" % self.relativex 
         screen.blit(self.background, (0+self.relativex, 0+self.relativey))

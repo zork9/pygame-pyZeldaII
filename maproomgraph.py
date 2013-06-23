@@ -44,24 +44,33 @@ class MaproomGraph:
     def adddownconnection(self, index, node):
 	self.graph[index].downconnections.append(node)
 
-    def moveup(self, index):
+    def moveupnode(self, index):
 	self.graph[index].current.moveup()
 	for i in self.graph[index].downconnections:
 		i.moveup()
 
-    def movedown(self, index):
+    def movedownnode(self, index):
 	self.graph[index].current.movedown()
 	for i in self.graph[index].upconnections:
 		i.movedown()
 
-    def moveleft(self, index):
+    def moveleftnode(self, index):
 	self.graph[index].current.moveleft()
 	for i in self.graph[index].rightconnections:
 		i.moveleft()
 
-    def moveright(self, index):
+    def moverightnode(self, index):
 	self.graph[index].current.moveright()
 	for i in self.graph[index].leftconnections:
 		i.moveright()
 
- 
+    def yplus(self, dy, index):
+	### FIX use yset for all
+	self.graph[index].current.yplus(dy)
+
+    def draw(self,screen,player):
+	screen.blit(self.graph[self.graphindex].current.background, 
+	(self.graph[self.graphindex].current.relativex, self.graph[self.graphindex].current.self.relativey))
+	# FIX draw connections
+
+

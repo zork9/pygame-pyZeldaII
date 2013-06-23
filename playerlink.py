@@ -124,7 +124,9 @@ class PlayerLink(PlayerBase):
 
     def update(self,room):
        if self.jumpcounter > 0 and self.jumpcounter < 200:
-            room.relativey += 20
+            ###FIXMENOTE room.relativey += 20
+            room.yplus(20)
+	    print "#############456> y=%d %s" % (room.relativey,room)
             self.jumpcounter += 15
        else:   
             self.jumpcounter = 0

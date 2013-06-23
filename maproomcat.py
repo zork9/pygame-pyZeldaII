@@ -136,19 +136,23 @@ class MaproomCat(MaproomDungeon):
 	### pself.nt "relx=%d" % self.relativex
 
 
+    def fall(self, player):
+	### no connections fall
+        self.graph[self.graphindex].current.moveup()
+        self.moveup()
+        for i in self.graph[self.graphindex].current.gameobjects:
+	    if i != None and i.fallcollide(self.graph[self.graphindex].current, player):
+                self.graph[self.graphindex].current.movedown()
+		### NOTE 
+                self.movedown()
+		return 2 # 1 kills game
+        
+        return 0
+
+
     def removeobject(self, o):
         for i in range(0,len(self.gameobjects)):
             if self.gameobjects[i] == o:
                 self.gameobjects[i] = None
 
-
-    def fall(self, player):
-	### no connections fall
-        self.graph[self.graphindex].current.moveup()
-        for i in self.graph[self.graphindex].current.gameobjects:
-	    if i != None and i.fallcollide(self.graph[self.graphindex].current, player):
-                self.graph[self.graphindex].current.movedown()
-		return 2 # 1 kills game
-        
-        return 0
 
