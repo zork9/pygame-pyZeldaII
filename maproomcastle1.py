@@ -41,6 +41,10 @@ class MaproomCastle1(MaproomDungeon):
     def __init__(self,x,y):
         MaproomDungeon.__init__(self,x,y)
         self.background = pygame.image.load('./pics/parapapalace-test.bmp').convert()
+
+	self.WIDTH = 640
+
+
         ###self.northwall1 = Tilebox(1,1,60,48,16,1,'./pics/walldungeonnorth2-beholderglass-60x48.bmp')
 ##        self.northwall1 = Tilebox(1,1,60,48,13,1,'./pics/walldungeonnorth1-60x48.bmp')
 ##        self.southwall1 = Tilebox(1,200,30,48,13,1,'./pics/walldungeonsouth1-30x48.bmp')
@@ -55,13 +59,13 @@ class MaproomCastle1(MaproomDungeon):
         
         # left NOTE : boxes collide so put them after enemies !
 	# base
-        self.gameobjects.append(Box(0,65,2400,50))
+        self.gameobjects.append(Box(0,65,self.WIDTH,50))
 	# roof
-        self.gameobjects.append(Box(0,422,2400,400))
+        self.gameobjects.append(Box(0,422,self.WIDTH,400))
 
 	# castle floors
-        self.gameobjects.append(Box(200,390,2400,400))
-        self.gameobjects.append(Box(280,360,2400,400))
+        self.gameobjects.append(Box(200,390,self.WIDTH,400))
+        self.gameobjects.append(Box(280,360,self.WIDTH,400))
 
 
 ##        self.gameobjects.append(Bullfrog(500,225))
@@ -69,7 +73,7 @@ class MaproomCastle1(MaproomDungeon):
         # right
         #self.gameobjects.append(Box(650,275,1750,80))
         # left under
-        #self.gameobjects.append(Box(0,475,2400,80))
+        #self.gameobjects.append(Box(0,475,self.WIDTH,80))
 ##        self.gameobjects.append(Bullfrog(800,425))
 ##        self.gameobjects.append(Bullfrog(900,425))
         # ropes       
