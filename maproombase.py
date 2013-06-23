@@ -29,6 +29,7 @@ class MaproomBase:
         self.relativey = y 
         self.background = pygame.image.load('./pics/blank.bmp').convert()
         self.direction = "north"
+        self.sidedirection = "north"
         
     def draw(self,screen):
 	##print "x=%d" % self.relativex 
@@ -62,6 +63,7 @@ class MaproomBase:
 
     def moveleft(self):
         self.direction = "west"
+        self.sidedirection = "west"
 	self.prevx = self.relativex + 1
 	self.prevy = self.relativey
         self.relativex = self.relativex - 10
@@ -71,6 +73,7 @@ class MaproomBase:
 	if self.relativex >= 0:
 		self.moveleft()
         self.direction = "east"
+        self.sidedirection = "east"
 	self.prevx = self.relativex - 1
 	self.prevy = self.relativey
         self.relativex = self.relativex + 10

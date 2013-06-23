@@ -36,11 +36,11 @@ from ironknuckle import *
 from deeler import *
 from daira import *
 
-class Maproom1(MaproomDungeon):
+class MaproomCastle1(MaproomDungeon):
     "Room with a (big) map"
     def __init__(self,x,y):
         MaproomDungeon.__init__(self,x,y)
-        self.background = pygame.image.load('./pics/bg1-2400x600.bmp').convert()
+        self.background = pygame.image.load('./pics/parapapalace-test.bmp').convert()
         ###self.northwall1 = Tilebox(1,1,60,48,16,1,'./pics/walldungeonnorth2-beholderglass-60x48.bmp')
 ##        self.northwall1 = Tilebox(1,1,60,48,13,1,'./pics/walldungeonnorth1-60x48.bmp')
 ##        self.southwall1 = Tilebox(1,200,30,48,13,1,'./pics/walldungeonsouth1-30x48.bmp')
@@ -51,22 +51,19 @@ class Maproom1(MaproomDungeon):
 ##        self.tileboxes.append(self.eastwall1)
 ##        self.tileboxes.append(self.southwall1)
 
-        self.gameobjects.append(Digdogger(1200,280))
-        self.gameobjects.append(Digdogger(1970,320))
         ### self.gameobjects.append(Ironknuckle(600,300))
-        self.gameobjects.append(Daira(100,300))
-        self.gameobjects.append(Daira(900,300))
-        self.gameobjects.append(Daira(1400,300))
-        self.gameobjects.append(Daira(1300,300))
-        
-        self.gameobjects.append(Deeler(900,100))
-        self.gameobjects.append(Deeler(2000,100))
-        self.gameobjects.append(Deeler(1700,100))
-        
         
         # left NOTE : boxes collide so put them after enemies !
+	# base
         self.gameobjects.append(Box(0,65,2400,50))
-        self.gameobjects.append(Box(0,375,2400,400))
+	# roof
+        self.gameobjects.append(Box(0,422,2400,400))
+
+	# castle floors
+        self.gameobjects.append(Box(200,390,2400,400))
+        self.gameobjects.append(Box(280,360,2400,400))
+
+
 ##        self.gameobjects.append(Bullfrog(500,225))
 ##        self.gameobjects.append(Bullfrog(600,225))
         # right

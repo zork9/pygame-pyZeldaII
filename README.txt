@@ -1,3 +1,3 @@
 - z,x buttons (jump & fight with sword)
 - arrows movement
-- t button (talk, do not talk)
+- t button (talk/do not talk)

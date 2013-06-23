@@ -33,7 +33,7 @@ class PlayerBase(PlayerBase,PlayerBase):
     PlayerBase.FIGHTER,PlayerBase.MAGICUSER = xrange(2)#,PlayerBase.MAGICUSER,PlayerBase.THIEF = xrange(3)
     PlayerBase.KATTA,PlayerBase.DROW = xrange(2)#,PlayerBase.HUMAN,PlayerBase.DROW = xrange(3)
     
-    def __init__(self,PLAYERRACE,PLAYERCLASS,heartmeter):
+    def __init__(self,PLAYERRACE,PLAYERCLASS,lifemeter):
         classByType = {
                 #PlayerBase.HUMAN : PlayerHuman,
                 PlayerBase.KATTA : PlayerKatta,
@@ -45,7 +45,7 @@ class PlayerBase(PlayerBase,PlayerBase):
                 PlayerBase.MAGICUSER : PlayerMagicUser,
                 #Player.THIEF : PlayerThief,
         }
-	self.heartmeter = heartmeter
+	self.lifemeter = lifemeter
 
         self.x = 280 
         self.y = 300 
@@ -96,8 +96,8 @@ class PlayerBase(PlayerBase,PlayerBase):
 
         self.fightcounter = 0
 
-        classByType[PLAYERRACE](heartmeter)
-        classByType2[PLAYERCLASS](heartmeter)
+        classByType[PLAYERRACE](lifemeter)
+        classByType2[PLAYERCLASS](lifemeter)
 
     def drawstatic(self, screen):
         # NOTE
@@ -145,8 +145,8 @@ class PlayerBase(PlayerBase,PlayerBase):
 
         
     def hit(self):
-	self.heartmeter.index -= 1 
-	if self.heartmeter.index <= 0:
+	self.lifemeter.index -= 1 
+	if self.lifemeter.index <= 0:
 		return 0 #FIXME1 FIX for gameover when collision with enemies 
 	else:
 		return 1	

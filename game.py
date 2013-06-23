@@ -18,11 +18,14 @@ import pygame
 from pygame.locals import *
 
 from maproom1 import *
+from maproomcatcastle1 import *
 from maproom2 import *
 
 from taskbar import *
 from time import *
 from inventory import *
+from lifemeter import *
+from manameter import *
 from meter import *
 from playerkattafighter import*
 from playerlink import *
@@ -34,6 +37,7 @@ class Game:
         pygame.font.init()
         screen = pygame.display.set_mode((640, 480))
         font = pygame.font.SysFont("Times", 32)
+        font2 = pygame.font.SysFont("Times", 12)
         gameover = 0
 
         askplayers = 0 # NOTE: 2 Player flag
@@ -44,9 +48,11 @@ class Game:
         self.x = 0
         self.y = 0
         
+        ### self.room = MaproomCatCastle1()
         self.room = Maproom1(0,0)
-        heartmeter = Meter()
-        player = PlayerLink(heartmeter)
+        lifemeter = LifeMeter(0,0)
+        manameter = ManaMeter(250,0)
+        player = PlayerLink(lifemeter,manameter)
 ##        selector = Selector(screen, font)
 ##
 ##        selector.select()
@@ -189,7 +195,7 @@ class Game:
 #                    self.inventoryrubysword = 1
 #                    self.taskbar.setrubysword()
                     
-            if self.room.collide(player) == 1 or player.hitpoints <= 0: # NOTE: return 1 after player heartmeter runs out (player.hit)
+            if self.room.collide(player) == 1 or player.hitpoints <= 0: # NOTE: return 1 after player lifemeter runs out (player.hit)
         	endingimage = pygame.image.load('./pics/endingscreen2.bmp').convert()
         	while gameover == 0:
 	            	pygame.display.update()
@@ -254,7 +260,8 @@ class Game:
                     player.update(self.room)
                     player.drawclimbing(screen)
                     self.taskbar.draw()
-                    heartmeter.draw(screen) 
+                    lifemeter.draw(screen) 
+                    manameter.draw(screen,font2) 
                     pygame.display.update()
                     screen.blit(blankimage, (0,0))
                     
@@ -276,9 +283,8 @@ class Game:
 	    sleep(0.05)
             # fight for enemies
             # remove dead game objects
-
-	    ### Set player hitpoints in life bar
-	    heartmeter.index = player.hitpoints
+		# FIX put in mana meter
+	    manameter.index = player.manapoints
 
             for o in self.room.gameobjects:
                 if o:
@@ -291,7 +297,8 @@ class Game:
 			self.talker = None
 
             self.taskbar.draw()
-            heartmeter.draw(screen)
+            lifemeter.draw(screen,font2)
+            manameter.draw(screen,font2)
             
             pygame.display.update()
             screen.blit(blankimage, (0,0))

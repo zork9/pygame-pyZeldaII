@@ -24,8 +24,8 @@ from rubysword import *
 
 class PlayerLink(PlayerBase):
     "Player"
-    def __init__(self,heartmeter):
-        PlayerBase.__init__(self,PlayerBase.DROW,PlayerBase.MAGICUSER,heartmeter)
+    def __init__(self,lifemeter,manameter):
+        PlayerBase.__init__(self,PlayerBase.DROW,PlayerBase.MAGICUSER,lifemeter)
         
         self.stimlib = Stateimagelibrary()	
         image = pygame.image.load('./pics/player1-72x72.bmp').convert()
@@ -62,7 +62,8 @@ class PlayerLink(PlayerBase):
         image.set_colorkey((0,0,0))
         self.stimlibduck.addpicture(image)
 
-        self.hitpoints = 100
+        self.hitpoints = 50
+        self.manapoints = 100
        	self.sword = BroadSword(0,0)
         self.duck = 0
         self.jumpcounter = 0
@@ -88,6 +89,7 @@ class PlayerLink(PlayerBase):
 	if damage > 0:
 		print 'player is hit!'
         self.hitpoints -= damage
+	self.lifemeter.set(self.hitpoints)
 
     def hitwithenemyweaponlow(self,damage):
 	if damage > 0:
