@@ -1,5 +1,5 @@
 
-# Copyright (C) Johan Ceuppens 2010
+# Copyright (C) Johan Ceuppens 2010-2013
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -89,7 +89,7 @@ class Maproom2(MaproomDungeon):
 		i.draw(screen,self)
 	
     def isroomupexit(self):
-	if self.relativex  < -550:
+	if self.relativex  < -450:
 		return 1
 	return 0
 
@@ -100,7 +100,7 @@ class Maproom2(MaproomDungeon):
     def exit(self, game):
 	if self.isroomupexit():
 		self.setxyfromup()
-		return 1 
+		return 1.1 
 	return 0 
  
     def collidesword(self,player):

@@ -17,6 +17,7 @@
 import pygame
 from pygame.locals import *
 
+from tileroom1 import *
 from maproom1 import *
 from maproomcatcastle1 import *
 from maproom2 import *
@@ -29,6 +30,7 @@ from manameter import *
 from meter import *
 from playerkattafighter import*
 from playerlink import *
+from playertilelink import *
 
 class Game:
     "Main function"
@@ -48,11 +50,13 @@ class Game:
         self.x = 0
         self.y = 0
         
-        self.room = MaproomCatCastle1(0,0)
+        ### self.room = MaproomCatCastle1(0,0)
         ### self.room = Maproom1(0,0)
+        self.room = Tileroom1(0,0)
         manameter = ManaMeter(0,0)
         lifemeter = LifeMeter(250,0)
-        player = PlayerLink(lifemeter,manameter)
+        ### player = PlayerLink(lifemeter,manameter)
+        player = PlayerTileLink()
 ##        selector = Selector(screen, font)
 ##
 ##        selector.select()
@@ -129,13 +133,13 @@ class Game:
 ##		                	self.taskbar.setrubysword()
 ##					player.setrubysword()
                     
-##                    elif event.key == K_UP:
-##                        self.room.movedown()    
-                    if event.key == K_DOWN:
+                    if event.key == K_UP:
+                        self.room.MOVEDOWN()    
+                    elif event.key == K_DOWN:
                         player.duck = 1
                         self.keydown = 2
                         #FIXME keydown = 2
-                        #self.room.moveup()    
+                        self.room.MOVEUP()    
                     elif event.key == K_LEFT:
                         player.duck = 0
                         self.room.moveright()    
@@ -302,8 +306,35 @@ class Game:
             
             pygame.display.update()
             screen.blit(blankimage, (0,0))
+
+
             roomnumber = self.room.exit(self)
-            self.chooseroom(roomnumber,font)
+
+	    if f != None:
+		roomnumber = f 
+
+
+
+####            self.chooseroom(roomnumber,font)
+            if (roomnumber == 0):
+                1#return
+        # NOTE: 1_X  woods around haunted castle
+            if (roomnumber == 1):
+                self.talker = None
+                self.room = Maproom1(self.x,self.y)
+            elif (roomnumber == 1.1):
+                self.talker = None
+                player = PlayerTileLink()
+                self.room = Tileroom1(self.x,self.y)
+            elif (roomnumber == 2):
+                self.talker = None
+                player = PlayerLink(lifemeter,manameter)
+                self.room = Maproom2(self.x,self.y)
+        #elif (roomnumber == 3):
+        #    self.talker = None
+        #    self.room = Maproom3(self.x,self.y)
+            if self.inventoryrubysword:
+                self.sethitf(self.room.gameobjects.hit2)
 
 
     def sethitf(self, hitf):
@@ -314,78 +345,7 @@ class Game:
         self.x = xx
         self.y = yy
 
-    def chooseroom(self, roomnumber,font):
-        if (roomnumber == 0):
-            return
-        # NOTE: 1_X  woods around haunted castle
-        if (roomnumber == 1):
-            self.talker = None
-            self.room = Maproom1(self.x,self.y)
-        elif (roomnumber == 1.1):
-            self.talker = None
-            self.room = Maproom1_1(self.x,self.y)
-        elif (roomnumber == 1.2):
-            self.talker = None
-            self.room = Maproom1_2(self.x,self.y)
-        elif (roomnumber == 1.3):
-            self.talker = None
-            self.room = Maproominn1_3(self.x,self.y)
-        elif (roomnumber == 1.4):
-            self.talker = None
-            self.room = Maproominn1_4(self.x,self.y)
-        elif (roomnumber == 1.5):
-            self.talker = None
-            self.room = Maproominn1_5(self.x,self.y)
-        elif (roomnumber == 1.6):
-            self.talker = None
-            self.room = Maproominn1_6(self.x,self.y)
-        # NOTE left woods of haunted castle
-        elif (roomnumber == "1.1.1"):
-            self.talker = None
-            self.room = Maproom1_1_1(self.x,self.y)
-        # rooms of haunted castle    
-        elif (roomnumber == 2):
-            self.talker = None
-            self.room = Maproom2(self.x,self.y)
-        elif (roomnumber == 3):
-            self.talker = None
-            self.room = Maproom3(self.x,self.y)
-        elif (roomnumber == 4):
-            self.talker = None
-            self.room = Maproom4(self.x,self.y)
-        elif (roomnumber == 5):
-            self.talker = None
-            self.room = Maproom5(self.x,self.y)
-        elif (roomnumber == 6):
-            self.talker = None
-            self.room = Maproom6(self.x,self.y)
-        elif (roomnumber == 7):
-            self.talker = None
-            self.room = Maproom7(self.x,self.y)
-        elif (roomnumber == 8):
-            self.talker = None
-            self.room = Maproom8(self.x,self.y)
-        elif (roomnumber == 9):
-            self.talker = None
-            self.room = Maproom9(self.x,self.y)
-        elif (roomnumber == 10):
-            self.talker = None
-            self.room = Maproom10(self.x,self.y)
-        elif (roomnumber == 11):
-            self.talker = None
-            self.room = Maproom11(self.x,self.y)
-        elif (roomnumber == 12):
-            self.talker = None
-            self.room = Maproom12(self.x,self.y)
-        elif (roomnumber == 13):
-            self.talker = None
-            self.room = Maproom13(self.x,self.y)
-        elif (roomnumber == 14):
-            self.talker = None
-            self.room = Maproom14(self.x,self.y)
-        # set sword parameters
-        if self.inventoryrubysword:
-            self.sethitf(self.room.gameobjects.hit2)
+###    def chooseroom(self, roomnumber,font):
             
 if __name__ == "__main__":
     foo = Game()
