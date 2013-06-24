@@ -189,7 +189,7 @@ class Game:
 					return
 				    
             if self.room.collide(player) == 3 or self.room.collide(player) == 2:###Dungeon wall
-                ###self.room.undomove() ### FIXME for rebound on enemies
+                ####self.room.undomove() ### FIXME for rebound on enemies
                 f = self.room.fall(player)
                 if not f == 2:
                     self.room.movedown()#FIXME
