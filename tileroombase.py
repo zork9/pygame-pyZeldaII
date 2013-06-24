@@ -125,37 +125,36 @@ class TileroomBase:
 	return 2 
 
     def moveleft(self):
-	self.relativex += 10
+	self.relativex -= 10
 	self.direction = "west"
-	if self.relativex <= 0:
-		self.relativex -= 10 
+	if self.relativex <= - self.WIDTH + 640: ### NOTE 640 screenwidth
+		self.relativex += 10 
 		
     def moveright(self):
-	self.relativex -= 10
+	self.relativex += 10
 	self.direction = "east"
-	if self.relativex <= - self.WIDTH + 640:### NOTE 640 screenwidth
-		self.relativex += 10 
+	if self.relativex >= 0:
+		self.relativex -= 10 
 
     def moveup(self):
 	self.direction = "north"
-	if self.relativey < 0 and self.relativey > -self.HEIGHT+480:
-		self.relativey -= 10
-	else:
+	self.relativey -= 10
+	if self.relativey <= - self.HEIGHT + 480: ### NOTE 480 screenheight
 		self.relativey += 10
 
     def movedown(self):
 	self.direction = "south"
-	if self.relativey < 0 and self.relativey > -self.HEIGHT+480:### NOTE 480 screenheight
-		self.relativey += 10
-	else:
+	self.relativey += 10
+	if self.relativey >= 0:### NOTE 480 screenheight
 		self.relativey -= 10
 
     def MOVEDOWN(self):
-	self.relativey += 10
+	##self.relativey += 10
+	self.movedown()
 
     def MOVEUP(self):
-	self.relativey -= 10
-
+##	self.relativey -= 10
+	self.moveup()
     def changeroom(self, n):
 	self.changeroomnumber = n
 

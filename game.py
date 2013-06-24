@@ -173,7 +173,8 @@ class Game:
 #                    self.inventoryrubysword = 1
 #                    self.taskbar.setrubysword()
                     
-            if self.room.collide(player) == 1 or player.hitpoints <= 0: # NOTE: return 1 after player lifemeter runs out (player.hit)
+            ########if self.room.collide(player) == 1 or player.hitpoints <= 0: # NOTE: return 1 after player lifemeter runs out (player.hit)
+            if player.hitpoints <= 0: # NOTE: return 1 after player lifemeter runs out (player.hit)
         	endingimage = pygame.image.load('./pics/endingscreen2.bmp').convert()
         	while gameover == 0:
 	            	pygame.display.update()

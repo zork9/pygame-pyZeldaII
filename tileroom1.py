@@ -694,7 +694,7 @@ class Tileroom1(TileroomBase):
 	r = TileroomBase.collide(self,player)
 	# tile 1 
 	if r == 2:
-		1#return 2 
+		1 #return 2 
 	# tile 2 - do not block 
 	if r == 2.1:
 		1	
