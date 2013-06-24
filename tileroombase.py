@@ -56,12 +56,6 @@ class TileroomBase:
 	self.changeroomnumber = 0 
  
     def draw(self,screen,player):
-###	for x in range(0, self.HEIGHT / self.TILEHEIGHT):
-###		for y in range(0, self.WIDTH / self.TILEWIDTH):
-###			if self.tilelist[x][y] == 1:	
-###				screen.blit(self.tile1, (self.x+x*self.TILEWIDTH+self.relativex, self.y+y*self.TILEHEIGHT+self.relativey))
-###			elif self.tilelist[x][y] == 2:	
-###				screen.blit(self.tile2, (self.x+x*self.TILEWIDTH+self.relativex, self.y+y*self.TILEHEIGHT+self.relativey))
 	1
 		
     def isroomdownexit(self):
