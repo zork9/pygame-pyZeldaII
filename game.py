@@ -51,38 +51,12 @@ class Game:
         self.y = 0
         
         ### self.room = MaproomCatCastle1(0,0)
-        ### self.room = Maproom1(0,0)
-        self.room = Tileroom1(0,0)
+        self.room = Maproom1(0,0)
+        ### self.room = Tileroom1(0,0)
         manameter = ManaMeter(0,0)
         lifemeter = LifeMeter(250,0)
-        ### player = PlayerLink(lifemeter,manameter)
-        player = PlayerTileLink()
-##        selector = Selector(screen, font)
-##
-##        selector.select()
-##        
-##	heartmeter = Meter()
-##	player = PlayerFighter(heartmeter)##default fighter class
-##	if selector.askrace() == "Human":
-##            if selector.askclass() == "Fighter":
-##                player = PlayerHumanFighter(heartmeter)
-##            elif selector.askclass() == "Magic User":
-##                player = PlayerMagicUser(heartmeter)
-##        if selector.askrace() == "Bugbear":
-##            if selector.askclass() == "Fighter":
-##                player = PlayerGnollFighter(heartmeter)
-##        if selector.askrace() == "Katta":
-##            if selector.askclass() == "Fighter":
-##                player = PlayerKattaFighter(heartmeter)
-##        if selector.askrace() == "Elven":
-##            if selector.askclass() == "Fighter":
-##                player = PlayerElfFighter(heartmeter)
-##        if selector.askrace() == "Abeille":
-##            if selector.askclass() == "Fighter":
-##                player = PlayerAbeilleFighter(heartmeter)
-##        
-##        player2 = None
-##
+        player = PlayerLink(lifemeter,manameter)
+        ### player = PlayerTileLink()
         pygame.key.set_repeat(10,100)
         self.keydown = 0
         self.inventoryitem = None
@@ -310,7 +284,7 @@ class Game:
 
             roomnumber = self.room.exit(self)
 
-	    if f != None:
+	    if f != None and f > 2:
 		roomnumber = f 
 
 
@@ -327,6 +301,10 @@ class Game:
                 player = PlayerTileLink()
                 self.room = Tileroom1(self.x,self.y)
             elif (roomnumber == 2):
+                self.talker = None
+                player = PlayerLink(lifemeter,manameter)
+                self.room = Maproom2(self.x,self.y)
+            elif (roomnumber == 4):
                 self.talker = None
                 player = PlayerLink(lifemeter,manameter)
                 self.room = Maproom2(self.x,self.y)

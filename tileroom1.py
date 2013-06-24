@@ -107,7 +107,7 @@ class Tileroom1(TileroomBase):
     def exit(self, game):
 	if self.isroomdownexit():
 		self.setxyfromdown()
-		return 2 
+		return 4 
 	return 0 
  
     def collidesword(self,player):
