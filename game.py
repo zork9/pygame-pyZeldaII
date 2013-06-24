@@ -52,7 +52,7 @@ class Game:
         
         ### self.room = MaproomCatCastle1(0,0)
         ### self.room = Maproom1(0,0)
-        self.room = Tileroom1(0,0)
+        self.room = Tileroom1(0,0,0,0)
         manameter = ManaMeter(0,0)
         lifemeter = LifeMeter(250,0)
         ### player = PlayerLink(lifemeter,manameter)
@@ -98,7 +98,7 @@ class Game:
                     # player 1 key controls
                     
                     if event.key == K_t:
-                        if self.room.collide(player) == 4:
+                        if self.room.collide(player) == 2:
                             self.talker = self.room.talkto() # FIX
                             print "self.talker=%s" % self.talker
 ##			if self.talker == None:
@@ -271,7 +271,8 @@ class Game:
                         self.room.removeobject(o)
 
             if self.talker != None:
-                if self.talker.talk(screen,font) < 0:
+                t = self.talker.talk(screen,font)
+		if t < 0:
 			self.talker = None
 
             self.taskbar.draw()
@@ -287,14 +288,19 @@ class Game:
 	    if f != None and f > 2:
 		roomnumber = f 
 
+	### NOTE : if there is a change in roomnumber present
+	### this is the final change of the room then
+	    if self.room.changeroomnumber != 0:
+		roomnumber = self.room.changeroomnumber
 
 
 ####            self.chooseroom(roomnumber,font)
             if (roomnumber == 0):
                 1#return
-        # NOTE: 1_X  woods around haunted castle
+        # NOTE: woods 
             if (roomnumber == 1):
                 self.talker = None
+        	player = PlayerLink(lifemeter,manameter)
                 self.room = Maproom1(self.x,self.y)
             elif (roomnumber == 1.1):
                 self.talker = None

@@ -33,16 +33,11 @@ class CommonGO(Gameobject):
         self.SCREENW = 480 
         ## dungeon statue as default picture
 	self.stimlib = Stateimagelibrary()	
-#        image = pygame.image.load('./pics/ogre-1-80x80.bmp').convert()
-#        image.set_colorkey((255,255,255)) 
-#	self.stimlib.addpicture(image)
-#        image = pygame.image.load('./pics/ogre-2-80x80.bmp').convert()
-#        image.set_colorkey((255,255,255)) 
-#	self.stimlib.addpicture(image)
         self.hitpoints = 1000000000
         # NOTE : decrease 1 hitpoint with default sword
         self.hitf = self.hit1
-        
+       	self.changeroomnumber = 0
+ 
     def draw(self, screen, room):
 	r = randint(0,100)
 	if r == 0:
@@ -55,13 +50,13 @@ class CommonGO(Gameobject):
 		self.direction = "south"
 
 	if self.direction == "west":
-		self.x -= 4
+		self.x -= 2
 	elif self.direction == "east":
-		self.x += 4
+		self.x += 2
 	elif self.direction == "north":
-		self.y -= 4
+		self.y -= 2
 	elif self.direction == "south":
-		self.y -= 4
+		self.y -= 2
         self.stimlib.draw(screen, self.x+room.relativex,self.y+room.relativey)    
     def collidewithsword(self, room, player):
         #print 'gameobject x=%d y=%d player x=%d y=%d' % (self.x,self.y,player.x-room.relativex,player.y-room.relativey)
@@ -89,13 +84,22 @@ class CommonGO(Gameobject):
 	    return 0
 
     def collide(self, room, player):
-        # FIX BUG
-        #print 'gameobject x=%d y=%d player x=%d y=%d' % (self.x,self.y,player.x-room.relativex,player.y-room.relativey)
 	if (player.x-room.relativex > self.x  and 
 	player.x-room.relativex < self.x+self.w and 
 	player.y-room.relativey > self.y and 
 	player.y-room.relativey < self.y + self.h):
 	    print "collision with OgreGO"
+	    return 1 
+	else:
+	    return 0 ## for game self.talker
+
+    def collidego(self, room, player):
+	if (player.x-room.relativex > self.x  and 
+	player.x-room.relativex < self.x+self.w and 
+	player.y-room.relativey > self.y and 
+	player.y-room.relativey < self.y + self.h):
+	    print "collision with CommonGO (collidego)"
+	    room.changeroom(self.changeroomnumber)
 	    return 1 
 	else:
 	    return 0 ## for game self.talker

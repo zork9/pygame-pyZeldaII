@@ -18,38 +18,42 @@ import pygame
 from pygame.locals import *
 from commongo import *
 from stateimagelibrary import *
-from random import *
 
-class OgreGO(CommonGO):
+class NerdWizardGO(CommonGO):
     "Game object"
     def __init__(self, xx,yy):
-	CommonGO.__init__(self,xx,yy)
+	CommonGO.__init__(self,xx,yy)	
+
 	self.x = xx 
         self.y = yy
-        self.direction = "south" 
 	# default width and height 
-        self.w = 80
-        self.h = 80 
-        image = pygame.image.load('./pics/ogre-1-80x80.bmp').convert()
+        self.w = 24 
+        self.h = 24
+        image = pygame.image.load('./pics/nerd-left-1-24x24.bmp').convert()
         image.set_colorkey((255,255,255)) 
 	self.stimlib.addpicture(image)
-        image = pygame.image.load('./pics/ogre-1-80x80.bmp').convert()
+        image = pygame.image.load('./pics/nerd-left-1-24x24.bmp').convert()
         image.set_colorkey((255,255,255)) 
 	self.stimlib.addpicture(image)
-        image = pygame.image.load('./pics/ogre-1-80x80.bmp').convert()
+        image = pygame.image.load('./pics/nerd-left-1-24x24.bmp').convert()
         image.set_colorkey((255,255,255)) 
 	self.stimlib.addpicture(image)
-        image = pygame.image.load('./pics/ogre-2-80x80.bmp').convert()
+        image = pygame.image.load('./pics/nerd-left-1-24x24.bmp').convert()
         image.set_colorkey((255,255,255)) 
 	self.stimlib.addpicture(image)
-        self.hitpoints = 1000000000
+        image = pygame.image.load('./pics/nerd-right-1-24x24.bmp').convert()
         image.set_colorkey((255,255,255)) 
 	self.stimlib.addpicture(image)
-        self.hitpoints = 1000000000
+        image = pygame.image.load('./pics/nerd-right-1-24x24.bmp').convert()
+        image.set_colorkey((255,255,255)) 
+	self.stimlib.addpicture(image)
+        image = pygame.image.load('./pics/nerd-right-1-24x24.bmp').convert()
+        image.set_colorkey((255,255,255)) 
+	self.stimlib.addpicture(image)
+        image = pygame.image.load('./pics/nerd-right-1-24x24.bmp').convert()
         image.set_colorkey((255,255,255)) 
 	self.stimlib.addpicture(image)
         self.hitpoints = 1000000000
         # NOTE : decrease 1 hitpoint with default sword
         self.hitf = self.hit1
-       	self.changeroomnumber = 1 
         

@@ -17,10 +17,15 @@
 import pygame
 from pygame.locals import *
 from gameobject import *
+from commongo import *
 
-class KoboldWizardGO(Gameobject):
+class KoboldWizardGO(Gameobject,CommonGO):
     "Game object"
     def __init__(self, xx,yy):
+
+	Gameobject.__init__(self, xx,yy)
+	CommonGO.__init__(self,xx,yy)
+
 	self.x = xx 
         self.y = yy
 	# default width and height 
@@ -35,7 +40,8 @@ class KoboldWizardGO(Gameobject):
         self.hitpoints = 1
         # NOTE : decrease 1 hitpoint with default sword
         self.hitf = self.hit1
-        
+       	self.changeroomnumber = 2
+ 
     def draw(self, screen, room):
         screen.blit(self.image,(self.x+room.relativex,self.y+room.relativey))
 	    
@@ -73,6 +79,17 @@ class KoboldWizardGO(Gameobject):
 	player.y-room.relativey > self.y and 
 	player.y-room.relativey < self.y + self.h):
 	    print "collision with Game Object!"
+	    return 1 
+	else:
+	    return 0 ## for game self.talker
+
+    def collidego(self, room, player):
+	if (player.x-room.relativex > self.x  and 
+	player.x-room.relativex < self.x+self.w and 
+	player.y-room.relativey > self.y and 
+	player.y-room.relativey < self.y + self.h):
+	    print "collision with KoboldWizardGO (collidego)"
+	    room.changeroom(self.changeroomnumber)
 	    return 1 
 	else:
 	    return 0 ## for game self.talker

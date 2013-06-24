@@ -30,7 +30,8 @@ class MaproomBase:
         self.background = pygame.image.load('./pics/blank.bmp').convert()
         self.direction = "north"
         self.sidedirection = "north"
-       
+        self.changeroomnumber = 0 
+ 
     def yminus(self, dy):
 	self.prevy = self.relativey 
 	self.relativey -= dy

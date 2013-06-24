@@ -26,6 +26,7 @@ from goblin1 import *
 from goblin2 import *
 from goblin3 import *
 from tilebox import *
+from tilemapbox import *
 from rope import *
 #from snake1 import *
 from rubysword import *
@@ -38,17 +39,19 @@ from daira import *
 from koboldwizardgo import *
 from ogrego import *
 from ghostygo import *
+from nerdwizardgo import *
 
 class Tileroom1(TileroomBase):
     "Room with a (big) map"
-    def __init__(self,xx,yy):
-        TileroomBase.__init__(self,xx,yy)
+    def __init__(self,xx,yy,relx,rely):
+        TileroomBase.__init__(self,xx,yy,relx,rely)
 ###        self.background = pygame.image.load('./pics/bg1-2400x600.bmp').convert()
         # left NOTE : boxes collide so put them after enemies !
         self.tileroomgameobjects.append(KoboldWizardGO(400,365))
         self.tileroomgameobjects.append(OgreGO(200,365))
         self.tileroomgameobjects.append(GhostyGO(100,345))
-        self.tileroomgameobjects.append(Box(0,0,2400,100))
+        self.tileroomgameobjects.append(NerdWizardGO(10,345))
+        self.tileroomgameobjects.append(TilemapBox(0,0,2400,100))
 
 	self.x = xx
 	self.y = yy
@@ -127,7 +130,7 @@ class Tileroom1(TileroomBase):
 
     def collide(self,player):
 	for go in self.tileroomgameobjects:
-		if go.collide(self,player):
+		if go.collidego(self,player):
 			self.undomove()
 			return 2	
 

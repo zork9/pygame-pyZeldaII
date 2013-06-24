@@ -76,9 +76,9 @@ class KoboldWizard(Gameobject):
                         talkflag = 0
                     elif event.type == KEYDOWN:
             	        if event.key == K_t:
+            		    pygame.key.set_repeat(10,100)
                             talkflag = 0
-            pygame.key.set_repeat(10,100)
-      	    self.talkcounter = -1
+      	    ###self.talkcounter = -1
         return 1
  
 ##        screen.blit(font.render("Watch out for Gohma. He spits venom!",4, (255,255,255)), (10,100))

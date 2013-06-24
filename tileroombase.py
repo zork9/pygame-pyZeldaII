@@ -38,9 +38,11 @@ from daira import *
 
 class TileroomBase:
     "Room with a (big) map"
-    def __init__(self,xx,yy):
+    def __init__(self,xx,yy,relx,rely):
 	self.x = xx
 	self.y = yy
+	self.relativex = relx
+	self.relativey = rely
 	self.relativex = 0
 	self.relativey = 0
 	self.WIDTH = 160 
@@ -51,7 +53,8 @@ class TileroomBase:
 	self.tilelist =	[], 
 	self.gameobjects = [] ### NOTE leavs this empty
 	self.tileroomgameobjects = []
-
+	self.changeroomnumber = 0 
+ 
     def draw(self,screen,player):
 	for x in range(0, self.HEIGHT / self.TILEHEIGHT):
 		for y in range(0, self.WIDTH / self.TILEWIDTH):
@@ -142,6 +145,10 @@ class TileroomBase:
 
     def MOVEUP(self):
 	self.relativey -= 10
+
+    def changeroom(self, n):
+	self.changeroomnumber = n
+
 
     def removeobject(self, o):
         for i in range(0,len(self.tileroomgameobjects)):
