@@ -40,6 +40,7 @@ from koboldwizardgo import *
 from ogrego import *
 from ghostygo import *
 from nerdwizardgo import *
+from town1go import *
 
 class Tileroom1(TileroomBase):
     "Room with a (big) map"
@@ -47,7 +48,8 @@ class Tileroom1(TileroomBase):
         TileroomBase.__init__(self,xx,yy,relx,rely)
 ###        self.background = pygame.image.load('./pics/bg1-2400x600.bmp').convert()
         # left NOTE : boxes collide so put them after enemies !
-        self.tileroomgameobjects.append(KoboldWizardGO(400,365))
+        self.tileroomgameobjects.append(KoboldWizardGO(400,665))
+        self.tileroomgameobjects.append(Town1GO(280,345))
         self.tileroomgameobjects.append(OgreGO(200,365))
         self.tileroomgameobjects.append(GhostyGO(100,345))
         self.tileroomgameobjects.append(NerdWizardGO(10,345))

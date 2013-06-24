@@ -19,6 +19,7 @@ from pygame.locals import *
 
 from tileroom1 import *
 from maproom1 import *
+from maproomtown1 import *
 from maproomcatcastle1 import *
 from maproom2 import *
 
@@ -52,11 +53,12 @@ class Game:
         
         ### self.room = MaproomCatCastle1(0,0)
         ### self.room = Maproom1(0,0)
-        self.room = Tileroom1(0,0,0,0)
+        self.room = MaproomTown1(0,-60)
+        ### self.room = Tileroom1(0,0,0,0)
         manameter = ManaMeter(0,0)
         lifemeter = LifeMeter(250,0)
-        ### player = PlayerLink(lifemeter,manameter)
-        player = PlayerTileLink()
+        player = PlayerLink(lifemeter,manameter)
+        ###player = PlayerTileLink()
         pygame.key.set_repeat(10,100)
         self.keydown = 0
         self.inventoryitem = None
@@ -315,9 +317,10 @@ class Game:
                 self.talker = None
                 player = PlayerLink(lifemeter,manameter)
                 self.room = Maproom2(self.x,self.y)
-        #elif (roomnumber == 3):
-        #    self.talker = None
-        #    self.room = Maproom3(self.x,self.y)
+            elif (roomnumber == 3):
+                self.talker = None
+                player = PlayerLink(lifemeter,manameter)
+                self.room = MaproomTown1(self.x,self.y)
             if self.inventoryrubysword:
                 self.sethitf(self.room.gameobjects.hit2)
 
