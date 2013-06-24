@@ -306,7 +306,7 @@ class Game:
             elif (roomnumber == 1.1):
                 self.talker = None
                 player = PlayerTileLink()
-                self.room = Tileroom1(self.x,self.y)
+                self.room = Tileroom1(self.x,self.y,0,0)
             elif (roomnumber == 2):
                 self.talker = None
                 player = PlayerLink(lifemeter,manameter)
