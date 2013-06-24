@@ -92,14 +92,18 @@ class TileroomBase:
 	py /= self.TILEHEIGHT
 	prelx = player.x - self.relativex
 	prely = player.y - self.relativey
-
-	tn = self.tilelist[py][px]	
-	
+	prelxx = prelx % self.WIDTH
+	prelyy = prely % self.HEIGHT
+	prelxxx = prelxx / self.TILEWIDTH
+	prelyyy = prelyy / self.TILEHEIGHT
+	###tn = self.tilelist[py][px]	
+	tn = self.tilelist[prelyyy][prelxxx]	
+	###print ">>> %d >>> %d tn=%f" % (prelxxx,prelyyy,tn)	
 	# FIX make function ?
-	if tn >= 2:
-		return tn 
-	
-	return None
+	##if tn >= 2:
+	##	return tn 
+	#return 0	
+	return tn 
 
     def undomove(self):
         if self.direction == "north":
