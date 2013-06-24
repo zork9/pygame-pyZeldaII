@@ -56,4 +56,5 @@ class NerdWizardGO(CommonGO):
         self.hitpoints = 1000000000
         # NOTE : decrease 1 hitpoint with default sword
         self.hitf = self.hit1
+       	self.changeroomnumber = 0 
         
