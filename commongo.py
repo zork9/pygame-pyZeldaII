@@ -17,29 +17,52 @@
 import pygame
 from pygame.locals import *
 from gameobject import *
+from stateimagelibrary import *
+from random import *
 
-class KoboldWizardGO(Gameobject):
+class CommonGO(Gameobject):
     "Game object"
     def __init__(self, xx,yy):
 	self.x = xx 
         self.y = yy
+        self.direction = "south" 
 	# default width and height 
-        self.w = 48
-        self.h = 48
-        self.SCREENH = 300
-        self.SCREENW = 300
+        self.w = 80
+        self.h = 80 
+        self.SCREENH = 640 
+        self.SCREENW = 480 
         ## dungeon statue as default picture
-        self.image = pygame.image.load('./pics/dungeon-statue1-36x36.bmp').convert()
-        ### self.image = pygame.image.load('./pics/nopicture.bmp').convert()
-        self.image.set_colorkey((0,0,0)) 
-        self.hitpoints = 1
+	self.stimlib = Stateimagelibrary()	
+#        image = pygame.image.load('./pics/ogre-1-80x80.bmp').convert()
+#        image.set_colorkey((255,255,255)) 
+#	self.stimlib.addpicture(image)
+#        image = pygame.image.load('./pics/ogre-2-80x80.bmp').convert()
+#        image.set_colorkey((255,255,255)) 
+#	self.stimlib.addpicture(image)
+        self.hitpoints = 1000000000
         # NOTE : decrease 1 hitpoint with default sword
         self.hitf = self.hit1
         
     def draw(self, screen, room):
-        screen.blit(self.image,(self.x+room.relativex,self.y+room.relativey))
-	    
-	     
+	r = randint(0,100)
+	if r == 0:
+		self.direction = "west"
+	if r == 25:
+		self.direction = "east"
+	if r == 50:
+		self.direction = "north"
+	if r == 75:
+		self.direction = "south"
+
+	if self.direction == "west":
+		self.x -= 4
+	elif self.direction == "east":
+		self.x += 4
+	elif self.direction == "north":
+		self.y -= 4
+	elif self.direction == "south":
+		self.y -= 4
+        self.stimlib.draw(screen, self.x+room.relativex,self.y+room.relativey)    
     def collidewithsword(self, room, player):
         #print 'gameobject x=%d y=%d player x=%d y=%d' % (self.x,self.y,player.x-room.relativex,player.y-room.relativey)
 	if (player.x-room.relativex > self.x and#-self.w  and 
@@ -72,16 +95,16 @@ class KoboldWizardGO(Gameobject):
 	player.x-room.relativex < self.x+self.w and 
 	player.y-room.relativey > self.y and 
 	player.y-room.relativey < self.y + self.h):
-	    print "collision with Game Object!"
+	    print "collision with OgreGO"
 	    return 1 
 	else:
 	    return 0 ## for game self.talker
 
     def fall(self, player):
-	return 2
+	return 0 
 
     def fallcollide(self, room, player):
-	    return 0 ## for game self.talker
+	return 0 ## for game self.talker
 
 
     def collidepickup(self, room, player):

@@ -43,22 +43,18 @@ class TileroomBase:
 	self.y = yy
 	self.relativex = 0
 	self.relativey = 0
-	self.tile1 = pygame.image.load('./pics/tile-grass-1.bmp').convert()
 	self.WIDTH = 160 
 	self.HEIGHT = 48 
 	self.TILEWIDTH = 16
 	self.TILEHEIGHT = 16
-         
+	self.direction = "south"         
 	self.tilelist =	[], 
-	self.gameobjects = []
+	self.gameobjects = [] ### NOTE leavs this empty
+	self.tileroomgameobjects = []
 
     def draw(self,screen,player):
-        # draw bg
-###        screen.blit(self.background, (0+self.relativex, 0+self.relativey))
-        # draw walls
-###        MaproomDungeon.draw(self,screen)
-	for y in range(0, self.WIDTH / self.TILEWIDTH):
-		for x in range(0, self.HEIGHT / self.TILEHEIGHT):
+	for x in range(0, self.HEIGHT / self.TILEHEIGHT):
+		for y in range(0, self.WIDTH / self.TILEWIDTH):
 			if self.tilelist[x][y] == 1:	
 				screen.blit(self.tile1, (self.x+x*self.TILEWIDTH+self.relativex, self.y+y*self.TILEHEIGHT+self.relativey))
 			elif self.tilelist[x][y] == 2:	
@@ -93,21 +89,52 @@ class TileroomBase:
 	return None
 
     def collide(self,player):
+	px = player.x % self.WIDTH
+	py = player.y % self.HEIGHT
+	px /= self.TILEWIDTH
+	py /= self.TILEHEIGHT
+	prelx = player.x - self.relativex
+	prely = player.y - self.relativey
+
+	tn = self.tilelist[px][py]	
+	
+	# FIX make function ?
+	if tn >= 2:
+		return tn 
+	
 	return None
+
+    def undomove(self):
+        if self.direction == "north":
+            self.movedown()
+            #self.movedown()
+        elif self.direction == "south":
+            self.moveup()
+            #self.moveup()
+        elif self.direction == "west":
+            self.moveright()
+            #self.moveright()
+        elif self.direction == "east":
+            self.moveleft()
+            #self.moveleft()
 
     def fall(self,player):
-	return None
+	return 2 
 
     def moveleft(self):
+	self.direction = "west"
 	self.relativex -= 10
 
     def moveright(self):
+	self.direction = "east"
 	self.relativex += 10
 
     def moveup(self):
+	self.direction = "north"
 	self.relativey -= 10
 
     def movedown(self):
+	self.direction = "south"
 	self.relativey += 10
 
     def MOVEDOWN(self):
@@ -117,6 +144,6 @@ class TileroomBase:
 	self.relativey -= 10
 
     def removeobject(self, o):
-        for i in range(0,len(self.gameobjects)):
-            if self.gameobjects[i] == o:
-                self.gameobjects[i] = None
+        for i in range(0,len(self.tileroomgameobjects)):
+            if self.tileroomgameobjects[i] == o:
+                self.tileroomgameobjects[i] = None

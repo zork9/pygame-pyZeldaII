@@ -51,12 +51,12 @@ class Game:
         self.y = 0
         
         ### self.room = MaproomCatCastle1(0,0)
-        self.room = Maproom1(0,0)
-        ### self.room = Tileroom1(0,0)
+        ### self.room = Maproom1(0,0)
+        self.room = Tileroom1(0,0)
         manameter = ManaMeter(0,0)
         lifemeter = LifeMeter(250,0)
-        player = PlayerLink(lifemeter,manameter)
-        ### player = PlayerTileLink()
+        ### player = PlayerLink(lifemeter,manameter)
+        player = PlayerTileLink()
         pygame.key.set_repeat(10,100)
         self.keydown = 0
         self.inventoryitem = None
@@ -203,7 +203,7 @@ class Game:
 		self.room.moveup()
 		self.room.moveup()
 		self.room.moveup()
-                         
+		                         
             if self.room.collidewithropes(player) == 2:
                 
                 while gameflag == 0:
