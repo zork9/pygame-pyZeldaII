@@ -67,11 +67,15 @@ class Tileroom1(TileroomBase):
 	self.tileborder7 = pygame.image.load('./pics/tile-border-7-16x16.bmp').convert()
 	self.tileborder8 = pygame.image.load('./pics/tile-border-8-16x16.bmp').convert()
 	self.tileborder9 = pygame.image.load('./pics/tile-border-9-16x16.bmp').convert()
+	self.tiletree1 = pygame.image.load('./pics/tile-tree-1-16x16.bmp').convert()
+	self.tiletree2 = pygame.image.load('./pics/tile-tree-2-16x16.bmp').convert()
+	self.tiletree3 = pygame.image.load('./pics/tile-tree-3-16x16.bmp').convert()
+	self.tiletree4 = pygame.image.load('./pics/tile-tree-4-16x16.bmp').convert()
 	self.WIDTH = 1024 
 	self.HEIGHT = 1024 
 	self.TILEWIDTH = 16
 	self.TILEHEIGHT = 16
-        
+       	#### FIX match lengths of table elements 
 	#### FIX do not use any number smaller than 2 as this is the gameover value 
 	self.tilelist =	[
 		[2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,
@@ -80,19 +84,19 @@ class Tileroom1(TileroomBase):
 		2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,
 		2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,2.8,],
 
-		[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
-		2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
-		2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
-		2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
-		2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,],
+		[2.6,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,
+		3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,
+		3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,
+		3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,3.2,3.1,
+		3.2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,],
 
-		[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
-		2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
-		2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
-		2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
-		2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,],
+		[2.6,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,
+		3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,
+		3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,
+		3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,3.4,3.3,
+		3.4,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,],
 
-		[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+		[2.6,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
 		2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
 		2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
 		2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
@@ -654,6 +658,14 @@ class Tileroom1(TileroomBase):
 				screen.blit(self.tileborder8, (self.x+x*self.TILEWIDTH+self.relativex, self.y+y*self.TILEHEIGHT+self.relativey))
 			elif self.tilelist[y][x] == 2.9:	
 				screen.blit(self.tileborder9, (self.x+x*self.TILEWIDTH+self.relativex, self.y+y*self.TILEHEIGHT+self.relativey))
+			elif self.tilelist[y][x] == 3.1:	
+				screen.blit(self.tiletree1, (self.x+x*self.TILEWIDTH+self.relativex, self.y+y*self.TILEHEIGHT+self.relativey))
+			elif self.tilelist[y][x] == 3.2:	
+				screen.blit(self.tiletree2, (self.x+x*self.TILEWIDTH+self.relativex, self.y+y*self.TILEHEIGHT+self.relativey))
+			elif self.tilelist[y][x] == 3.3:	
+				screen.blit(self.tiletree3, (self.x+x*self.TILEWIDTH+self.relativex, self.y+y*self.TILEHEIGHT+self.relativey))
+			elif self.tilelist[y][x] == 3.4:	
+				screen.blit(self.tiletree4, (self.x+x*self.TILEWIDTH+self.relativex, self.y+y*self.TILEHEIGHT+self.relativey))
 
 	for go in self.tileroomgameobjects:
 		go.draw(screen,self)
