@@ -24,6 +24,7 @@ from maproomtown1inside1 import *
 from maproomtown1inside2 import *
 from maproomcatcastle1 import *
 from maproom2 import *
+from maproomcave1 import *
 
 from taskbar import *
 from time import *
@@ -346,7 +347,7 @@ class Game:
                 self.talker = None
                 self.player = PlayerLink(lifemeter,manameter)
                 self.room = Maproom2(self.x,self.y)
-		### first town 1 
+		### town 1 
             elif (roomnumber == 3):
                 self.talker = None
                 self.player = PlayerLink(lifemeter,manameter)
@@ -364,6 +365,11 @@ class Game:
                 self.player = PlayerLink(lifemeter,manameter)
                 self.room = MaproomTown1Inside2(self.x,self.y)
 		self.player.y = 350
+            elif (roomnumber == 5):
+                self.talker = None
+                self.player = PlayerLink(lifemeter,manameter)
+                self.room = MaproomCave1(self.x,self.y)
+		self.player.y = 362
  
             if self.inventoryrubysword:
                 self.sethitf(self.room.gameobjects.hit2)

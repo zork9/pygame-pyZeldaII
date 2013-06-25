@@ -32,6 +32,7 @@ from ogrego import *
 from ghostygo import *
 from nerdwizardgo import *
 from town1go import *
+from cave1go import *
 
 class Tileroom1(TileroomBase):
     "Room with a (big) map"
@@ -41,6 +42,7 @@ class Tileroom1(TileroomBase):
         # left NOTE : boxes collide so put them after enemies !
         self.tileroomgameobjects.append(TilemapBox(0,0,2400,100))
         self.tileroomgameobjects.append(Town1GO(300,330))
+        self.tileroomgameobjects.append(Cave1GO(620,292))
        ### self.tileroomgameobjects.append(OgreGO(300,430))
 
         self.tileroomgameobjects.append(KoboldWizardGO(1000,630))
