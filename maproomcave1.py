@@ -34,7 +34,7 @@ class MaproomCave1(MaproomDungeon):
         self.gameobjects.append(Daira(100,1890))
         self.gameobjects.append(Daira(900,1890))
         self.gameobjects.append(Daira(1400,1890))
-
+	# NOTE put enemies before boxes
 	# ground level
         self.gameobjects.append(Box(0,2000-40,1400,400))
 
@@ -45,13 +45,20 @@ class MaproomCave1(MaproomDungeon):
 	#self.gameobjects.append(RubySword(400,100))
 
 	# first rope encountered, plus platform next to rope	
-        self.ropes.append(Rope(850,1500,500))
+        self.ropes.append(Rope(850,1350,650))
         self.gameobjects.append(Box(780,1750,400,100))
- 
+
+	# left upper platform above exit
+        self.gameobjects.append(Box(0,1490,1000,100))
+	# left upper platform above exit - left wall
+        self.gameobjects.append(Box(0,1350,90,250))
+        ###self.addwestwall(0,1350, 120,250)
 	# roofs 
         self.roofs.append(Box(0,1500,300,350))
         self.roofs.append(Box(0,1480,150,300))
         self.roofs.append(Box(780,1750,400,100))
+	# roof above left upper platform above exit
+        self.roofs.append(Box(0,1250,1000,100))
 
 	self.relativex = relx
 	self.relativey = rely
@@ -76,7 +83,7 @@ class MaproomCave1(MaproomDungeon):
 
 	
     def isroomupexit(self):
-	if self.relativex > 275:
+	if self.relativex > 275 and self.relativey < -2000+800:
 		return 1.1 
 	return 0
 

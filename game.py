@@ -222,6 +222,7 @@ class Game:
                 
                 while gameflag == 0:
 
+	    	    sleep(0.05)
                     for event in pygame.event.get():
                         if event.type == QUIT:
                             return

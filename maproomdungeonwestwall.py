@@ -19,16 +19,29 @@ from pygame.locals import *
 from koboldwizard import *
 from time import *
 from maproom import *
+###from maproomdungeonwall import *
 
 # each wall has its own pic, for dithered and changed images
 class MaproomWestDungeonWall:
-    "Room with a (big) map"
-    def __init__(self,x,y):
+    ""
+    def __init__(self,x,y,w,h):
         self.x = x
         self.y = y
-        self.wallimage = pygame.load.image('./pics/walldungeon1-60x48.bmp')
+        self.w = w 
+        self.h = h 
+        self.wallimage = pygame.image.load('./pics/walldungeon1-60x48.bmp')
         
+    def collide(self, room, player):
+	if (player.x > self.x+room.relativex  and 
+	player.x < self.x+room.relativex+self.w and 
+	player.y > self.y+room.relativey and 
+	player.y < self.y+room.relativey + self.h):
+	    print "collision in Dungeon Wall!"	
+	    return 2 
+	else:
+	    return 0
+
         
-    def draw(self,screen):
+    def draw(self,screen,room):
 	##print "x=%d" % self.relativex 
-        screen.blit(self.wall, (0+self.relativex, 0+self.relativey))
+        screen.blit(self.wallimage, (self.x+room.relativex, self.y+room.relativey))

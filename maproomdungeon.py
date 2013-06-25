@@ -37,24 +37,30 @@ class MaproomDungeon(MaproomBase):
         self.pits = []
         self.ropes = []
         
-    def addnorthwall(self, x,y):
-        self.northwalls.append(MaproomNorthDungeonWall(x,y))
+    def addnorthwall(self, x,y,w,h):
+        self.northwalls.append(MaproomNorthDungeonWall(x,y,w,h))
 
-    def addsouthwall(self, x,y):
-        self.southwalls.append(MaproomSouthDungeonWall(x,y))
+    def addsouthwall(self, x,y,w,h):
+        self.southwalls.append(MaproomSouthDungeonWall(x,y,w,h))
 
-    def addwestwall(self, x,y):
-        self.westwalls.append(MaproomWestDungeonWall(x,y))
+    def addwestwall(self, x,y,w,h):
+        self.westwalls.append(MaproomWestDungeonWall(x,y,w,h))
 
-    def addeastwall(self, x,y):
-        self.eastwalls.append(MaproomEastDungeonWall(x,y))
+    def addeastwall(self, x,y,w,h):
+        self.eastwalls.append(MaproomEastDungeonWall(x,y,w,h))
         
     def draw(self,screen):
 	##print "x=%d" % self.relativex 
         ###FIX NOTE 
 	### screen.blit(self.background, (0+self.relativex, 0+self.relativey))
-        for w in self.northwalls:
-            w.draw(screen,self.relativex,self.relativey)
+#        for w in self.northwalls:
+#            w.draw(screen,self.relativex,self.relativey)
+#        for w in self.southwalls:
+#            w.draw(screen,self.relativex,self.relativey)
+        for w in self.westwalls:
+            w.draw(screen,self)
+#        for w in self.eastwalls:
+#            w.draw(screen,self.relativex,self.relativey)
 
     def collidewithropes(self, player):	
 	for i in self.ropes:
