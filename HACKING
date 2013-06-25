@@ -1,3 +1,6 @@
+
+- every talkto method should return a Gameobject which has this method 
+overridden and in a room returns the collided NPC (== overridden gameobj) 
+
+
 - grep for FIX
-- z,x buttons (talk & fight with sword)
-- arrows movement

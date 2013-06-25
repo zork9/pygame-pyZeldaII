@@ -44,7 +44,7 @@ class ElfwomanTown(Gameobject):
 	player.x < self.x+room.relativex+self.w and 
 	player.y > self.y+room.relativey and 
             player.y < self.y+room.relativey + self.h):
-            print "collision with Elf man in Town 1"
+            print "collision with Elf woman in Town"
             return 2 ## NOTE 2 for talker
 	else:
 	    return 0

@@ -48,12 +48,8 @@ class Tileroom1(TileroomBase):
         TileroomBase.__init__(self,xx,yy,relx,rely)
 ###        self.background = pygame.image.load('./pics/bg1-2400x600.bmp').convert()
         # left NOTE : boxes collide so put them after enemies !
-        self.tileroomgameobjects.append(KoboldWizardGO(400,665))
-        self.tileroomgameobjects.append(Town1GO(280,345))
-        self.tileroomgameobjects.append(OgreGO(200,365))
-        self.tileroomgameobjects.append(GhostyGO(100,345))
-        self.tileroomgameobjects.append(NerdWizardGO(10,345))
         self.tileroomgameobjects.append(TilemapBox(0,0,2400,100))
+        self.tileroomgameobjects.append(Town1GO(300,330))
 
 	self.x = xx
 	self.y = yy
@@ -670,6 +666,7 @@ class Tileroom1(TileroomBase):
 		]
 
     def draw(self,screen,player):
+	self.update(screen,player)
 	TileroomBase.draw(self,screen,player)
 	for x in range(0, self.HEIGHT / self.TILEHEIGHT):
 		for y in range(0, self.WIDTH / self.TILEWIDTH):
@@ -705,7 +702,14 @@ class Tileroom1(TileroomBase):
 				screen.blit(self.tiletree4, (self.x+x*self.TILEWIDTH+self.relativex, self.y+y*self.TILEHEIGHT+self.relativey))
 
 	for go in self.tileroomgameobjects:
+		go.update(self,player) ### NOTE every gameobj has this
 		go.draw(screen,self)
+
+    def update(self, screen, player):
+	if randint(0, 1000) == 100:
+		self.tileroomgameobjects.append(OgreGO(player.x - randint(70,100), player.y))			
+	if randint(0, 1000) == 200:
+		self.tileroomgameobjects.append(GhostyGO(player.x + randint(70,100), player.y))			
 
     def isroomdownexit(self):
 	###if self.relativex  < -100:
