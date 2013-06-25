@@ -17,21 +17,12 @@
 import pygame
 from pygame.locals import *
 from maproom import *
-from tree import *
-from tree2 import *
-from dungeonentrance1 import *
 from tileroombase import *
-from maproomdungeonnorthwall import *
-from goblin1 import *
-from goblin2 import *
-from goblin3 import *
 from tilebox import *
 from tilemapbox import *
 from rope import *
 #from snake1 import *
 from rubysword import *
-from beholder import *
-from beholderbat import *
 from digdogger import *
 from ironknuckle import *
 from deeler import *
@@ -50,6 +41,7 @@ class Tileroom1(TileroomBase):
         # left NOTE : boxes collide so put them after enemies !
         self.tileroomgameobjects.append(TilemapBox(0,0,2400,100))
         self.tileroomgameobjects.append(Town1GO(300,330))
+        self.tileroomgameobjects.append(OgreGO(300,430))
 
 	self.x = xx
 	self.y = yy

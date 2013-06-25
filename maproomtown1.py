@@ -17,20 +17,12 @@
 import pygame
 from pygame.locals import *
 from maproom import *
-from tree import *
-from tree2 import *
-from dungeonentrance1 import *
 from maproomdungeon import *
 from maproomdungeonnorthwall import *
-from goblin1 import *
-from goblin2 import *
-from goblin3 import *
 from koboldwizard import *
 from tilebox import *
 #from snake1 import *
 from rubysword import *
-from beholder import *
-from beholderbat import *
 from elfwoman1town1 import *
 from elfwoman2town1 import *
 
