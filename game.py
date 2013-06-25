@@ -57,12 +57,20 @@ class Game:
         ### self.room = MaproomCatCastle1(0,0)
         ### self.room = Maproom1(0,0)
         ### self.room = MaproomTown1(0,-60)
-        self.room = Tileroom1(0,0,0,0)
+        ### self.room = Tileroom1(0,0,0,0)
+        self.room = MaproomCave1(0,0,0,-2000+480)
         manameter = ManaMeter(0,0)
         lifemeter = LifeMeter(250,0)
-        ### self.player = PlayerLink(lifemeter,manameter)
-        self.player = PlayerTileLink()
-        pygame.key.set_repeat(10,100)
+        self.player = PlayerLink(lifemeter,manameter)
+        ###self.player = PlayerTileLink()
+
+
+	### NOTE
+	self.player.y = 360 ### 382
+       
+
+
+	pygame.key.set_repeat(10,100)
         self.keydown = 0
         self.inventoryitem = None
         self.inventorymasterkey = None
@@ -368,8 +376,9 @@ class Game:
             elif (roomnumber == 5):
                 self.talker = None
                 self.player = PlayerLink(lifemeter,manameter)
-                self.room = MaproomCave1(self.x,self.y)
-		self.player.y = 362
+                ### self.room = MaproomCave1(self.x,self.y)
+                self.room = MaproomCave1(0,0,0,-2000+480)
+		self.player.y = 360 ### 382
  
             if self.inventoryrubysword:
                 self.sethitf(self.room.gameobjects.hit2)

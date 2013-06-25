@@ -27,20 +27,26 @@ from rope import *
 
 class MaproomCave1(MaproomDungeon):
     "Room with a (big) map"
-    def __init__(self,x,y):
+    def __init__(self,x,y,relx,rely):
         MaproomDungeon.__init__(self,x,y)
-        self.background = pygame.image.load('./pics/bg-3-underground1-1400x480.bmp').convert()
+        self.background = pygame.image.load('./pics/bg-3-underground1-6000x2000.bmp').convert()
 	# ground level
-        self.gameobjects.append(Box(0,440,1400,400))
-	# roof 
-        self.gameobjects.append(Box(0,0,1400,300))
+        self.gameobjects.append(Box(0,2000-40,1400,400))
         #self.gameobjects.append(Snake1(680,140))
         #self.gameobjects.append(Beholder(300,100))
         #self.gameobjects.append(BeholderBat(300,100))
 	#self.gameobjects.append(RubySword(400,100))
-        self.ropes.append(Rope(605,100,340))
-
+        self.ropes.append(Rope(850,1500,500))
+        self.gameobjects.append(Box(850,1780,400,100))
+	self.relativex = relx
+	self.relativey = rely
  
+	# roof 
+	self.roofs = []
+        self.roofs.append(Box(0,1500,1000,350))
+
+
+
     def draw(self,screen,player):
         # draw bg
         screen.blit(self.background, (0+self.relativex, 0+self.relativey))
@@ -82,6 +88,14 @@ class MaproomCave1(MaproomDungeon):
 		#self.relativey = self.prevy
 		return i ## NOTE : returns collided entity (single)
 	return None
+
+    def collideup(self,player):
+	for i in self.roofs:
+		if i.collideup(self, player):
+			print ">>>>>>>>>>> collideup"
+			return 2
+	return 0
+
 
     def talkto(self, player):
         return self.gameobjects[1] 

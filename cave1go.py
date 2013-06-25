@@ -86,7 +86,7 @@ class Cave1GO(Gameobject,CommonGO):
 	player.x-room.relativex < self.x+self.w and 
 	player.y-room.relativey > self.y and 
 	player.y-room.relativey < self.y + self.h):
-	    print "collision with KoboldWizardGO (collidego)"
+	    print "collision with Cave1GO (collidego)"
 	    room.changeroom(self.changeroomnumber)
 	    return 1 
 	else:

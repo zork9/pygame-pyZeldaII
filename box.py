@@ -42,6 +42,20 @@ class Box(Gameobject):
 	else:
 	    return 0
 
+	### for in room.roofs list
+    def collideup(self, room, player):
+	if (player.x > self.x+room.relativex  and 
+	player.x < self.x+room.relativex+self.w and 
+	player.y > self.y+room.relativey and #FIXED +self.h
+	player.y < self.y+room.relativey + self.h):
+	    print "collision up in box!"	
+	    if player.y > self.y+room.relativey:
+		return 2
+	    else:
+		return 0 
+	else:
+	    return 0
+
 
     def fallcollide(self, room, player):
         # FIX BUG
