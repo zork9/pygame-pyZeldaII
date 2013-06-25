@@ -1,6 +1,6 @@
 
 - every talkto method should return a Gameobject which has this method 
 overridden and in a room returns the collided NPC (== overridden gameobj) 
-
-
+- if returning a self.talker make sure you do not collide on boxes
+- collideup requires a player arg, no more
 - grep for FIX

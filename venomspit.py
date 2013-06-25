@@ -38,7 +38,7 @@ class Venomspit(Gameobject):
         self.stimlib.draw(screen, self.x+room.relativex,self.y+room.relativey)
 		    
 	     
-    def update(self,room):
+    def update(self,room,player):
         sleep(.01) # FIX venom spit sleep
         if (self.direction == "down"):
 	        self.y +=5

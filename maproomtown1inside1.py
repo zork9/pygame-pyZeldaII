@@ -73,11 +73,7 @@ class MaproomTown1Inside1(MaproomDungeon):
 	return None
 
     def talkto(self,player):
-	for i in self.gameobjects:
-		print "i=%s" % i
-		if i.collide(self,player):
-        		return i 
-	return None
+	return self.gameobjects[1] 
 
     def moveright(self):
 	if self.relativex >= 280:

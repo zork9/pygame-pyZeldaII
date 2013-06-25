@@ -104,5 +104,8 @@ class Deeler(Gameobject):
 	else:
 	    return 0
 
+    def collideup(self, room, player):
+	return 0
+  
     def fight(self,room,player,keydown = -1):
         1
