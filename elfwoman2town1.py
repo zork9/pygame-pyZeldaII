@@ -53,35 +53,17 @@ class Elfwoman2Town1(ElfwomanTown):
 
 
 
-    def talk(self, screen,font):
+    def talk(self):
         self.talkcounter += 1
         if self.talkcounter == 0:
-           return -1 
+           return None 
         elif self.talkcounter == 1:
-            screen.blit(font.render("The wizard out of town knows many.", 8, (255,255,255)), (100,100))
-	    talkflag = 1
-	    while talkflag == 1:
-                for event in pygame.event.get():
-                    if event.type == QUIT:
-        	        pygame.key.set_repeat(10,100)
-                        talkflag = 0
-                    elif event.type == KEYDOWN:
-            	        if event.key == K_t:
-        		    pygame.key.set_repeat(10,100)
-                            talkflag = 0
+            return "Go listen to Error." 
         elif self.talkcounter == 2:
-            # FIXME 
-	    pygame.key.set_repeat(1000,1000)
-            screen.blit(font.render("Try to be friendly.", 8, (255,255,255)), (100,100))
-	    talkflag = 1
-	    while talkflag == 1:
-                for event in pygame.event.get():
-                    if event.type == QUIT:
-                        talkflag = 0
-                    elif event.type == KEYDOWN:
-            	        if event.key == K_t:
-            		    pygame.key.set_repeat(10,100)
-                            talkflag = 0
-      	    ###self.talkcounter = -1
-        return 1
+            return "Try to be friendly."
+      	else:
+    	    self.talkcounter = -1 
+            return None
+	return None 
+ 
  

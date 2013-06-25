@@ -104,7 +104,7 @@ class Maproom2(MaproomDungeon):
 		return i ## NOTE : returns collided entity (single)
 	return None
 
-    def talkto(self):
+    def talkto(self, player):
         return self.gameobjects[1] 
 
     def removeobject(self, o):

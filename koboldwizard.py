@@ -49,47 +49,22 @@ class KoboldWizard(Gameobject):
 	else:
 	    return 0
 
-    def talk(self, screen,font):
+    def talk(self):
         self.talkcounter += 1
         if self.talkcounter == 0:
-           return -1 
+           return None 
         elif self.talkcounter == 1:
-            screen.blit(font.render("Watch out for Gohma. He spits venom!", 8, (255,255,255)), (100,100))
-	    talkflag = 1
-	    while talkflag == 1:
-                for event in pygame.event.get():
-                    if event.type == QUIT:
-        	        pygame.key.set_repeat(10,100)
-                        talkflag = 0
-                    elif event.type == KEYDOWN:
-            	        if event.key == K_t:
-        		    pygame.key.set_repeat(10,100)
-                            talkflag = 0
+            return "My brother fought for the Angel Legion." 
         elif self.talkcounter == 2:
-            # FIXME 
-	    pygame.key.set_repeat(1000,1000)
-            screen.blit(font.render("Ask the alchemist for poison.", 8, (255,255,255)), (100,100))
-	    talkflag = 1
-	    while talkflag == 1:
-                for event in pygame.event.get():
-                    if event.type == QUIT:
-                        talkflag = 0
-                    elif event.type == KEYDOWN:
-            	        if event.key == K_t:
-            		    pygame.key.set_repeat(10,100)
-                            talkflag = 0
-      	    ###self.talkcounter = -1
-        return 1
+            return "As I did." 
+        elif self.talkcounter == 3:
+            return "It happened long ago."
+        elif self.talkcounter == 3:
+            return "We were defeated."
+        elif self.talkcounter == 3:
+            return "As a reprisal I was changed into a kobold."
+      	else:
+    	    self.talkcounter = -1 
+            return None
+	return None 
  
-##        screen.blit(font.render("Watch out for Gohma. He spits venom!",4, (255,255,255)), (10,100))
-##        pygame.display.update()
-##        sleep(1)
-##        for event in pygame.event.get():
-##            self.room.draw(screen) 
-##           
-##            pygame.display.update()
-##            if event.type == QUIT:
-##                return
-##            elif event.type == KEYDOWN:
-##                if event.key == K_z:
-##                  break

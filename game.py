@@ -55,12 +55,12 @@ class Game:
         
         ### self.room = MaproomCatCastle1(0,0)
         ### self.room = Maproom1(0,0)
-        self.room = MaproomTown1(0,-60)
-        ### self.room = Tileroom1(0,0,0,0)
+        ### self.room = MaproomTown1(0,-60)
+        self.room = Tileroom1(0,0,0,0)
         manameter = ManaMeter(0,0)
         lifemeter = LifeMeter(250,0)
-        self.player = PlayerLink(lifemeter,manameter)
-        ###self.player = PlayerTileLink()
+        ### self.player = PlayerLink(lifemeter,manameter)
+        self.player = PlayerTileLink()
         pygame.key.set_repeat(10,100)
         self.keydown = 0
         self.inventoryitem = None
@@ -276,8 +276,35 @@ class Game:
                         self.room.removeobject(o)
 
             if self.talker != None:
-                t = self.talker.talk(screen,font)
-		if t < 0:
+	    	talkflag = 1
+                t = self.talker.talk()
+            	screen.blit(font.render(t, 8, (255,255,255)), (100,100))
+            	pygame.display.update()
+		print "t = %s" % t
+	    	while talkflag == 1:
+        	       	pygame.key.set_repeat(1000,1000)
+                	for event in pygame.event.get():
+                    		if event.type == QUIT:
+                       			talkflag = 0
+                    		elif event.type == KEYDOWN:
+            	       			if event.key == K_t:
+                				t = self.talker.talk()
+						print "t2 = %s" % t
+						if not t:
+							talkflag = 0	
+            					screen.blit(blankimage, (0,0))
+
+                    				self.room.draw(screen,self.player)
+
+            					self.taskbar.draw()
+            					lifemeter.draw(screen,font2)
+            					manameter.draw(screen,font2)
+						
+            					screen.blit(font.render(t, 8, (255,255,255)), (100,100))
+            					pygame.display.update()
+					
+        	    		pygame.key.set_repeat(10,100)
+		if not t:
 			self.talker = None
 
             self.taskbar.draw()

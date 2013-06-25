@@ -41,7 +41,9 @@ class Tileroom1(TileroomBase):
         # left NOTE : boxes collide so put them after enemies !
         self.tileroomgameobjects.append(TilemapBox(0,0,2400,100))
         self.tileroomgameobjects.append(Town1GO(300,330))
-        self.tileroomgameobjects.append(OgreGO(300,430))
+       ### self.tileroomgameobjects.append(OgreGO(300,430))
+
+        self.tileroomgameobjects.append(KoboldWizardGO(1000,630))
 
 	self.x = xx
 	self.y = yy

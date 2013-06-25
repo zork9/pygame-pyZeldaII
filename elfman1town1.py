@@ -47,51 +47,26 @@ class Elfman1Town1(Gameobject):
 	else:
 	    return 0
 
-    def talk(self, screen,font):
+    def talk(self):
         self.talkcounter += 1
         if self.talkcounter == 0:
-           return -1 
+           return None 
         elif self.talkcounter == 1:
-            screen.blit(font.render("I am Bomey.", 8, (255,255,255)), (100,100))
-	    talkflag = 1
-	    while talkflag == 1:
-                for event in pygame.event.get():
-                    if event.type == QUIT:
-        	        pygame.key.set_repeat(10,100)
-                        talkflag = 0
-                    elif event.type == KEYDOWN:
-            	        if event.key == K_t:
-        		    pygame.key.set_repeat(10,100)
-                            talkflag = 0
+            return "I am Error" 
         elif self.talkcounter == 2:
-            # FIXME 
-	    pygame.key.set_repeat(1000,1000)
-            screen.blit(font.render("There lives a wizard at the statue.", 8, (255,255,255)), (100,100))
-	    talkflag = 1
-	    while talkflag == 1:
-                for event in pygame.event.get():
-                    if event.type == QUIT:
-                        talkflag = 0
-                    elif event.type == KEYDOWN:
-            	        if event.key == K_t:
-            		    pygame.key.set_repeat(10,100)
-                            talkflag = 0
+            return "Always ask a wizard something." 
         elif self.talkcounter == 3:
-            # FIXME 
-	    pygame.key.set_repeat(1000,1000)
-            screen.blit(font.render("He can help you with magic.", 8, (255,255,255)), (100,100))
-	    talkflag = 1
-	    while talkflag == 1:
-                for event in pygame.event.get():
-                    if event.type == QUIT:
-                        talkflag = 0
-                    elif event.type == KEYDOWN:
-            	        if event.key == K_t:
-            		    pygame.key.set_repeat(10,100)
-                            talkflag = 0
-      	    ###self.talkcounter = -1
-      	    ###self.talkcounter = -1
-        return 1
+            return "He can help you with magic."
+        elif self.talkcounter == 4:
+            return "Our King, my liege, is ill."
+        elif self.talkcounter == 5:
+            return "The lands begin to cripple."
+        elif self.talkcounter == 6:
+            return "Without a King, evil stirs."
+      	else:
+    	    self.talkcounter = -1 
+            return None
+	return None 
  
 ##        screen.blit(font.render("Watch out for Gohma. He spits venom!",4, (255,255,255)), (10,100))
 ##        pygame.display.update()
