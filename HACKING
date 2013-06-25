@@ -1,4 +1,7 @@
 
+
+- in rooms of dairs, deelers etc, put the enemies before the boxes as these
+are first for collision checks, else you would fight a box :-)
 - every talkto method should return a Gameobject which has this method 
 overridden and in a room returns the collided NPC (== overridden gameobj) 
 - if returning a self.talker make sure you do not collide on boxes

@@ -24,27 +24,37 @@ from tilebox import *
 #from snake1 import *
 from rubysword import *
 from rope import *
+from daira import *
 
 class MaproomCave1(MaproomDungeon):
     "Room with a (big) map"
     def __init__(self,x,y,relx,rely):
         MaproomDungeon.__init__(self,x,y)
         self.background = pygame.image.load('./pics/bg-3-underground1-6000x2000.bmp').convert()
+        self.gameobjects.append(Daira(100,1890))
+        self.gameobjects.append(Daira(900,1890))
+        self.gameobjects.append(Daira(1400,1890))
+
 	# ground level
         self.gameobjects.append(Box(0,2000-40,1400,400))
+
+
         #self.gameobjects.append(Snake1(680,140))
         #self.gameobjects.append(Beholder(300,100))
         #self.gameobjects.append(BeholderBat(300,100))
 	#self.gameobjects.append(RubySword(400,100))
+
+	# first rope encountered, plus platform next to rope	
         self.ropes.append(Rope(850,1500,500))
-        self.gameobjects.append(Box(850,1780,400,100))
+        self.gameobjects.append(Box(780,1750,400,100))
+ 
+	# roofs 
+        self.roofs.append(Box(0,1500,300,350))
+        self.roofs.append(Box(0,1480,150,300))
+        self.roofs.append(Box(780,1750,400,100))
+
 	self.relativex = relx
 	self.relativey = rely
- 
-	# roof 
-	self.roofs = []
-        self.roofs.append(Box(0,1500,1000,350))
-
 
 
     def draw(self,screen,player):
@@ -98,7 +108,7 @@ class MaproomCave1(MaproomDungeon):
 
 
     def talkto(self, player):
-        return self.gameobjects[1] 
+        return None
 
     def moveright(self):
         self.direction = "east"

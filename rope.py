@@ -36,6 +36,7 @@ class Rope:
 	     
     def collidewithrope(self, room, player):
         print 'rope x=%d y=%d player x=%d y=%d' % (self.x,self.y,player.x-room.relativex,player.y-room.relativey)
+        print ' %d %d' % (room.relativex,room.relativey)
 	if (player.x-room.relativex > self.x and 
 	player.x-room.relativex < self.x+self.w and 
 	player.y-room.relativey > self.y and

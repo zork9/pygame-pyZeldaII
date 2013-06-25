@@ -27,6 +27,7 @@ class MaproomBase:
         self.prevy = y
         self.relativex = x
         self.relativey = y 
+	self.roofs = []
         self.background = pygame.image.load('./pics/blank.bmp').convert()
         self.direction = "north"
         self.sidedirection = "north"
