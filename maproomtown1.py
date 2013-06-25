@@ -31,7 +31,7 @@ from tilebox import *
 from rubysword import *
 from beholder import *
 from beholderbat import *
-from elfman1town1 import *
+from elfwoman1town1 import *
 
 class MaproomTown1(MaproomDungeon):
     "Room with a (big) map"
@@ -40,6 +40,7 @@ class MaproomTown1(MaproomDungeon):
         self.background = pygame.image.load('./pics/bg-town-1-2000x600.bmp').convert()
 	# ground level
         self.gameobjects.append(Box(0,385,2000,400))
+        self.gameobjects.append(Elfwoman1Town1(800,332))
 	self.changeroomnumber = 0
  
     def draw(self,screen,player):
