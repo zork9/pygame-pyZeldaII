@@ -47,47 +47,17 @@ class Wizardman1Town1(Gameobject):
 	else:
 	    return 0
 
-    def talk(self, screen,font):
+    def talk(self):
         self.talkcounter += 1
         if self.talkcounter == 0:
-           return -1 
+           return None 
         elif self.talkcounter == 1:
-            screen.blit(font.render("Use your mana well.", 8, (255,255,255)), (100,100))
-	    talkflag = 1
-	    while talkflag == 1:
-                for event in pygame.event.get():
-                    if event.type == QUIT:
-        	        pygame.key.set_repeat(10,100)
-                        talkflag = 0
-                    elif event.type == KEYDOWN:
-            	        if event.key == K_t:
-        		    pygame.key.set_repeat(10,100)
-                            talkflag = 0
+            return "Use your mana well." 
         elif self.talkcounter == 2:
-            # FIXME 
-	    pygame.key.set_repeat(1000,1000)
-            screen.blit(font.render("My brother lives in the east.", 8, (255,255,255)), (100,100))
-	    talkflag = 1
-	    while talkflag == 1:
-                for event in pygame.event.get():
-                    if event.type == QUIT:
-                        talkflag = 0
-                    elif event.type == KEYDOWN:
-            	        if event.key == K_t:
-            		    pygame.key.set_repeat(10,100)
-                            talkflag = 0
-      	    ###self.talkcounter = -1
-        return 1
- 
-##        screen.blit(font.render("Watch out for Gohma. He spits venom!",4, (255,255,255)), (10,100))
-##        pygame.display.update()
-##        sleep(1)
-##        for event in pygame.event.get():
-##            self.room.draw(screen) 
-##           
-##            pygame.display.update()
-##            if event.type == QUIT:
-##                return
-##            elif event.type == KEYDOWN:
-##                if event.key == K_z:
-##                  break
+            return "My brother lives in the east." 
+        elif self.talkcounter == 3:
+            return "He was a warrior-wizard once.."
+      	else:
+    	    self.talkcounter = -1 
+            return None
+	return None 
