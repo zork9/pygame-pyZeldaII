@@ -53,7 +53,7 @@ class PlayerLink(PlayerBase):
         self.stimlibfight.addpicture(image)
 
         self.stimlibclimbing = Stateimagelibrary()	
-        image = pygame.image.load('./pics/player-climbing-72x72.bmp').convert()
+        image = pygame.image.load('./pics/player-climbing-2-72x72.bmp').convert()
         image.set_colorkey((0,0,255))
         self.stimlibclimbing.addpicture(image)
 
