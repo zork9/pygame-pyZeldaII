@@ -119,7 +119,7 @@ class Maproom(MaproomBase):
                 if i == o:
                     i = None ###FIXME2
 
-    def talkto(self):
+    def talkto(self,player):
         return None
 
     def collidesword(self,room,player):

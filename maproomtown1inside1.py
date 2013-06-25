@@ -80,8 +80,12 @@ class MaproomTown1Inside1(MaproomDungeon):
 		return i ## NOTE : returns collided entity (single)
 	return None
 
-    def talkto(self):
-        return self.gameobjects[1] 
+    def talkto(self,player):
+	for i in self.gameobjects:
+		print "i=%s" % i
+		if i.collide(self,player):
+        		return i 
+	return None
 
     def moveright(self):
 	if self.relativex >= 280:

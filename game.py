@@ -102,7 +102,7 @@ class Game:
                     
                     if event.key == K_t:
                         if self.room.collide(self.player) == 2:
-                            self.talker = self.room.talkto() # FIX
+                            self.talker = self.room.talkto(self.player) # FIX
                             print "self.talker=%s" % self.talker
 ##			if self.talker == None:
 ##                       	id = self.player.pickup(self.room)
