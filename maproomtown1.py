@@ -32,7 +32,7 @@ class MaproomTown1(MaproomDungeon):
         MaproomDungeon.__init__(self,x,y)
         self.background = pygame.image.load('./pics/bg-town-1-2000x600.bmp').convert()
 	# ground level
-        self.gameobjects.append(Box(0,385,2000,400))
+        self.gameobjects.append(Box(0,440,2000,400))
         self.gameobjects.append(Elfwoman1Town1(800,332))
         self.gameobjects.append(Elfwoman2Town1(400,332))
 	self.changeroomnumber = 0

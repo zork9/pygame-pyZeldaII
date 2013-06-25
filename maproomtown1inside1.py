@@ -31,7 +31,7 @@ class MaproomTown1Inside1(MaproomDungeon):
         MaproomDungeon.__init__(self,x,y)
         self.background = pygame.image.load('./pics/bg-town1-inside1-640x480.bmp').convert()
 	# ground level
-        self.gameobjects.append(Box(0,365,2400,400))
+        self.gameobjects.append(Box(0,440,2400,400))
         self.gameobjects.append(Elfman1Town1(100,340))
  
     def draw(self,screen,player):
