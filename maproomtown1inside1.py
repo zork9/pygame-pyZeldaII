@@ -33,14 +33,14 @@ from beholder import *
 from beholderbat import *
 from elfman1town1 import *
 
-class MaproomTown1(MaproomDungeon):
+class MaproomTown1Inside1(MaproomDungeon):
     "Room with a (big) map"
     def __init__(self,x,y):
         MaproomDungeon.__init__(self,x,y)
-        self.background = pygame.image.load('./pics/bg-town-1-2000x600.bmp').convert()
+        self.background = pygame.image.load('./pics/bg-town1-inside1-640x480.bmp').convert()
 	# ground level
-        self.gameobjects.append(Box(0,385,2000,400))
-	self.changeroomnumber = 0
+        self.gameobjects.append(Box(0,365,2400,400))
+        self.gameobjects.append(Elfman1Town1(100,340))
  
     def draw(self,screen,player):
         # draw bg
@@ -57,8 +57,8 @@ class MaproomTown1(MaproomDungeon):
 		i.draw(screen,self)
 	
     def isroomupexit(self):
-	if self.relativex  < -2000+460:
-		return 1
+	if self.relativex  < -250:
+		return 3 
 	return 0
 
     def setxyfromup(self):
@@ -68,13 +68,9 @@ class MaproomTown1(MaproomDungeon):
     def exit(self, game):
 	if self.isroomupexit():
 		self.setxyfromup()
-		return 1.1 
+		return 3 
 	return 0 
-
-
-    def collideup(self, player):
-	return 0
-  
+ 
     def collidesword(self,player):
         for i in self.gameobjects:
 	    if i!= None:
@@ -87,11 +83,19 @@ class MaproomTown1(MaproomDungeon):
     def talkto(self):
         return self.gameobjects[1] 
 
-	### NOTE town 1 collides for going inside houses
-    def MOVEDOWN(self,room,player):
-	if room.relativex < -700 + player.x and room.relativex > -750 + player.x:
-		room.changeroomnumber = 3.1 
+    def moveright(self):
+	if self.relativex >= 280:
+		self.moveleft()
+        self.direction = "east"
+        self.sidedirection = "east"
+	self.prevx = self.relativex - 1
+	self.prevy = self.relativey
+        self.relativex = self.relativex + 10
+	### print "relx=%d" % self.relativex
 
+    def collideup(self, player):
+	return 0
+  
     def removeobject(self, o):
         for i in range(0,len(self.gameobjects)):
             if self.gameobjects[i] == o:

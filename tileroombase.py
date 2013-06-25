@@ -146,13 +146,14 @@ class TileroomBase:
 	if self.relativey >= 0:### NOTE 480 screenheight
 		self.relativey -= 10
 
-    def MOVEDOWN(self):
+    def MOVEDOWN(self,room,player):
 	##self.relativey += 10
 	self.movedown()
 
     def MOVEUP(self):
 ##	self.relativey -= 10
 	self.moveup()
+
     def changeroom(self, n):
 	self.changeroomnumber = n
 

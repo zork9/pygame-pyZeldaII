@@ -73,7 +73,7 @@ class MaproomBase:
             #self.moveleft()
 
 	### NOTE dummy function for non overworld maps ## FIX
-    def MOVEDOWN(self):
+    def MOVEDOWN(self,room,player):
 	1	
  
 	### NOTE dummy function for non overworld maps ## FIX

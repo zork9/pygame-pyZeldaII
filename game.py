@@ -20,6 +20,7 @@ from pygame.locals import *
 from tileroom1 import *
 from maproom1 import *
 from maproomtown1 import *
+from maproomtown1inside1 import *
 from maproomcatcastle1 import *
 from maproom2 import *
 
@@ -57,8 +58,8 @@ class Game:
         ### self.room = Tileroom1(0,0,0,0)
         manameter = ManaMeter(0,0)
         lifemeter = LifeMeter(250,0)
-        player = PlayerLink(lifemeter,manameter)
-        ###player = PlayerTileLink()
+        self.player = PlayerLink(lifemeter,manameter)
+        ###self.player = PlayerTileLink()
         pygame.key.set_repeat(10,100)
         self.keydown = 0
         self.inventoryitem = None
@@ -67,7 +68,7 @@ class Game:
         self.inventorykey2 = None
         self.inventoryrubysword = None
         
-        self.taskbar = Taskbar(screen,font,player)
+        self.taskbar = Taskbar(screen,font,self.player)
         self.talker = None
         gameflag = 0
         while gameover == 0:
@@ -84,47 +85,47 @@ class Game:
             
         gameover = 0
         while gameover == 0:
-            player.h = 72 # NOTE: for ducking
+            self.player.h = 72 # NOTE: for ducking
             for event in pygame.event.get():
                 if event.type == QUIT:
                     return
                 elif event.type == KEYDOWN:
                     if event.key == K_z:
-                        if self.keydown == 2 or player.duck:
-                            player.fightlow(self.room)
+                        if self.keydown == 2 or self.player.duck:
+                            self.player.fightlow(self.room)
                         else:
-                            player.fightmedium(self.room)
+                            self.player.fightmedium(self.room)
                         break
                     # FIXME KLUDGE
             	    self.keydown = 1
-                    # player 1 key controls
+                    # self.player 1 key controls
                     
                     if event.key == K_t:
-                        if self.room.collide(player) == 2:
+                        if self.room.collide(self.player) == 2:
                             self.talker = self.room.talkto() # FIX
                             print "self.talker=%s" % self.talker
 ##			if self.talker == None:
-##                       	id = player.pickup(self.room)
+##                       	id = self.player.pickup(self.room)
 ##				if id == 5:
 ##		                	self.taskbar.setrubysword()
-##					player.setrubysword()
+##					self.player.setrubysword()
                     
                     if event.key == K_UP:
-                        self.room.MOVEDOWN()    
+                        self.room.MOVEDOWN(self.room,self.player)    
                     elif event.key == K_DOWN:
-                        player.duck = 1
+                        self.player.duck = 1
                         self.keydown = 2
                         #FIXME keydown = 2
                         self.room.MOVEUP()    
                     elif event.key == K_LEFT:
-                        player.duck = 0
+                        self.player.duck = 0
                         self.room.moveright()    
                     elif event.key == K_RIGHT:
-                        player.duck = 0
+                        self.player.duck = 0
                         self.room.moveleft()    
                     elif event.key == K_x:
-                        if player.jumpcounter == 0:
-                            player.jump(self.room)  
+                        if self.player.jumpcounter == 0:
+                            self.player.jump(self.room)  
     
                     elif event.key == K_i:
 #                        self.level.gameover = 1
@@ -160,7 +161,7 @@ class Game:
                                 inventory.draw(screen)
                                 pygame.display.update()
  
-#	    pickupid = self.room.pickup(player)
+#	    pickupid = self.room.pickup(self.player)
 #	    if pickupid:
 #		if pickupid == 1: # NOTE : masterkey id
 #		    self.inventorymasterkey = 1
@@ -175,8 +176,8 @@ class Game:
 #                    self.inventoryrubysword = 1
 #                    self.taskbar.setrubysword()
                     
-            ########if self.room.collide(player) == 1 or player.hitpoints <= 0: # NOTE: return 1 after player lifemeter runs out (player.hit)
-            if player.hitpoints <= 0: # NOTE: return 1 after player lifemeter runs out (player.hit)
+            ########if self.room.collide(self.player) == 1 or self.player.hitpoints <= 0: # NOTE: return 1 after self.player lifemeter runs out (self.player.hit)
+            if self.player.hitpoints <= 0: # NOTE: return 1 after self.player lifemeter runs out (self.player.hit)
         	endingimage = pygame.image.load('./pics/endingscreen2.bmp').convert()
         	while gameover == 0:
 	            	pygame.display.update()
@@ -191,23 +192,23 @@ class Game:
                     			gameover = 1
 					return
 				    
-            if self.room.collide(player) == 3 or self.room.collide(player) == 2:###Dungeon wall
+            if self.room.collide(self.player) == 3 or self.room.collide(self.player) == 2:###Dungeon wall
                 ####self.room.undomove() ### FIXME for rebound on enemies
-                f = self.room.fall(player)
+                f = self.room.fall(self.player)
                 if not f == 2:
                     self.room.movedown()#FIXME
-            f = self.room.fall(player)
+            f = self.room.fall(self.player)
             if f == 2:
                 gameflag = 0
             elif f == 0:
                 1#gameflag = 1
-            if self.room.collideup(player) == 2:
+            if self.room.collideup(self.player) == 2:
 		self.room.moveup()
 		self.room.moveup()
 		self.room.moveup()
 		self.room.moveup()
 		                         
-            if self.room.collidewithropes(player) == 2:
+            if self.room.collidewithropes(self.player) == 2:
                 
                 while gameflag == 0:
 
@@ -216,16 +217,16 @@ class Game:
                             return
                         elif event.type == KEYDOWN:
             	    
-                            # player 1 key controls
-                            ##player.draw(screen)
+                            # self.player 1 key controls
+                            ##self.player.draw(screen)
                             ##if event.key == K_z:
-                             ##   player.fight(self.room)  
+                             ##   self.player.fight(self.room)  
                             if event.key == K_UP:
-                                if self.room.collidewithropes(player) == 2:
+                                if self.room.collidewithropes(self.player) == 2:
                                     self.room.movedown()   
                             elif event.key == K_DOWN:
 ##                              if at the end of the rope, have to jump off  
-                                if self.room.collidewithropes(player) == 2:
+                                if self.room.collidewithropes(self.player) == 2:
                                     self.room.moveup()
                             elif event.key == K_RIGHT:
                                 self.room.moveleft()
@@ -237,9 +238,9 @@ class Game:
                                 gameflag = 1
                             elif event.key == K_z:
                                 gameflag = 1
-                    self.room.draw(screen,player)
-                    player.update(self.room)
-                    player.drawclimbing(screen)
+                    self.room.draw(screen,self.player)
+                    self.player.update(self.room)
+                    self.player.drawclimbing(screen)
                     self.taskbar.draw()
                     lifemeter.draw(screen) 
                     manameter.draw(screen,font2) 
@@ -248,28 +249,28 @@ class Game:
                     
             
                 
-            self.room.draw(screen,player)
-            player.update(self.room)
+            self.room.draw(screen,self.player)
+            self.player.update(self.room)
             if self.keydown == 1:
                 self.keydown = 0
-                player.draw(screen)
+                self.player.draw(screen)
             elif self.keydown == 2:
                 self.keydown = 2
-                player.drawduck(screen)
-                player.h = 32
+                self.player.drawduck(screen)
+                self.player.h = 32
             else:
-                player.drawstatic(screen)
+                self.player.drawstatic(screen)
             
-            #player.draw(screen)
+            #self.player.draw(screen)
 	    sleep(0.05)
             # fight for enemies
             # remove dead game objects
 		# FIX put in mana meter
-	    manameter.index = player.manapoints
+	    manameter.index = self.player.manapoints
 
             for o in self.room.gameobjects:
                 if o:
-                    o.fight(self.room,player,self.keydown)
+                    o.fight(self.room,self.player,self.keydown)
                     if o.hitpoints <= 0:
                         self.room.removeobject(o)
 
@@ -303,24 +304,32 @@ class Game:
         # NOTE: woods 
             if (roomnumber == 1):
                 self.talker = None
-        	player = PlayerLink(lifemeter,manameter)
+        	self.player = PlayerLink(lifemeter,manameter)
                 self.room = Maproom1(self.x,self.y)
             elif (roomnumber == 1.1):
                 self.talker = None
-                player = PlayerTileLink()
+                self.player = PlayerTileLink()
                 self.room = Tileroom1(self.x,self.y,0,0)
             elif (roomnumber == 2):
                 self.talker = None
-                player = PlayerLink(lifemeter,manameter)
+                self.player = PlayerLink(lifemeter,manameter)
                 self.room = Maproom2(self.x,self.y)
             elif (roomnumber == 4):
                 self.talker = None
-                player = PlayerLink(lifemeter,manameter)
+                self.player = PlayerLink(lifemeter,manameter)
                 self.room = Maproom2(self.x,self.y)
+		### first town 1 
             elif (roomnumber == 3):
                 self.talker = None
-                player = PlayerLink(lifemeter,manameter)
+                self.player = PlayerLink(lifemeter,manameter)
                 self.room = MaproomTown1(self.x,self.y)
+		self.player.y = 360 
+		### first house in town 1
+            elif (roomnumber == 3.1):
+                self.talker = None
+                self.player = PlayerLink(lifemeter,manameter)
+                self.room = MaproomTown1Inside1(self.x,self.y)
+		self.player.y = 350 
             if self.inventoryrubysword:
                 self.sethitf(self.room.gameobjects.hit2)
 
