@@ -21,6 +21,7 @@ from tileroom1 import *
 from maproom1 import *
 from maproomtown1 import *
 from maproomtown1inside1 import *
+from maproomtown1inside2 import *
 from maproomcatcastle1 import *
 from maproom2 import *
 
@@ -330,6 +331,13 @@ class Game:
                 self.player = PlayerLink(lifemeter,manameter)
                 self.room = MaproomTown1Inside1(self.x,self.y)
 		self.player.y = 350 
+		### second house in town 1
+            elif (roomnumber == 3.2):
+                self.talker = None
+                self.player = PlayerLink(lifemeter,manameter)
+                self.room = MaproomTown1Inside2(self.x,self.y)
+		self.player.y = 350
+ 
             if self.inventoryrubysword:
                 self.sethitf(self.room.gameobjects.hit2)
 

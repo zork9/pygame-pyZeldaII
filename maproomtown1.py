@@ -96,8 +96,15 @@ class MaproomTown1(MaproomDungeon):
 
 	### NOTE town 1 collides for going inside houses
     def MOVEDOWN(self,room,player):
+
+	print "DOWN> %d %d" % (room.relativex,player.x)
+
 	if room.relativex < -700 + player.x and room.relativex > -750 + player.x:
 		room.changeroomnumber = 3.1 
+	if room.relativex < -1110 + player.x and room.relativex > -1160 + player.x:
+		room.changeroomnumber = 3.2
+
+
 
     def removeobject(self, o):
         for i in range(0,len(self.gameobjects)):
