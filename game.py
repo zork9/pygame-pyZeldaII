@@ -244,7 +244,7 @@ class Game:
                     self.player.update(self.room)
                     self.player.drawclimbing(screen)
                     self.taskbar.draw()
-                    lifemeter.draw(screen) 
+                    lifemeter.draw(screen,font2) 
                     manameter.draw(screen,font2) 
                     pygame.display.update()
                     screen.blit(blankimage, (0,0))

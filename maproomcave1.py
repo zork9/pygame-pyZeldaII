@@ -23,6 +23,7 @@ from koboldwizard import *
 from tilebox import *
 #from snake1 import *
 from rubysword import *
+from rope import *
 
 class MaproomCave1(MaproomDungeon):
     "Room with a (big) map"
@@ -37,6 +38,7 @@ class MaproomCave1(MaproomDungeon):
         #self.gameobjects.append(Beholder(300,100))
         #self.gameobjects.append(BeholderBat(300,100))
 	#self.gameobjects.append(RubySword(400,100))
+        self.ropes.append(Rope(605,100,340))
 
  
     def draw(self,screen,player):
@@ -52,6 +54,10 @@ class MaproomCave1(MaproomDungeon):
 	    if i != None:
 		i.update(self,player)
 		i.draw(screen,self)
+	for r in self.ropes:
+		r.update(self,player)
+		r.draw(screen,self)
+
 	
     def isroomupexit(self):
 	if self.relativex > 275:

@@ -22,18 +22,16 @@ class Rope:
     def __init__(self, xx,yy,hh):
 	self.x = xx
         self.y = yy 
-        self.w = 14
+        self.w = 16 
         self.h = hh
         
-        ## dungeon statue as default picture
-        ## self.image = pygame.image.load('./pics/dungeon-statue1-36x36.bmp').convert()
-        self.image = pygame.image.load('./pics/nopicture.bmp').convert()
+        self.image = pygame.image.load('./pics/rope-16x16.bmp').convert()
         self.image.set_colorkey((0,0,0)) 
         self.hitpoints = 999999
-        # NOTE : decrease 1 hitpoint with default sword
         
     def draw(self, screen, room):
-        screen.blit(self.image,(self.x+room.relativex+self.w*2,self.y+room.relativey))
+	for i in range(self.y/self.w,self.y+self.h/self.w):
+        	screen.blit(self.image,(self.x+room.relativex+self.w*2,i*self.w+room.relativey))
 	    
 	     
     def collidewithrope(self, room, player):
