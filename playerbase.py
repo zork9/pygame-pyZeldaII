@@ -129,10 +129,11 @@ class PlayerBase(PlayerBase,PlayerBase):
 	self.stimlibduck.draw(screen,self.x,self.y)
 	
     def draw(self, screen):
+	# This is an extra heart container
 	if self.changeplayernumber == "heart": 
 		self.stimlibhold.drawstatic(screen,self.x,self.y-24,0)
 		self.hitpoints += RNG().generatehitpoints(10, self.lifemeter.max - self.lifemeter.index - 1) ### FIX (10, ? 
-		self.lifemeter.set(self.hitpoints % self.lifemeter.max) 
+		self.lifemeter.addblock() 
                 pygame.display.update()
 		sleep(3.1)
 		self.changeplayer(None)

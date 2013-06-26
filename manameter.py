@@ -52,6 +52,7 @@ class ManaMeter:
 	for i in range(0,self.index/self.div):
 		self.hearts.append(ManaBlock())
 
+	### FIX see lifemeter
     def set(self, hp):
 	self.index = hp	
 	for i in range(self.index/self.div, self.max/self.div):
