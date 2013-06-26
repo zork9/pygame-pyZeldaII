@@ -8,7 +8,7 @@ overworld :
 - arrow keys : movement, touch an tile to enter it, fight it, ... 
 
 side-scroll rooms :
-
+- i key : inventory
 - z,x buttons : jump & fight with sword
 - arrow keys :  movement
 - down arrow key : duck

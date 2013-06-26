@@ -27,6 +27,7 @@ from rope import *
 from daira import *
 from healingpotionitem import *
 from healingheartitem import *
+from healingitem import *
 
 class MaproomCave1(MaproomDungeon):
     "Room with a (big) map"
@@ -36,7 +37,7 @@ class MaproomCave1(MaproomDungeon):
         self.gameobjects.append(Daira(100,1890))
         self.gameobjects.append(Daira(900,1890))
         self.gameobjects.append(Daira(1400,1890))
-        self.gameobjects.append(HealingheartItem(140,1440))
+        self.gameobjects.append(HealingItem(140,1440))
 	# NOTE put enemies before boxes
 	# ground level
         self.gameobjects.append(Box(0,2000-40,1400,400))

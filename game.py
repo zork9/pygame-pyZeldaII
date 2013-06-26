@@ -201,7 +201,9 @@ class Game:
                 		if event.type == pygame.MOUSEBUTTONDOWN:
                     			gameover = 1
 					return
-				    
+	    ###if self.player.hitpoints > 0:
+	####	lifemeter.index = self.player.hitpoints
+			    
             if self.room.collide(self.player) == 3 or self.room.collide(self.player) == 2:###Dungeon wall
                 ####self.room.undomove() ### FIXME for rebound on enemies
                 f = self.room.fall(self.player)

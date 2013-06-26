@@ -62,6 +62,9 @@ class LifeMeter:
 			self.hearts[i] = LifeEmptyBlock() 
 	#else:
 	#	1#self.hearts[self.index/self.div] = LifeEmptyBlock() 
+	for i in range(0,self.index/self.div):
+		self.hearts[i] = LifeBlock()
+
 
     def draw(self,screen,font):
 	lifestr = "life - %d" % (self.max/self.div); 	

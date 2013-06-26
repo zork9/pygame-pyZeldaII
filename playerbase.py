@@ -132,8 +132,15 @@ class PlayerBase(PlayerBase,PlayerBase):
 	if self.changeplayernumber == "heart": 
 		self.stimlibhold.drawstatic(screen,self.x,self.y-24,0)
 		self.hitpoints += RNG().generatehitpoints(10, self.lifemeter.max - self.lifemeter.index - 1) ### FIX (10, ? 
+		self.lifemeter.set(self.hitpoints % self.lifemeter.max) 
                 pygame.display.update()
 		sleep(3.1)
+		self.changeplayer(None)
+		return
+	elif self.changeplayernumber == "healing": 
+		self.hitpoints += RNG().generatehitpoints(10, self.lifemeter.max - self.lifemeter.index) ### FIX (10, ? 
+		self.lifemeter.set(self.hitpoints % self.lifemeter.max) 
+		print "self.hitpoints = %d" % self.hitpoints
 		self.changeplayer(None)
 		return
         # NOTE
