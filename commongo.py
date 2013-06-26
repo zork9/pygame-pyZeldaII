@@ -50,13 +50,13 @@ class CommonGO(Gameobject):
 		self.direction = "south"
 
 	if self.direction == "west":
-		self.x -= 2
+		self.x -= 5
 	elif self.direction == "east":
-		self.x += 2
+		self.x += 5
 	elif self.direction == "north":
-		self.y -= 2
+		self.y -= 5
 	elif self.direction == "south":
-		self.y -= 2
+		self.y -= 5
         self.stimlib.draw(screen, self.x+room.relativex,self.y+room.relativey)    
     def collidewithsword(self, room, player):
         #print 'gameobject x=%d y=%d player x=%d y=%d' % (self.x,self.y,player.x-room.relativex,player.y-room.relativey)

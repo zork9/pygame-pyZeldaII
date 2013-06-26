@@ -39,4 +39,26 @@ class GhostyGO(CommonGO):
         self.hitpoints = 1000000000
         # NOTE : decrease 1 hitpoint with default sword
         self.hitf = self.hit1
+
+    def update(self,room,player):
+	r = randint(0,30)
+	if r >= 10 and self.x > player.x + room.relativex:
+		self.direction = "west"	
+	elif r >= 10 and self.x < player.x + room.relativex:
+		self.direction = "east"	
+	elif r >= 10 and self.y > player.y + room.relativey:
+		self.direction = "north"	
+	elif r >= 10 and self.y < player.y + room.relativey:
+		self.direction = "south"	
+	if self.direction == "west":
+		self.x -= 5
+	elif self.direction == "east":
+		self.x += 5
+	elif self.direction == "north":
+		self.y -= 5
+	elif self.direction == "south":
+		self.y -= 5
+
+    def draw(self, screen, room):
+        self.stimlib.draw(screen, self.x+room.relativex,self.y+room.relativey)    
         

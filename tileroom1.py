@@ -702,9 +702,10 @@ class Tileroom1(TileroomBase):
 		go.draw(screen,self)
 
     def update(self, screen, player):
-	if randint(0, 1000) == 100:
+	r = randint(0, 100)
+	if r == 50:
 		self.tileroomgameobjects.append(OgreGO(player.x - randint(70,100), player.y))			
-	if randint(0, 1000) == 200:
+	if r == 100:
 		self.tileroomgameobjects.append(GhostyGO(player.x + randint(70,100), player.y))			
 
     def isroomdownexit(self):
