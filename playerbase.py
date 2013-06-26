@@ -22,6 +22,8 @@ from playerfighter import *
 from playermagicuser import *
 from playerelf import *
 from playerdrow import *
+from time import *
+from rng import *
 
 class PlayerBase:
     def __init__(self):
@@ -94,11 +96,22 @@ class PlayerBase(PlayerBase,PlayerBase):
         image.set_colorkey((0,0,0))
         self.stimlibfight.addpicture(image)
 
+	self.stimlibhold = Stateimagelibrary()
+        image = pygame.image.load('./pics/playerhold-heart-72x96.bmp').convert()
+        image.set_colorkey((0,0,0))
+        self.stimlibhold.addpicture(image)
+
         self.fightcounter = 0
+ 
+	self.changeplayernumber = None
 
         classByType[PLAYERRACE](lifemeter)
         classByType2[PLAYERCLASS](lifemeter)
 
+    def changeplayer(self, codecstr):
+	self.changeplayernumber = codecstr
+	### if codecstr == "heart":
+		
     def drawstatic(self, screen):
         # NOTE
         if self.fightcounter > 0:
@@ -116,6 +129,14 @@ class PlayerBase(PlayerBase,PlayerBase):
 	self.stimlibduck.draw(screen,self.x,self.y)
 	
     def draw(self, screen):
+	if self.changeplayernumber == "heart": 
+		self.stimlibhold.drawstatic(screen,self.x,self.y,0)
+		### Healingheartitem(self.x+6,self.y-32)
+		self.hitpoints += RNG().generatehitpoints(0, self.lifemeter.max/self.lifemeter.div - self.lifemeter.max/self.lifemeter.div) 
+                pygame.display.update()
+		sleep(3)
+		self.changeplayer(None)
+		return
         # NOTE
         if self.fightcounter > 0:
             self.fightcounter += 1

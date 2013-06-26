@@ -67,7 +67,7 @@ class PlayerLink(PlayerBase):
        	self.sword = BroadSword(0,0)
         self.duck = 0
         self.jumpcounter = 0
- 
+
     def askclass(self):
         return "Assassin"
 
