@@ -50,7 +50,7 @@ class Game:
         
         blankimage = pygame.image.load('./pics/blank.bmp').convert()
         ## There are several title screens in the ./pics/ directory
-        titleimage = pygame.image.load('./pics/titlescreen-link2.bmp').convert()
+        titleimage = pygame.image.load('./pics/titlescreen-link3.bmp').convert()
         self.x = 0
         self.y = 0
         
