@@ -65,8 +65,8 @@ class MaproomCat(MaproomDungeon):
 		i.draw(screen,self)
 		
     def isroomdownexit(self):
-	if self.relativex  < -500:
-		return 1
+	###if self.relativex  < -500:
+	###	return 1
 	return 0
 
     def setxyfromdown(self):
@@ -74,9 +74,9 @@ class MaproomCat(MaproomDungeon):
 	self.relativey = 0
 
     def exit(self, game):
-	if self.isroomdownexit():
-		self.setxyfromdown()
-		return 2 
+	#if self.isroomdownexit():
+	#	self.setxyfromdown()
+	#	return 2 
 	return 0 
  
     def collidesword(self,player):

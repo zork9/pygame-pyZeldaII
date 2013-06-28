@@ -21,6 +21,7 @@ from maproomdungeon import *
 from maproomdungeonnorthwall import *
 from tilebox import *
 from boxcat import *
+from elevatorcat import *
 from rope import *
 #from snake1 import *
 from rubysword import *
@@ -30,10 +31,10 @@ from deeler import *
 from daira import *
 
 class MaproomCastle2(MaproomDungeon):
-    "Room with a (big) map"
+    ""
     def __init__(self,x,y):
         MaproomDungeon.__init__(self,x,y)
-        self.background = pygame.image.load('./pics/bg2-2400x600.bmp').convert()
+        self.background = pygame.image.load('./pics/parapapalace-2-640x480.bmp').convert()
 
 	self.WIDTH = 640
 
@@ -45,12 +46,12 @@ class MaproomCastle2(MaproomDungeon):
 	# roof
         ###self.gameobjects.append(Boxcat(0,65,self.WIDTH,50))
 	# base
-        self.gameobjects.append(Boxcat(self.offsetx,422,self.WIDTH,400))
+        self.gameobjects.append(Boxcat(self.offsetx,422,self.WIDTH,40))
 
 	# castle floors
         ### self.gameobjects.append(Boxcat(200,390,self.WIDTH,400))
         ### self.gameobjects.append(Boxcat(280,360,self.WIDTH,400))
-
+	self.elevators.append(Elevatorcat(640,360-100,48,96)) ### 100 -> elevator.size == 96
 
     def draw(self,screen,player):
         # draw bg
@@ -71,10 +72,16 @@ class MaproomCastle2(MaproomDungeon):
 	    if i != None:
 		i.update(self,player)
 		i.draw(screen,self)
-		
+	for i in self.elevators:
+		i.update(self,player)
+		i.draw(screen,self)
+	####### FIX update code for elevator of concatrooms
+	for i in self.elevators:
+		if i.collide(self,player) == 2:
+			1
     def isroomdownexit(self):
-	if self.relativex  < -500:
-		return 1
+	###if self.relativex  < -500:
+	###	return 1
 	return 0
 
     def setxyfromdown(self):
@@ -82,9 +89,9 @@ class MaproomCastle2(MaproomDungeon):
 	self.relativey = 0
 
     def exit(self, game):
-	if self.isroomdownexit():
-		self.setxyfromdown()
-		return 2 
+	#if self.isroomdownexit():
+	#	self.setxyfromdown()
+	#	return 2 
 	return 0 
  
     def collidesword(self,player):

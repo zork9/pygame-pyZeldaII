@@ -43,29 +43,6 @@ class Maproom2(MaproomDungeon):
         #self.gameobjects.append(BeholderBat(300,100))
 	#self.gameobjects.append(RubySword(400,100))
 
-        #FIX	self.gameobjects.append(Dungeonentrance1(0,0))
-##	self.gameobjects.append(Tree2(10,100))
-##	self.gameobjects.append(Tree2(100,100))
-##	self.gameobjects.append(Tree2(200,120))
-##        self.gameobjects.append(Goblin1(50,230))
-##        self.gameobjects.append(Goblin1(440,230))
-##        b = Box(650,0,150,300)
-##        b.setimage('./pics/knightdungeon1-150x350.bmp',0,0,0)
-##        self.gameobjects.append(b)
-##        # upper crevasses
-##        self.gameobjects.append(Box(0,0,375,75))
-##        self.gameobjects.append(Box(375,0,100,100))
-##        self.gameobjects.append(Box(475,0,100,125))
-##        self.gameobjects.append(Box(500,0,120,180))
-##        self.gameobjects.append(Box(600,0,50,160))
-##        self.gameobjects.append(Box(650,0,25,75))
-##        self.gameobjects.append(Box(675,0,75,40))
-##        self.gameobjects.append(Box(750,0,50,40))
-##        # lower crevasses
-##        self.gameobjects.append(Box(500,220,120,400))
-##        self.gameobjects.append(Box(0,400,800,100))
-        #self.addnorthwall(0,0)
- 
     def draw(self,screen,player):
         # draw bg
         screen.blit(self.background, (0+self.relativex, 0+self.relativey))
