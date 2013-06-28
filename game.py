@@ -55,8 +55,8 @@ class Game:
         self.y = 0
         
         ### self.room = MaproomCatCastle1(0,0)
-        ### self.room = Maproom1(0,0)
         self.room = MaproomTown1(0,-60)
+        ### self.room = Maproom1(0,0)
         ### self.room = Tileroom1(0,0,0,0)
         ### self.room = MaproomCave1(0,0,0,-2000+480)
         manameter = ManaMeter(0,0)

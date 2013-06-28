@@ -22,6 +22,9 @@ class Elevatorcatcntl(Gameobject):
     ""
     def __init__(self, xx,yy,ww,hh):
         Gameobject.__init__(self,xx,yy)
+	self.startx = xx
+	self.starty = yy	
+	self.roomstarty = yy	
         self.w = ww
         self.h = hh
         self.hitpoints = 999999999 #FIX else wall/floor disappears
@@ -32,20 +35,45 @@ class Elevatorcatcntl(Gameobject):
 	# NOTE that updates must propagate without falling (staying on e.g. 
 	# a box or boxcat
     def update(self, room, player):
-	if self.moveflag == 1:
-		player.y += 10 ### fall even with obstruction 
-		self.y += 10	
-		if room.fall(player) == 0:
-			1
-		elif room.fall(player) == 2:		
+	### move down with elevator:
+	print "123> DOWN = starty=%d y=%d playery=%d" % (self.roomstarty,room.relativey,player.y)
+	if self.moveflag == 2:
+		###room.yplus(-10) ### elevator down move
+		if room.relativey < - self.roomstarty:
+			#player.y -= 10
+			self.y += 10
+			room.yplus(-10) ### elevator down move
+		else:
 			room.yplus(-10) ### elevator down move
 	
+		self.y += 10	
+		if room.relativey <= self.roomstarty - 480:
+			print "123> STOP"
+			self.moveflag = 0
+	### move up with elevator
+	elif self.moveflag == 1:
+		if self.y > self.starty: ##NOTE default room height, ascend no more or less:
+			player.y -= 10 ### fall even with obstruction 
+			self.y -= 10	
+			if room.fall(player) == 0: ### no obstruction
+				1
+			elif room.fall(player) == 2:	### obstruction	
+				room.yplus(10) ### elevator down move
+		if self.y >= self.starty + 480:
+			self.moveflag = 0
+			self.y -= 10
+	### no move
+	else:
+		1
+		## KLU
+		room.yplus(10)	
+		room.yplus(10)	
     def draw(self, screen, room):
 	if self.moveflag == 0:
         	screen.blit(self.image, (self.x+room.relativex, self.y+room.relativey))
 	else:	
 		### NOTE self.y !
-        	screen.blit(self.image, (self.x+room.relativex, self.y))
+        	screen.blit(self.image, (self.x+room.relativex, self.y+room.relativey))
 			
     def collide(self, room, player):
 	#if self.moveflag == 0:
@@ -53,7 +81,7 @@ class Elevatorcatcntl(Gameobject):
 	player.x-room.relativex < self.x+self.w and 
 	player.y-room.relativey > self.y - self.h  and #FIX
 	player.y-room.relativey < self.y + self.h):
-	    print "collision in elevator cat!"
+	    ### print "collision in elevator catcntl!"
 	    ### self.moveflag = 1
 	    ### room.yplus(-10) ### elevator down move
 	    return 2 

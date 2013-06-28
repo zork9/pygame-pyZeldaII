@@ -20,6 +20,7 @@ from maproom import *
 from maproomcat import *
 from maproomcastle1 import *
 from maproomcastle2 import *
+from maproomcastle3 import *
 from maproomgraph import *
 from maproomdungeonnorthwall import *
 from tilebox import *
@@ -37,11 +38,14 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
     def __init__(self,xx,yy):
         MaproomGraph.__init__(self)
         MaproomCat.__init__(self,xx,yy)
-	node1 = MaproomGraphNode(MaproomCastle1(0,0))
-	self.graph.append(node1)
-	node2 = MaproomGraphNode(MaproomCastle2(640,0)) ## NOTE x=640
-	###self.graph.append(node2)
-	self.addrightconnection(0,node2)
+	self.node1 = MaproomGraphNode(MaproomCastle1(0,0))
+	self.graph.append(self.node1)
+	self.node2 = MaproomGraphNode(MaproomCastle2(640,0)) ## NOTE x=640
+	###self.graph.append(self.node2)
+	self.node1.addrightconnection(self.node2)
+	self.node3 = MaproomGraphNode(MaproomCastle3(640,480)) ## NOTE x=640
+	###self.graph.append(self.node3)
+	self.node2.adddownconnection(self.node3)
 	self.graphindex = 0
 
 	self.elevators.append(Elevatorcatcntl(100+640,360-110,48,96)) ### 100 -> elevator.h == 96
@@ -55,34 +59,48 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
 	### self.graph[self.graphindex].current.draw(screen,player)
 	
 	### print "dir = %s sidedir = %s" % (self.direction, self.sidedirection)
-	if self.direction == "south":
-		for c in self.graph[self.graphindex].upconnections:
-			c.current.xset(self.relativex+0)
-			c.current.yset(self.relativey)
-			c.current.draw(screen,player)
-	if self.direction == "north":
-		for c in self.graph[self.graphindex].downconnections:
-			c.current.xset(self.relativex+0)
-			c.current.yset(self.relativey)
-			c.current.draw(screen,player)
-	if self.sidedirection == "east":
-		for c in self.graph[self.graphindex].leftconnections:
-			c.current.xset(self.relativex+0)
-			c.current.yset(self.relativey)
-			c.current.draw(screen,player)
-	if self.sidedirection == "west":
-		for c in self.graph[self.graphindex].rightconnections:
-			c.current.xset(self.relativex)
-			c.current.yset(self.relativey)
-			c.current.draw(screen,player)
+
+	self.drawiter(screen,player,2,self.graph[self.graphindex])
+
 	for i in self.elevators:
-		if i.collide(self,player) == 2:
-			i.update(self,player)
 		i.draw(screen,self)
-	
+		### if i.collide(self,player) == 2 or i.moveflag != 0:
+		if i.moveflag != 0:
+			i.update(self,player)
+
 	#for i in self.elevators:
 	#	i.update(self,player)
 	####### FIX update code for elevator of concatrooms
+
+    def drawiter(self, screen, player, depth, graph):
+	if depth > 0:
+		if self.direction == "south":
+			for c in graph.upconnections:
+				c.current.xset(self.relativex+0)
+				c.current.yset(self.relativey)
+				c.current.draw(screen,player)
+				self.drawiter(screen,player,depth-1,graph.upconnections[0])
+		if self.direction == "north":
+			for c in graph.downconnections:
+				c.current.xset(self.relativex+0)
+				c.current.yset(self.relativey)
+				c.current.draw(screen,player)
+				self.drawiter(screen,player,depth-1,graph.downconnections[0])
+		if self.sidedirection == "east":
+			for c in graph.leftconnections:
+				c.current.xset(self.relativex+0)
+				c.current.yset(self.relativey)
+				c.current.draw(screen,player)
+				self.drawiter(screen,player,depth-1,graph.leftconnections[0])
+		if self.sidedirection == "west":
+			for c in graph.rightconnections:
+				c.current.xset(self.relativex)
+				c.current.yset(self.relativey)
+				c.current.draw(screen,player)
+				self.drawiter(screen,player,depth-1,graph.rightconnections[0])
+
+
+
     def moveup(self):
         MaproomGraph.moveupnode(self, self.graphindex)
         MaproomCat.moveup(self)
@@ -107,6 +125,7 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
 	if self.direction == "north":
 		for c in self.graph[self.graphindex].downconnections:
 			c.current.yset(self.relativey)
+			## test self.graph[self.graphindex].downconnections[0].current.xset(self.relativey)
 	if self.sidedirection == "east":
 		for c in self.graph[self.graphindex].leftconnections:
 			c.current.xset(self.relativex)
@@ -122,6 +141,7 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
 		if self.direction == "north":
 			for c in self.graph[self.graphindex].downconnections:
 				c.current.yset(self.relativey)
+				#test self.graph[self.graphindex].downconnections[0].current.xset(self.relativey)
 		if self.sidedirection == "east":
 			for c in self.graph[self.graphindex].leftconnections:
 				c.current.xset(self.relativex+0)
@@ -141,12 +161,7 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
 
     def yplus(self,dy): ### FIX NOTE KLU
 	self.relativey += dy
-	print "123> yplus=%d" % self.relativey
 	MaproomGraph.yplus(self,dy,self.graphindex)
-
-###	MaproomGraph.yset(self,self.relativey,self.graphindex)
-
-###	MaproomCat.yplus(self,dy)
 
 #    def yget(self):
 #	print "123> y=%d" % self.relativey
@@ -163,8 +178,11 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
     def MOVEUP(self, room, player):
 	for el in self.elevators:
 		if el.collide(self,player) == 2:
-			el.moveflag = 1	
+			el.moveflag = 2 
+			el.roomstarty = room.relativey
+
+
     def MOVEDOWN(self, room, player):
 	for el in self.elevators:
 		if el.collide(self,player) == 2:
-			el.moveflag = 1	
+			el.moveflag = 1

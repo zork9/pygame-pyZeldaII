@@ -124,9 +124,8 @@ class PlayerLink(PlayerBase):
 
     def update(self,room):
        if self.jumpcounter > 0 and self.jumpcounter < 200:
-            ###FIXMENOTE KLU yplus in adjacent rooms such as linked maproomcat.py 
-            room.yplus(20) ### FIX NOTE KLU
-	    print "#############player YPLUS> y=%d %s" % (room.relativey,room)
+            ###NOTE yplus in adjacent rooms such as linked maproomcat.py 
+            room.yplus(20)
             self.jumpcounter += 15
        else:   
             self.jumpcounter = 0

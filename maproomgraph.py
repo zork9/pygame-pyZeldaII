@@ -25,24 +25,37 @@ class MaproomGraphNode:
 	self.rightconnections = [] 
 	self.upconnections = [] 
 	self.downconnections = [] 
-	self.current = current ### This is the Room itself
+	self.current = current ### This is the Room itsel, the lists above contain nodes
+
+    def addleftconnection(self, node):
+	self.leftconnections.append(node)
+
+    def addrightconnection(self, node):
+	self.rightconnections.append(node)
+
+    def addupconnection(self, node):
+	self.upconnections.append(node)
+
+    def adddownconnection(self, node):
+	self.downconnections.append(node)
+
  
 class MaproomGraph:
     "Room lst ADT"
     def __init__(self):
 	self.graph = []
 	
-    def addleftconnection(self, index, node):
-	self.graph[index].leftconnections.append(node)
+##    def addleftconnection(self, index, node):
+##	self.graph[index].leftconnections.append(node)
 
-    def addrightconnection(self, index, node):
-	self.graph[index].rightconnections.append(node)
+ ##   def addrightconnection(self, index, node):
+##	self.graph[index].rightconnections.append(node)
 
-    def addupconnection(self, index, node):
-	self.graph[index].upconnections.append(node)
+ ##   def addupconnection(self, index, node):
+##	self.graph[index].upconnections.append(node)
 
-    def adddownconnection(self, index, node):
-	self.graph[index].downconnections.append(node)
+ ##   def adddownconnection(self, index, node):
+##	self.graph[index].downconnections.append(node)
 
     def moveupnode(self, index):
 	self.graph[index].current.moveup()
