@@ -29,40 +29,45 @@ class Elevatorcat(Gameobject):
         self.image.set_colorkey((0,0,0)) 
 	self.moveflag = 0
 
+	# NOTE that updates must propagate without falling (staying on e.g. 
+	# a box or boxcat
     def update(self, room, player):
 	if self.moveflag == 1:
-		###self.y += 3 
-		room.yplus(3)
-
-    def draw(self, screen, room):
-        screen.blit(self.image, (self.x+room.relativex, self.y+room.relativey))
+		# self.y += 10	
+		player.y += 10 ### fall even with obstruction 
+		self.y += 10	
+		if room.fall(player) == 0:
+			### room.yplus(-10) ### elevator down move
+			#room.relativey -= 10
+			#player.y -= 10 ### fall even with obstruction 
+			1
+		elif room.fall(player) == 2:		
+			room.yplus(-10) ### elevator down move
+			#room.relativey -= 10
+			#player.y -= 10 ### do not fall even with obstruction 
 	
+    def draw(self, screen, room):
+	if self.moveflag == 0:
+        	screen.blit(self.image, (self.x+room.relativex, self.y+room.relativey))
+	else:	
+		### NOTE self.y !
+        	screen.blit(self.image, (self.x+room.relativex, self.y))
+			
     def collide(self, room, player):
-	## print "coll elevator cat playerx=%d playery=%d elevatorx=%d elevatory=%d" % (player.x-room.relativex,player.y-room.relativey,self.x,self.y) 
-	if (player.x-room.relativex > self.x  and 
+	if (player.x-room.relativex > self.x - self.w and
 	player.x-room.relativex < self.x+self.w and 
-	player.y-room.relativey > self.y and #FIXED +self.h
+	player.y-room.relativey > self.y -self.h and #FIX
 	player.y-room.relativey < self.y+self.h):
 	    print "collision in elevator cat!"
-	    self.moveflag = 1	
+	    self.moveflag = 1
+	    ### player.y = player.y - 96+72	
 	    return 2 
 	else:
 	    return 0
 
 	### for in room.roofs list
     def collideup(self, room, player):
-	if (player.x > self.x+room.relativex  and 
-	player.x < self.x+room.relativex+self.w and 
-	player.y > self.y+room.relativey and #FIXED +self.h
-	player.y < self.y+room.relativey + self.h):
-	    print "collision up in box!"	
-	    if player.y > self.y+room.relativey:
-		return 2
-	    else:
 		return 0 
-	else:
-	    return 0
-
 
     def fallcollide(self, room, player):
         # FIX BUG

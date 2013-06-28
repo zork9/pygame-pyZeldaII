@@ -42,6 +42,8 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
 	###self.graph.append(node2)
 	self.addrightconnection(0,node2)
 	self.graphindex = 0
+
+	self.elevators.append(Elevatorcat(100+640,360-100,48,96)) ### 100 -> elevator.h == 96
  
     def draw(self,screen,player):
         # draw bg
@@ -72,7 +74,14 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
 			c.current.xset(self.relativex)
 			c.current.yset(self.relativey)
 			c.current.draw(screen,player)
+	for i in self.elevators:
+		if i.collide(self,player) == 2:
+			i.update(self,player)
+		i.draw(screen,self)
 	
+	#for i in self.elevators:
+	#	i.update(self,player)
+	####### FIX update code for elevator of concatrooms
     def moveup(self):
         MaproomGraph.moveupnode(self, self.graphindex)
         MaproomCat.moveup(self)
@@ -122,7 +131,8 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
         
         return 0
 
-    def collideup(self, player):	
+	
+    def collideup(self, player): ### KLU	
 	for i in self.graph[self.graphindex].current.gameobjects:
 	    if i != None and i.collideup(self, player) == 1:
 		return 2

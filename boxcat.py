@@ -37,7 +37,7 @@ class Boxcat(Gameobject):
 	player.x < self.x+room.relativex+self.w and 
 	player.y > self.y+room.relativey and #FIXED +self.h
 	player.y < self.y+room.relativey + self.h):
-	    print "collision in catbox!"	
+	    ### print "collision in catbox!"	
 	    return 2 
 	else:
 	    return 0
@@ -55,7 +55,7 @@ class Boxcat(Gameobject):
 	player.x-room.relativex < self.x+self.w and 
 	player.y-room.relativey+player.h > self.y and 
 	player.y-room.relativey < self.y + self.h):
-	    print "collision with Boxcat!"
+	    ## print "collision with Boxcat!"
 	    return 1 
 	else:
 	    return 0 ## for game self.talker

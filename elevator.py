@@ -32,7 +32,8 @@ class Elevator(Gameobject):
     def update(self, player, room):
 	if self.moveflag == 1:
 		###self.y += 3 
-		room.relativey -= 3
+		room.relativey -= 3 ## elevator map move
+		room.movedown() ### anti-fall on elevator platform move
 
     def draw(self, screen, room):
         screen.blit(self.image, (self.x+room.relativex, self.y+room.relativey))

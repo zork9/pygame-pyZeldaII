@@ -51,7 +51,6 @@ class MaproomCastle2(MaproomDungeon):
 	# castle floors
         ### self.gameobjects.append(Boxcat(200,390,self.WIDTH,400))
         ### self.gameobjects.append(Boxcat(280,360,self.WIDTH,400))
-	self.elevators.append(Elevatorcat(640,360-100,48,96)) ### 100 -> elevator.size == 96
 
     def draw(self,screen,player):
         # draw bg
@@ -72,13 +71,7 @@ class MaproomCastle2(MaproomDungeon):
 	    if i != None:
 		i.update(self,player)
 		i.draw(screen,self)
-	for i in self.elevators:
-		i.update(self,player)
-		i.draw(screen,self)
-	####### FIX update code for elevator of concatrooms
-	for i in self.elevators:
-		if i.collide(self,player) == 2:
-			1
+		
     def isroomdownexit(self):
 	###if self.relativex  < -500:
 	###	return 1
