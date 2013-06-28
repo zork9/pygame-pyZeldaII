@@ -53,7 +53,7 @@ class MaproomBase:
  
     def xset(self, x):
 	self.prevx = self.relativex 
-	self.relativey = x
+	self.relativex = x
  
     def draw(self,screen):
 	##print "x=%d" % self.relativex 

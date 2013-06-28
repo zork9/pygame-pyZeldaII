@@ -25,7 +25,7 @@ class MaproomGraphNode:
 	self.rightconnections = [] 
 	self.upconnections = [] 
 	self.downconnections = [] 
-	self.current = current
+	self.current = current ### This is the Room itself
  
 class MaproomGraph:
     "Room lst ADT"
@@ -67,9 +67,18 @@ class MaproomGraph:
     def yplus(self, dy, index):
 	### FIX use yset for all
 	self.graph[index].current.yplus(dy)
+	for c in self.graph[index].leftconnections:
+		c.current.yplus(dy)
+	for c in self.graph[index].rightconnections:
+		c.current.yplus(dy)
+	for c in self.graph[index].upconnections:
+		c.current.yplus(dy)
+	for c in self.graph[index].downconnections:
+		c.current.yplus(dy)
 
     def xset(self, x, index):
 	### FIX use yset for all
+	print "8888888888888888> %s" % self.graph[index].current
 	self.graph[index].current.xset(x)
 
     def xget(self, index):
@@ -78,6 +87,7 @@ class MaproomGraph:
 
     def yset(self, y, index):
 	### FIX use yset for all
+	print "8888888888888888> %s" % self.graph[index].current
 	self.graph[index].current.yset(y)
 
     def yget(self, index):

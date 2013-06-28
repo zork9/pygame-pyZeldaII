@@ -20,6 +20,7 @@ from maproom import *
 from maproomdungeon import *
 from maproomdungeonnorthwall import *
 from tilebox import *
+from boxcat import *
 from rope import *
 #from snake1 import *
 from rubysword import *
@@ -36,25 +37,26 @@ class MaproomCastle2(MaproomDungeon):
 
 	self.WIDTH = 640
 
-
+	self.offsetx = x
+	self.offsety = y
         ### self.gameobjects.append(Ironknuckle(600,300))
         
         # left NOTE : boxes collide so put them after enemies !
 	# roof
-        self.gameobjects.append(Box(0,65,self.WIDTH,50))
+        ###self.gameobjects.append(Boxcat(0,65,self.WIDTH,50))
 	# base
-        self.gameobjects.append(Box(0,422,self.WIDTH,400))
+        self.gameobjects.append(Boxcat(self.offsetx,422,self.WIDTH,400))
 
 	# castle floors
-        self.gameobjects.append(Box(200,390,self.WIDTH,400))
-        self.gameobjects.append(Box(280,360,self.WIDTH,400))
+        ### self.gameobjects.append(Boxcat(200,390,self.WIDTH,400))
+        ### self.gameobjects.append(Boxcat(280,360,self.WIDTH,400))
 
 
     def draw(self,screen,player):
         # draw bg
-	print "abc> %d" % self.relativey
+	### print "abc> %d" % self.relativey
         ### is in maproomdungeon screen.blit(self.background, (0+self.relativex, 0+self.relativey))
-	screen.blit(self.background, (0+self.relativex, 0+self.relativey))
+	screen.blit(self.background, (self.offsetx+self.relativex, self.offsety+self.relativey))
         # draw walls
         MaproomDungeon.draw(self,screen)
         for t in self.tileboxes:

@@ -20,6 +20,7 @@ from maproom import *
 from maproomdungeon import *
 from maproomdungeonnorthwall import *
 from tilebox import *
+from boxcat import *
 from rope import *
 #from snake1 import *
 from rubysword import *
@@ -39,13 +40,13 @@ class MaproomCastle1(MaproomDungeon):
 
         # left NOTE : boxes collide so put them after enemies !
 	# roof
-        self.gameobjects.append(Box(0,65,self.WIDTH,50))
+        ### self.gameobjects.append(Boxcat(0,65,self.WIDTH,50))
 	# base
-        self.gameobjects.append(Box(0,422,self.WIDTH,400))
+        self.gameobjects.append(Boxcat(0,422,self.WIDTH,40))
 
 	# castle floors
-        self.gameobjects.append(Box(200,390,self.WIDTH,400))
-        self.gameobjects.append(Box(280,360,self.WIDTH,400))
+        self.gameobjects.append(Boxcat(200,390,self.WIDTH,40))
+        self.gameobjects.append(Boxcat(280,360,self.WIDTH,40))
 
 
     def draw(self,screen,player):
@@ -104,19 +105,19 @@ class MaproomCastle1(MaproomDungeon):
     def moveup(self):
         self.direction = "north"
 	self.prevx = self.relativex
-	self.prevy = self.relativey + 1
+	self.prevy = self.relativey + 10
         self.relativey = self.relativey - 10
 
     def movedown(self):
         self.direction = "south"
 	self.prevx = self.relativex
-	self.prevy = self.relativey - 1
+	self.prevy = self.relativey - 10
         self.relativey = self.relativey + 10
 
     def moveleft(self):
         self.direction = "west"
         self.sidedirection = "west"
-	self.prevx = self.relativex + 1
+	self.prevx = self.relativex + 10
 	self.prevy = self.relativey
         self.relativex = self.relativex - 10
 	### print "self.lx=%d" % self.self.lativex
@@ -126,7 +127,7 @@ class MaproomCastle1(MaproomDungeon):
 		self.moveleft()
         self.direction = "east"
         self.sidedirection = "east"
-	self.prevx = self.relativex - 1
+	self.prevx = self.relativex - 10
 	self.prevy = self.relativey
         self.relativex = self.relativex + 10
 	### print "relx=%d" % r.relativex

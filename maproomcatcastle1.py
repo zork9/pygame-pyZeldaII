@@ -45,13 +45,13 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
  
     def draw(self,screen,player):
         # draw bg
-	print "789> rely=%d %s" % (self.relativey,self)
+	### print "789> rely=%d %s" % (self.relativey,self)
         ###FIX NOTE blit with these global relx rely 
         ###FIX NOTE xset yset 
 	screen.blit(self.graph[self.graphindex].current.background, (self.graph[self.graphindex].current.relativex, self.graph[self.graphindex].current.relativey))
 	### self.graph[self.graphindex].current.draw(screen,player)
 	
-	print "dir = %s sidedir = %s" % (self.direction, self.sidedirection)
+	### print "dir = %s sidedir = %s" % (self.direction, self.sidedirection)
 	if self.direction == "south":
 		for c in self.graph[self.graphindex].upconnections:
 			c.current.xset(self.relativex+0)
@@ -69,7 +69,7 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
 			c.current.draw(screen,player)
 	if self.sidedirection == "west":
 		for c in self.graph[self.graphindex].rightconnections:
-			c.current.xset(self.relativex+0)
+			c.current.xset(self.relativex)
 			c.current.yset(self.relativey)
 			c.current.draw(screen,player)
 	
@@ -99,10 +99,10 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
 			c.current.yset(self.relativey)
 	if self.sidedirection == "east":
 		for c in self.graph[self.graphindex].leftconnections:
-			c.current.xset(self.relativex+0)
+			c.current.xset(self.relativex)
 	if self.sidedirection == "west":
 		for c in self.graph[self.graphindex].rightconnections:
-			c.current.xset(self.relativex+0)
+			c.current.xset(self.relativex)
         for i in self.graph[self.graphindex].current.gameobjects:
 	    if i != None and i.fallcollide(self, player):
                 self.movedown()
@@ -128,11 +128,14 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
 		return 2
 	return 0
 
-    def yplus(self,dy):
-	print "123> y=%d" % self.relativey
-	MaproomGraph.yplus(self,dy,self.graphindex)
-	MaproomCat.yplus(self,dy)
+    def yplus(self,dy): ### FIX NOTE KLU
 	self.relativey += dy
+	print "123> yplus=%d" % self.relativey
+	MaproomGraph.yplus(self,dy,self.graphindex)
+
+###	MaproomGraph.yset(self,self.relativey,self.graphindex)
+
+###	MaproomCat.yplus(self,dy)
 
 #    def yget(self):
 #	print "123> y=%d" % self.relativey

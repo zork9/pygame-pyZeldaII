@@ -119,7 +119,7 @@ class PlayerTileLink(PlayerBase):
     def update(self,room):
        if self.jumpcounter > 0 and self.jumpcounter < 200:
             ###FIXMENOTE room.relativey += 20
-            room.yplus(20)
+            room.yplus(10)
 	    print "#############456> y=%d %s" % (room.relativey,room)
             self.jumpcounter += 15
        else:   

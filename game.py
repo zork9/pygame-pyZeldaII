@@ -56,14 +56,13 @@ class Game:
         
         ### self.room = MaproomCatCastle1(0,0)
         ### self.room = Maproom1(0,0)
-        ### self.room = MaproomTown1(0,-60)
-        self.room = Tileroom1(0,0,0,0)
+        self.room = MaproomTown1(0,-60)
+        ### self.room = Tileroom1(0,0,0,0)
         ### self.room = MaproomCave1(0,0,0,-2000+480)
         manameter = ManaMeter(0,0)
         lifemeter = LifeMeter(250,0)
-        ### self.player = PlayerLink(lifemeter,manameter)
-        self.player = PlayerTileLink()
-
+        self.player = PlayerLink(lifemeter,manameter)
+        ### self.player = PlayerTileLink()
 
 	### NOTE
 	self.player.y = 360 ### 382
@@ -136,7 +135,7 @@ class Game:
                     elif event.key == K_x:
                         if self.player.jumpcounter == 0:
                             self.player.jump(self.room)  
-    
+   			    print "init jump" 
                     elif event.key == K_i:
 #                        self.level.gameover = 1
                       #FIXME  pygame.event.flush()

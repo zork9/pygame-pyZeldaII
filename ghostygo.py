@@ -39,16 +39,40 @@ class GhostyGO(CommonGO):
         self.hitpoints = 1000000000
         # NOTE : decrease 1 hitpoint with default sword
         self.hitf = self.hit1
+	self.directioncounter = 0
 
+	### use a side and updown direction variable
     def update(self,room,player):
 	r = randint(0,30)
+	if self.directioncounter > 30:
+		r = 10
+
+	px = player.x + room.relativex
+	py = player.y + room.relativey
+	x = self.x
+	y = self.y
+
+	min = self.minimum(abs(px-x), abs(py-y))		
+	if min == abs(px-x) and px-x >= 0:
+			self.direction = "east" 
+	elif min == abs(px-x) and px-x < 0:
+			self.direction = "west" 
+	if min == abs(py-y) and py-y >= 0:
+			self.direction = "south" 
+	elif min == abs(py-y) and py-y > 0:
+			self.direction = "north" 
+ 
 	if r >= 10 and self.x > player.x + room.relativex:
+		self.directioncounter = 0
 		self.direction = "west"	
 	elif r >= 10 and self.x < player.x + room.relativex:
+		self.directioncounter = 0
 		self.direction = "east"	
 	elif r >= 10 and self.y > player.y + room.relativey:
+		self.directioncounter = 0
 		self.direction = "north"	
 	elif r >= 10 and self.y < player.y + room.relativey:
+		self.directioncounter = 0
 		self.direction = "south"	
 	if self.direction == "west":
 		self.x -= 5
@@ -58,7 +82,10 @@ class GhostyGO(CommonGO):
 		self.y -= 5
 	elif self.direction == "south":
 		self.y -= 5
-
     def draw(self, screen, room):
         self.stimlib.draw(screen, self.x+room.relativex,self.y+room.relativey)    
-        
+    def minimum(self,a,b):
+	if a >= b:
+		return b
+	else:
+		return a 
