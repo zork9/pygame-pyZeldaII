@@ -115,7 +115,7 @@ class MaproomDungeon(MaproomBase):
     def fall(self, player):
         self.moveup()
         for i in self.gameobjects:
-	    if i != None and i.fallcollide(self, player):
+	    if i != None and i.fallcollide(self, player) != 0:
                 self.movedown()
 		return 2 # 1 kills game
         

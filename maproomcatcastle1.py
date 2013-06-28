@@ -30,6 +30,7 @@ from digdogger import *
 from ironknuckle import *
 from deeler import *
 from daira import *
+from elevatorcatcntl import *
 
 class MaproomCatCastle1(MaproomGraph, MaproomCat):
     "Room with a (big) map"
@@ -43,7 +44,7 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
 	self.addrightconnection(0,node2)
 	self.graphindex = 0
 
-	self.elevators.append(Elevatorcat(100+640,360-100,48,96)) ### 100 -> elevator.h == 96
+	self.elevators.append(Elevatorcatcntl(100+640,360-110,48,96)) ### 100 -> elevator.h == 96
  
     def draw(self,screen,player):
         # draw bg
@@ -159,4 +160,11 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
     def xset(self,x):
 	self.relativex = dx
 
-	
+    def MOVEUP(self, room, player):
+	for el in self.elevators:
+		if el.collide(self,player) == 2:
+			el.moveflag = 1	
+    def MOVEDOWN(self, room, player):
+	for el in self.elevators:
+		if el.collide(self,player) == 2:
+			el.moveflag = 1	

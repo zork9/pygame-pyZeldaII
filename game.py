@@ -54,9 +54,9 @@ class Game:
         self.x = 0
         self.y = 0
         
-        ### self.room = MaproomCatCastle1(0,0)
+        self.room = MaproomCatCastle1(0,0)
         ### self.room = Maproom1(0,0)
-        self.room = MaproomTown1(0,-60)
+        ## self.room = MaproomTown1(0,-60)
         ### self.room = Tileroom1(0,0,0,0)
         ### self.room = MaproomCave1(0,0,0,-2000+480)
         manameter = ManaMeter(0,0)
@@ -125,7 +125,7 @@ class Game:
                         self.player.duck = 1
                         self.keydown = 2
                         #FIXME keydown = 2
-                        self.room.MOVEUP()    
+                        self.room.MOVEUP(self.room,self.player)    
                     elif event.key == K_LEFT:
                         self.player.duck = 0
                         self.room.moveright()    

@@ -142,7 +142,7 @@ class TileroomBase:
 	##self.relativey += 10
 	self.movedown()
 
-    def MOVEUP(self):
+    def MOVEUP(self,room,player):
 ##	self.relativey -= 10
 	self.moveup()
 

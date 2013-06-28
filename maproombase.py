@@ -78,7 +78,7 @@ class MaproomBase:
 	1	
  
 	### NOTE dummy function for non overworld maps ## FIX
-    def MOVEUP(self):
+    def MOVEUP(self, room, player):
 	1	
  
     def moveup(self):

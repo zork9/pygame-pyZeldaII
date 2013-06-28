@@ -18,7 +18,7 @@ import pygame
 from pygame.locals import *
 from gameobject import *
 
-class Elevatorcat(Gameobject):
+class Elevatorcatcntl(Gameobject):
     ""
     def __init__(self, xx,yy,ww,hh):
         Gameobject.__init__(self,xx,yy)
@@ -54,7 +54,7 @@ class Elevatorcat(Gameobject):
 	player.y-room.relativey > self.y - self.h  and #FIX
 	player.y-room.relativey < self.y + self.h):
 	    print "collision in elevator cat!"
-	    self.moveflag = 1
+	    ### self.moveflag = 1
 	    ### room.yplus(-10) ### elevator down move
 	    return 2 
 	else:
