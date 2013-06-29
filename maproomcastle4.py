@@ -45,13 +45,14 @@ class MaproomCastle4(MaproomDungeon):
         
         # left NOTE : boxes collide so put them after enemies !
 	# roof
-        self.gameobjects.append(Boxcat(self.offsetx,self.offsety,self.WIDTH,50))
+        ### self.gameobjects.append(Boxcat(self.offsetx,self.offsety,self.WIDTH,50))
 	# base
         self.gameobjects.append(Boxcat(self.offsetx,self.offsety+422,self.WIDTH,40))
 
-	# castle floors
-        ### self.gameobjects.append(Boxcat(200,390,self.WIDTH,400))
-        ### self.gameobjects.append(Boxcat(280,360,self.WIDTH,400))
+	# left platforms
+        self.gameobjects.append(Boxcat(self.offsetx+0,self.offsety+235,200,40))
+	# right platforms
+        self.gameobjects.append(Boxcat(self.offsetx+310,self.offsety+235,200,40))
 
     def draw(self,screen,player):
         # draw bg

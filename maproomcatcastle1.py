@@ -136,7 +136,7 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
 
 
 	####fall = self.falliter(player, self.graph[self.graphindex].rightconnections[0].downconnections[0], 3)
-	fall = self.falliter(player, self.graph[self.graphindex], 3)
+	fall = self.falliter(player, self.graph[self.graphindex], 4)
 	#print "fall=%s" % fall 
 	if fall > 0:
 		return fall
