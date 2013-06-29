@@ -381,6 +381,11 @@ class Game:
                 ### self.room = MaproomCave1(self.x,self.y)
                 self.room = MaproomCave1(0,0,0,-2000+480)
 		self.player.y = 360 ### 382
+            elif (roomnumber == 6):
+                self.talker = None
+                self.player = PlayerLink(lifemeter,manameter)
+                self.room = MaproomCatCastle1(0,0)###,0,-2000+480)
+		self.player.y = 360 ### 382
  
             if self.inventoryrubysword:
                 self.sethitf(self.room.gameobjects.hit2)

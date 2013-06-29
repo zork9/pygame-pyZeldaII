@@ -21,6 +21,7 @@ from maproomcat import *
 from maproomcastle1 import *
 from maproomcastle2 import *
 from maproomcastle3 import *
+from maproomcastle4 import *
 from maproomgraph import *
 from maproomdungeonnorthwall import *
 from tilebox import *
@@ -46,6 +47,9 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
 	self.node3 = MaproomGraphNode(MaproomCastle3(640,480)) ## NOTE x=640
 	###self.graph.append(self.node3)
 	self.node2.adddownconnection(self.node3)
+	self.node4 = MaproomGraphNode(MaproomCastle4(0,480)) ## NOTE x=640
+	###self.graph.append(self.node3)
+	self.node3.adddownconnection(self.node4)
 	self.graphindex = 0
 
 	self.elevators.append(Elevatorcatcntl(170+640,360-110,48,96)) ### 100 -> elevator.h == 96
