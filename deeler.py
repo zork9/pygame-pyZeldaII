@@ -57,7 +57,7 @@ class Deeler(Gameobject):
             screen.blit(self.image2, (self.x-40+room.relativex,self.y+room.relativey))
 	    
     def update(self,room,player):
-        if abs(player.x-self.x+room.relativex) < 5:
+        if abs(player.x-(self.x+room.relativex)) < 5:
             self.crawling = 0
 
         # movement in trees towards player
