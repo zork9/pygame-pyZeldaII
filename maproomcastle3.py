@@ -34,13 +34,14 @@ class MaproomCastle3(MaproomDungeon):
     ""
     def __init__(self,x,y):
         MaproomDungeon.__init__(self,x,y)
-        self.background = pygame.image.load('./pics/parapapalace-2-640x480.bmp').convert()
+        self.background = pygame.image.load('./pics/parapapalace-3-640x480.bmp').convert()
 
 	self.WIDTH = 640
 
 	self.offsetx = x
 	self.offsety = y
-        self.gameobjects.append(Ironknuckle(600,300))
+
+        self.gameobjects.append(Ironknuckle(self.offsetx+600,self.offsety+300))
         
         # left NOTE : boxes collide so put them after enemies !
 	# roof

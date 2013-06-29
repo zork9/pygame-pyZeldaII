@@ -25,8 +25,8 @@ class Gameobject:
 	# default width and height 
         self.w = 48
         self.h = 48
-        self.SCREENH = 300
-        self.SCREENW = 300
+        self.SCREENH = 640 
+        self.SCREENW = 480 
         ## dungeon statue as default picture
         ## self.image = pygame.image.load('./pics/dungeon-statue1-36x36.bmp').convert()
         self.image = pygame.image.load('./pics/nopicture.bmp').convert()

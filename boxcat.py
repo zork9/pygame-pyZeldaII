@@ -37,25 +37,25 @@ class Boxcat(Gameobject):
 	player.x < self.x+room.relativex+self.w and 
 	player.y > self.y+room.relativey and #FIXED +self.h
 	player.y < self.y+room.relativey + self.h):
-	    ### print "collision in catbox!"	
+	    ### print "collide collision in boxcat!"	
 	    return 2 
 	else:
 	    return 0
 
 	### for in room.roofs list
     def collideup(self, room, player):
-            ###print 'collideup gameobject x=%d y=%d player x=%d y=%d' % (self.x,self.y,player.x-room.relativex,player.y-room.relativey)
+            ### print 'collideup boxcat room=%s x=%d y=%d player x=%d y=%d' % (room, self.x,self.y,player.x-room.relativex,player.y-room.relativey)
 	    return 0
 
 
     def fallcollide(self, room, player):
         # FIX BUG
-        ### print 'fallcollide gameobject x=%d y=%d player x=%d y=%d' % (self.x,self.y,player.x-room.relativex,player.y-room.relativey)
+        ### print 'fallcollide gameobject room=%s x=%d y=%d player x=%d y=%d' % (room, self.x,self.y,player.x-room.relativex,player.y-room.relativey)
 	if (player.x-room.relativex > self.x  and 
 	player.x-room.relativex < self.x+self.w and 
 	player.y-room.relativey+player.h > self.y and 
 	player.y-room.relativey < self.y + self.h):
-	    ## print "collision with Boxcat!"
+	    ### print "fall collision with Boxcat!"
 	    return 1 
 	else:
 	    return 0 ## for game self.talker

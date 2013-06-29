@@ -36,19 +36,19 @@ class Elevatorcatcntl(Gameobject):
 	# a box or boxcat
     def update(self, room, player):
 	### move down with elevator:
-	print "123> DOWN = starty=%d y=%d playery=%d" % (self.roomstarty,room.relativey,player.y)
+	## print "123> DOWN = starty=%d y=%d playery=%d" % (self.roomstarty,room.relativey,player.y)
 	if self.moveflag == 2:
-		###room.yplus(-10) ### elevator down move
 		if room.relativey < - self.roomstarty:
-			#player.y -= 10
+			### player.y += 10
 			self.y += 10
 			room.yplus(-10) ### elevator down move
 		else:
 			room.yplus(-10) ### elevator down move
+			room.yplus(-10) ### elevator down move, hack for fallcollide
 	
 		self.y += 10	
 		if room.relativey <= self.roomstarty - 480:
-			print "123> STOP"
+			### print "123> STOP"
 			self.moveflag = 0
 	### move up with elevator
 	elif self.moveflag == 1:

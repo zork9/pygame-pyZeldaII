@@ -52,9 +52,10 @@ class MaproomCastle2(MaproomDungeon):
         ### self.gameobjects.append(Boxcat(200,390,self.WIDTH,400))
         ### self.gameobjects.append(Boxcat(280,360,self.WIDTH,400))
 
+
     def draw(self,screen,player):
         # draw bg
-	### print "abc> %d" % self.relativey
+	### print "> %d " % self.relativey
         ### is in maproomdungeon screen.blit(self.background, (0+self.relativex, 0+self.relativey))
 	screen.blit(self.background, (self.offsetx+self.relativex, self.offsety+self.relativey))
         # draw walls

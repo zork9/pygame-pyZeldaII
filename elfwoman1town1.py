@@ -42,7 +42,7 @@ class Elfwoman1Town1(ElfwomanTown):
         if self.talkcounter == 0:
            return None 
         elif self.talkcounter == 1:
-            return "I am Error" 
+            return "Some adivce" 
         elif self.talkcounter == 2:
             return "Go listen to Error." 
         elif self.talkcounter == 3:
