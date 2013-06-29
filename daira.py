@@ -24,7 +24,7 @@ from math import *
 from rng import *
 
 class Daira(Gameobject):
-    "Crocodile man"
+    "Daira"
     def __init__(self,xx,yy):
 	Gameobject.__init__(self, xx, yy)
         self.w = 48
@@ -54,33 +54,28 @@ class Daira(Gameobject):
 
         self.crawling = 1
         self.up = 0
+	
+	self.stun = 0
+
 
     def draw(self, screen, room):
-        #if self.crawling == 1:
+        if self.direction == "stop" or self.stun > 0:
+       		self.stun -= 1     
         if (self.direction == "left"):
             self.stimlibleft.draw(screen, self.x+room.relativex,self.y+room.relativey)
         elif (self.direction == "right"):
             self.stimlibright.draw(screen, self.x+room.relativex,self.y+room.relativey)
-        elif self.direction == "stop":
-            1
                 
     def update(self,room,player):
-#        if abs(player.x-self.x-room.relativex) < 50:
-#            self.direction = "left"
-#        else:
-#            self.direction = "right"
-        if player.x+48 < self.x:
-            self.direction = "left"
-        elif player.x-48 > self.x:
-            self.direction = "right"
-        # movement in trees towards player
-        ###FIXif self.crawling:
-        if self.direction == "left":###player.x <= self.x-room.relativex:
-            ###self.direction = "left"
-            self.x -= 5
-        if self.direction == "right":###player.x > self.x-room.relativex:
-            ###self.direction = "right"
-            self.x += 5
+	if self.stun == 0:
+		if player.x+48 < self.x:
+		    self.direction = "left"
+		elif player.x-48 > self.x:
+		    self.direction = "right"
+		if self.direction == "left":
+		    self.x -= 5
+		if self.direction == "right":
+		    self.x += 5
                             
     def collide(self, room, player):
         # FIX BUG
@@ -109,6 +104,15 @@ class Daira(Gameobject):
     def collideup(self, room, player):
 	return 0
   
+    def hitwithweapon(self,damage):
+	if damage > 0:
+            print 'Daira is hit!'
+        self.stun = 40
+        self.hitpoints -= damage
+	if self.direction == "left":
+		self.x += 10
+	if self.direction == "right":
+		self.x -= 10
 
     def fight(self,room,player,keydown = -1):
         self.fightcounter = 1

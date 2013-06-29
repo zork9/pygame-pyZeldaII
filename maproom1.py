@@ -105,13 +105,15 @@ class Maproom1(MaproomDungeon):
 	return 0 
  
     def collidesword(self,player):
+	r = None
         for i in self.gameobjects:
-	    if i!= None:
-	    	id = i.collidewithsword(self,player)
-		#self.relativex = self.prevx
-		#self.relativey = self.prevy
-		return i ## NOTE : returns collided entity (single), put enemies before walls in gameobjects
-	return None
+	    if i != None:
+	    	r = i.collidewithsword(self,player)
+		if r:
+			r = i
+			break
+		#return i ## NOTE : returns collided entity (single), put enemies before walls in gameobjects
+	return r 
 
     def collideswordlow(self,player):
         for i in self.gameobjects:

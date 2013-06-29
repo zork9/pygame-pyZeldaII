@@ -132,7 +132,11 @@ class PlayerBase(PlayerBase,PlayerBase):
 	# This is an extra heart container
 	if self.changeplayernumber == "heart": 
 		self.stimlibhold.drawstatic(screen,self.x,self.y-24,0)
-		self.hitpoints += RNG().generatehitpoints(10, self.lifemeter.max - self.lifemeter.index - 1) ### FIX (10, ? 
+		stop = self.lifemeter.max - self.lifemeter.index - 1
+
+		if stop > 10:	
+			self.hitpoints += RNG().generatehitpoints(10, stop)
+
 		self.lifemeter.addblock() 
                 pygame.display.update()
 		sleep(3.1)
