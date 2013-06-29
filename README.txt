@@ -11,6 +11,6 @@ side-scroll rooms :
 - i key : inventory
 - z,x buttons : jump & fight with sword
 - arrow keys :  movement
-- down arrow key : duck
+- down arrow key : duck, move elevator down
 - up arrow key : enter house
 - t button : talk/do not talk to NPCs

@@ -54,7 +54,8 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
         # draw bg
 	### print "789> rely=%d %s" % (self.relativey,self)
         ###FIX NOTE blit with these global relx rely 
-        ###FIX NOTE xset yset 
+        ###FIX NOTE xset yset
+	### FIX blit this room with graph 
 	screen.blit(self.graph[self.graphindex].current.background, (self.graph[self.graphindex].current.relativex, self.graph[self.graphindex].current.relativey))
 	### self.graph[self.graphindex].current.draw(screen,player)
 	
@@ -70,28 +71,26 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
 
     def drawiter(self, screen, player, depth, node):
 	if depth > 0:
-		print "direction drawiter = %s conns = %s" % (self.direction,node.downconnections)
-		if self.direction == "south" or self.direction == "north":
+		### print "direction drawiter = %s conns = %s" % (self.direction,node.downconnections)
+		### if going north or south, draw up and down connecteed rooms
+		if self.direction == "north" or self.direction == "south" or self.sidedirection == "east" or self.sidedirection == "west":
 			for c in node.upconnections:
-				print "UPCONNS= %s" % c.current
+				### print "UPCONNS= %s" % c.current
 				c.current.xset(self.relativex+0)
 				c.current.yset(self.relativey)
 				c.current.draw(screen,player)
 				self.drawiter(screen,player,depth-1,c)
-		if self.direction == "north" or self.direction == "south":
 			for c in node.downconnections:
 				print "DOWNCONNS= %s" % c.current
 				c.current.xset(self.relativex+0)
 				c.current.yset(self.relativey)
 				c.current.draw(screen,player)
 				self.drawiter(screen,player,depth-1,c)
-		if self.sidedirection == "east":
 			for c in node.leftconnections:
 				c.current.xset(self.relativex+0)
 				c.current.yset(self.relativey)
 				c.current.draw(screen,player)
 				self.drawiter(screen,player,depth-1,c)
-		if self.sidedirection == "west":
 			for c in node.rightconnections:
 				c.current.xset(self.relativex)
 				c.current.yset(self.relativey)
@@ -132,12 +131,14 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
 			c.current.xset(self.relativex)
 
 
+	####fall = self.falliter(player, self.graph[self.graphindex].rightconnections[0].downconnections[0], 3)
 	fall = self.falliter(player, self.graph[self.graphindex], 3)
 	#print "fall=%s" % fall 
 	if fall > 0:
 		return fall
 	else:	
         	return 0
+
 #        for i in self.graph[self.graphindex].current.gameobjects:
 #		### NOTE if colliding down on a platform, yset sets the
 #		# y value to the coord of the non-faller
@@ -171,22 +172,18 @@ class MaproomCatCastle1(MaproomGraph, MaproomCat):
         	for i in node.current.gameobjects:
 		    	if i != None and i.fallcollide(node.current, player): 
        	        		self.movedown()
-				### print "FALLCOLLIDE CATCASTLE1 falliter direction = %s node.currentroom=%s conns= %s" % (self.direction,node.current,node.downconnections)
+				print "FALLCOLLIDE CATCASTLE1 falliter direction = %s sidedirection = %s node.currentroom=%s conns= %s" % (self.direction,self.sidedirection, node.current,node.downconnections)
 				return 2
-		if self.direction == "north":
-			for n in node.downconnections: ### FIX KLU up down
+		if self.direction == "north" or self.sidedirection == "west" or self.sidedirection == "east":
+			for n in node.downconnections:
 				n.current.yset(self.relativey)
 				return self.falliter(player,n,depth-1)
-		if self.direction == "south":
 			for n in node.upconnections:
-				print "+++++++++++++++++++++"
 				n.current.yset(self.relativey)
 				return self.falliter(player,n,depth-1)
-		if self.sidedirection == "east":
 			for n in node.leftconnections:
 				n.current.xset(self.relativex+0)
 				return self.falliter(player,n,depth-1)
-		if self.sidedirection == "west":
 			for n in node.rightconnections:
 				n.current.xset(self.relativex+0)
 				return self.falliter(player,n,depth-1)

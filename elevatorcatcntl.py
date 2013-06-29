@@ -47,10 +47,11 @@ class Elevatorcatcntl(Gameobject):
 			room.yplus(-10) ### elevator down move, hack for fallcollide
 	
 		self.y += 10	
-		if room.relativey <= self.roomstarty - 480:
+		if room.relativey < - self.roomstarty - 480 + 80:
 			### print "123> STOP"
 			self.moveflag = 0
 	### move up with elevator
+	### FIX
 	elif self.moveflag == 1:
 		if self.y > self.starty: ##NOTE default room height, ascend no more or less:
 			player.y -= 10 ### fall even with obstruction 

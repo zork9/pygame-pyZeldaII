@@ -41,11 +41,11 @@ class MaproomCastle3(MaproomDungeon):
 	self.offsetx = x
 	self.offsety = y
 
-        self.gameobjects.append(Ironknuckle(self.offsetx+600,self.offsety+300))
+        self.gameobjects.append(Ironknuckle(self.offsetx+600,self.offsety+340))
         
         # left NOTE : boxes collide so put them after enemies !
 	# roof
-        ###self.gameobjects.append(Boxcat(0,65,self.WIDTH,50))
+        self.gameobjects.append(Boxcat(self.offsetx,self.offsety,self.WIDTH,50))
 	# base
         self.gameobjects.append(Boxcat(self.offsetx,self.offsety+422,self.WIDTH,40))
 

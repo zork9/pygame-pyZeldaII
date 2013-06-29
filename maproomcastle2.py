@@ -49,8 +49,7 @@ class MaproomCastle2(MaproomDungeon):
         self.gameobjects.append(Boxcat(self.offsetx,422,self.WIDTH,40))
 
 	# castle floors
-        ### self.gameobjects.append(Boxcat(200,390,self.WIDTH,400))
-        ### self.gameobjects.append(Boxcat(280,360,self.WIDTH,400))
+        self.gameobjects.append(Boxcat(self.offsetx,360,self.WIDTH,40))
 
 
     def draw(self,screen,player):
