@@ -1,4 +1,4 @@
-
+. make a better superclass for enemies and NPCs
 . boxes, boxcats can block jumping, falling etc by movement of the map such as self.movedown, moveup
 - in rooms of dairs, deelers etc, put the enemies before the boxes as these
 are first for collision checks, else you would fight a box :-)
