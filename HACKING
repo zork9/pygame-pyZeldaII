@@ -1,3 +1,5 @@
+. change the sleep parameter in the files (there are 2) sleep(1) sleeps a second
+
 . make a better superclass for enemies and NPCs
 . boxes, boxcats can block jumping, falling etc by movement of the map such as self.movedown, moveup
 - in rooms of dairs, deelers etc, put the enemies before the boxes as these
