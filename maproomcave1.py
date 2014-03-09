@@ -20,7 +20,7 @@ from maproom import *
 from maproombase import *
 from koboldwizard import *
 from tilebox import *
-#from snake1 import *
+from snakeflyer import *
 from rubysword import *
 from rope import *
 from daira import *
@@ -34,6 +34,7 @@ class MaproomCave1(MaproomBase):
         MaproomBase.__init__(self,x,y)
         self.background = pygame.image.load('./pics/bg-3-underground1-6000x2000.bmp').convert()
         self.enemies.append(Daira(100,1890,4))
+        self.enemies.append(SnakeDigDogger(1000,1840,32,32,4))
         self.enemies.append(Daira(900,1890,4))
         self.enemies.append(Daira(1400,1890,4))
         ###self.gameobjects.append(HealingItem(140,1440))

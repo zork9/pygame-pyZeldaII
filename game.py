@@ -55,10 +55,10 @@ class Game:
         self.y = 0
         
         ###self.room = MaproomTown1(0,0)
-        self.room = MaproomCatCastle1(0,0)
+        ### self.room = MaproomCatCastle1(0,0)
         ### self.room = RandomGORoom1(0,0)
         ### self.room = Tileroom1(0,0,0,0)
-        ### self.room = MaproomCave1(0,0,0,-2000+480)
+        self.room = MaproomCave1(0,0,0,-2000+480)
         manameter = ManaMeter(0,0)
         lifemeter = LifeMeter(250,0)
         self.player = PlayerLink(lifemeter,manameter)
