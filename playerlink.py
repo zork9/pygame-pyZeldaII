@@ -66,6 +66,7 @@ class PlayerLink(PlayerBase):
         self.manapoints = 100
        	self.sword = BroadSword(0,0)
         self.duck = 0
+        self.duckh = self.h / 2 
         self.jumpcounter = 0
 
     def askclass(self):
@@ -108,6 +109,9 @@ class PlayerLink(PlayerBase):
         if o:
             print "LOW: fight scored hit on %s!" % o
             o.hitwithweapon(self.sword.roll())
+            if o.hitpoints <= 0:
+                room.enemies.remove(o)
+                print "%s dies !" % o
 
     def fightmedium(self,room):
         self.fightcounter = 1

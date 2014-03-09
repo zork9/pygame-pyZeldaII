@@ -43,16 +43,16 @@ class RandomGORoom1(MaproomDungeon):
 ##        self.tileboxes.append(self.eastwall1)
 ##        self.tileboxes.append(self.southwall1)
 
-        self.enemies.append(Digdogger(1200,280))
-        self.enemies.append(Digdogger(1970,320))
+        self.enemies.append(Digdogger(1200,280,32,32,1))
+        self.enemies.append(Digdogger(1970,320,32,32,1))
         self.enemies.append(Daira(100,300,4))
         self.enemies.append(Daira(900,300,4))
         self.enemies.append(Daira(1400,300,4))
         self.enemies.append(Daira(1300,300,4))
         
-        self.enemies.append(Deeler(900,100))
-        self.enemies.append(Deeler(2000,100))
-        self.enemies.append(Deeler(1700,100))
+        self.enemies.append(Deeler(900,100,32,32,2))
+        self.enemies.append(Deeler(2000,100,32,32,2))
+        self.enemies.append(Deeler(1700,100,32,32,2))
         
         
         # left NOTE : boxes collide so put them after enemies !

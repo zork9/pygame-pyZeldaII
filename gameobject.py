@@ -22,6 +22,7 @@ class Gameobject:
     def __init__(self, xx,yy):
 	self.x = xx 
         self.y = yy
+        self.infinity = 999999
 	# default width and height 
         self.w = 48
         self.h = 48
@@ -31,7 +32,7 @@ class Gameobject:
         ## self.image = pygame.image.load('./pics/dungeon-statue1-36x36.bmp').convert()
         self.image = pygame.image.load('./pics/nopicture.bmp').convert()
         self.image.set_colorkey((0,0,0)) 
-        self.hitpoints = 1
+        self.hitpoints = self.infinity 
         # NOTE : decrease 1 hitpoint with default sword
         self.hitf = self.hit1
         

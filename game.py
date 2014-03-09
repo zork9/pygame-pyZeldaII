@@ -117,11 +117,6 @@ class Game:
                         if self.room.collide(self.player) == 2:
                             self.talker = self.room.talkto(self.player) # FIX
                             print "self.talker=%s" % self.talker
-##			if self.talker == None:
-##                       	id = self.player.pickup(self.room)
-##				if id == 5:
-##		                	self.taskbar.setrubysword()
-##					self.player.setrubysword()
                     
                     if event.key == K_UP:
                         self.room.MOVEDOWN(self.room,self.player)    

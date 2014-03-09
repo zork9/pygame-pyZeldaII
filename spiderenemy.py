@@ -16,27 +16,27 @@
 
 import pygame
 from pygame.locals import *
-from spiderenemy import *
+from enemy import *
 from stateimagelibrary import *
 import random
 from time import *
 from math import *
 from rng import *
 
-class Deeler(SpiderEnemy):
+class SpiderEnemy(Enemy):
     "Spider"
     def __init__(self,xx,yy,ww,hh,hp):
-	SpiderEnemy.__init__(self, xx, yy, ww, hh, hp)
+	Enemy.__init__(self, xx,yy,ww,hh,hp)
         
+        self.yy = self.y
+    
         self.image = pygame.image.load('./pics/dealer1-48x48.bmp').convert()
         self.image.set_colorkey((0,0,255))
         self.image2 = pygame.image.load('./pics/dealerup1-48x48.bmp').convert()
         self.image2.set_colorkey((0,0,255)) 
 	self.silkimage = pygame.image.load('./pics/silk-2x2.bmp').convert()
         self.silkimage.set_colorkey((0,0,255))
-       
-        self.silkspideroffset = 12
- 
+        
 	self.talkcounter = 0
 	self.direction = "down"
 
@@ -46,9 +46,9 @@ class Deeler(SpiderEnemy):
     def draw(self, screen, room):
         if self.crawling == 0:
             # Draw spider silk cord
-            for i in range(self.yy,self.y+self.silkspideroffset):
+            for i in range(self.yy,self.y):
                 screen.blit(self.silkimage, (self.x-self.w/2+room.relativex,i))
-            # Draw Spider 
+	    
             screen.blit(self.image, (self.x-40+room.relativex,self.y+room.relativey))
 	else:
             screen.blit(self.image2, (self.x-40+room.relativex,self.y+room.relativey))
@@ -77,32 +77,3 @@ class Deeler(SpiderEnemy):
             elif self.y >= 300:
                 self.up = 1
                     
-    def collide(self, room, player):
-        # FIX BUG
-        #print 'gameobject x=%d y=%d player x=%d y=%d' % (self.x,self.y,player.x-room.relativex,player.y-room.relativey)
-	if (player.x-room.relativex > self.x-self.w  and 
-	player.x-room.relativex < self.x+self.w+self.w and 
-	player.y-room.relativey > self.y-self.h and 
-	player.y-room.relativey < self.y + self.h +self.h):
-	    #print "collision with Deeler!"
-	    return 1 
-	else:
-	    return 0 ## for game self.talker
-
-
-    def collidewithsword(self, room, player):
-        #print 'Digdogger x=%d y=%d player x=%d y=%d' % (self.x,self.y,player.x-room.relativex,player.y-room.relativey)
-	if (player.x-room.relativex > self.x -self.w  and 
-	player.x-room.relativex < self.x+self.w and 
-	player.y-room.relativey > self.y -self.h and 
-	player.y-room.relativey < self.y + self.h):
-	    #print "collision with Sword Dealer!"
-	    return 1 
-	else:
-	    return 0
-
-    def collideup(self, room, player):
-	return 0
-  
-    def fight(self,room,player,keydown = -1):
-        1

@@ -1,5 +1,5 @@
 
-# Copyright (C) Johan Ceuppens 2010
+# Copyright (C) Johan Ceuppens 2010-2014
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -16,44 +16,33 @@
 
 import pygame
 from pygame.locals import *
-from enemyonfoot import *
+from enemy import *
 from stateimagelibrary import *
 import random
 from time import *
 from math import *
 from rng import *
 
-class Daira(EnemyOnFoot):
+class EnemyOnFoot(Enemy):
     "Daira"
-    def __init__(self,xx,yy,hp):
-	EnemyOnFoot.__init__(self, xx,yy,48,64,hp)
-        self.realw = 30 
-        self.realh = 64
-        self.duckh = 32
+    def __init__(self,xx,yy,ww,hh,hp):
+	Enemy.__init__(self, xx,yy,ww,hh,hp)
+        self.realw = self.w 
+        self.realh = self.h 
+        self.duckh = self.h/2 
 
         self.stimlibleft = Stateimagelibrary()
         self.stimlibright = Stateimagelibrary()
-        image = pygame.image.load('./pics/daira1-48x64.bmp').convert()
+        image = pygame.image.load('./pics/nopicture.bmp').convert()
         image.set_colorkey((0,0,255))
         self.stimlibleft.addpicture(image)
-        image = pygame.image.load('./pics/daira2-58x64.bmp').convert()
-        image.set_colorkey((0,0,255))
-        self.stimlibleft.addpicture(image)
-
-        image = pygame.image.load('./pics/dairaright1-48x64.bmp').convert()
+        image = pygame.image.load('./pics/nopicture.bmp').convert()
         image.set_colorkey((0,0,255))
         self.stimlibright.addpicture(image)
-        image = pygame.image.load('./pics/dairaright2-58x64.bmp').convert()
-        image.set_colorkey((0,0,255))
-        self.stimlibright.addpicture(image)
-        
         
 	self.talkcounter = 0
 	self.direction = "left"
 
-        self.crawling = 1
-        self.up = 0
-	
 	self.stun = 0
 
 
@@ -66,7 +55,7 @@ class Daira(EnemyOnFoot):
             self.stimlibright.draw(screen, self.x+room.relativex,self.y+room.relativey)
                 
     def update(self,room,player):
-	if self.stun == 0:
+	if not self.stun:
 		if player.x+48 < self.x:
 		    self.direction = "left"
 		elif player.x-48 > self.x:
@@ -117,7 +106,7 @@ class Daira(EnemyOnFoot):
     def hitwithweapon(self,damage):
 	if damage > 0:
             print 'Daira is hit!'
-        self.stun = 40
+            self.stun = 40
         self.hitpoints -= damage
 	if self.direction == "left":
 		self.x += 10
