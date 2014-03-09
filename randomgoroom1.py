@@ -28,10 +28,10 @@ from ironknuckle import *
 from deeler import *
 from daira import *
 
-class RandomGORoom1(MaproomDungeon):
+class RandomGORoom1(MaproomBase):
     "Room with a (big) map"
     def __init__(self,x,y):
-        MaproomDungeon.__init__(self,x,y)
+        MaproomBase.__init__(self,x,y)
         self.background = pygame.image.load('./pics/bg1-2400x600.bmp').convert()
         ###self.northwall1 = Tilebox(1,1,60,48,16,1,'./pics/walldungeonnorth2-beholderglass-60x48.bmp')
 ##        self.northwall1 = Tilebox(1,1,60,48,13,1,'./pics/walldungeonnorth1-60x48.bmp')
@@ -74,11 +74,9 @@ class RandomGORoom1(MaproomDungeon):
     def draw(self,screen,player):
         # draw bg
         MaproomBase.draw(self, screen) 
-        # draw walls
-        MaproomDungeon.draw(self,screen)
+        # draw tileboxes 
         for t in self.tileboxes:
             t.draw(screen,self.relativex,self.relativey)
-        #self.southwall1.draw(screen,self.relativex,self.relativey)
         # draw gameobjects
         for i in self.gameobjects:
 	    if i != None:

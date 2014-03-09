@@ -17,8 +17,7 @@
 import pygame
 from pygame.locals import *
 from maproom import *
-from maproomdungeon import *
-from maproomdungeonnorthwall import *
+from maproombase import *
 from koboldwizard import *
 from tilebox import *
 #from snake1 import *
@@ -29,10 +28,10 @@ from healingpotionitem import *
 from healingheartitem import *
 from healingitem import *
 
-class MaproomCave1(MaproomDungeon):
+class MaproomCave1(MaproomBase):
     "Room with a (big) map"
     def __init__(self,x,y,relx,rely):
-        MaproomDungeon.__init__(self,x,y)
+        MaproomBase.__init__(self,x,y)
         self.background = pygame.image.load('./pics/bg-3-underground1-6000x2000.bmp').convert()
         self.enemies.append(Daira(100,1890,4))
         self.enemies.append(Daira(900,1890,4))
@@ -73,7 +72,6 @@ class MaproomCave1(MaproomDungeon):
         # draw bg
         MaproomBase.draw(self,screen)
         # draw walls
-        MaproomDungeon.draw(self,screen)
         for t in self.tileboxes:
             t.draw(screen,self.relativex,self.relativey)
         #self.southwall1.draw(screen,self.relativex,self.relativey)
@@ -106,28 +104,6 @@ class MaproomCave1(MaproomDungeon):
 		return 1.1 
 	return 0 
  
-    def collideswordmedium(self,player):
-        for i in self.enemies:
-	    if i != None:
-	        if i.collidewithswordmedium(self,player) != None:
-		    return i ## NOTE : returns collided entity (single)
-	return None
-
-    def collideswordlow(self,player):
-        for i in self.enemies:
-	    if i!= None:
-	    	if i.collidewithswordlow(self,player) != None:
-		    return i ## NOTE : returns collided entity (single)
-	return None
-
-    def collideup(self,player):
-	for i in self.roofs:
-		if i.collideup(self, player):
-			print ">>>>>>>>>>> collideup"
-			return 2
-	return 0
-
-
     def talkto(self, player):
         return None
 
@@ -137,7 +113,6 @@ class MaproomCave1(MaproomDungeon):
 	self.prevx = self.relativex - 1
 	self.prevy = self.relativey
         self.relativex = self.relativex + 10
-	### print "relx=%d" % self.relativex
 
     def removeobject(self, o):
         for i in range(0,len(self.gameobjects)):

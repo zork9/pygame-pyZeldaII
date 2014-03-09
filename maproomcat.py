@@ -29,10 +29,10 @@ from ironknuckle import *
 from deeler import *
 from daira import *
 
-class MaproomCat(MaproomDungeon):
+class MaproomCat(MaproomBase):
     "Room as part of a bigger map-room"
     def __init__(self,xx,yy):
-        MaproomDungeon.__init__(self,xx,yy)
+        MaproomBase.__init__(self,xx,yy)
 	
        	self.WIDTH = 640
 	self.HEIGHT = 480 
@@ -50,7 +50,6 @@ class MaproomCat(MaproomDungeon):
         # draw bg
         self.graph[self.graphindex].screen.blit(self.background, (0+self.relativex, 0+self.relativey))
         # draw walls
-        MaproomDungeon.draw(self,screen)
         for t in self.tileboxes:
             t.draw(screen,self.relativex,self.relativey)
         #self.southwall1.draw(screen,self.relativex,self.relativey)

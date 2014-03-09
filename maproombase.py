@@ -27,7 +27,13 @@ class MaproomBase:
         self.prevy = y
         self.relativex = x
         self.relativey = y 
+        self.enemies = []
+        self.gameobjects = []
+        self.tileboxes = []
 	self.roofs = []
+        self.pits = []
+        self.ropes = []
+       	self.elevators = []
         self.background = pygame.image.load('./pics/blank.bmp').convert()
         self.direction = "north"
         self.sidedirection = "north"
@@ -57,6 +63,44 @@ class MaproomBase:
  
     def draw(self,screen):
         screen.blit(self.background, (0+self.relativex, 0+self.relativey))
+
+    def collidewithropes(self, player):	
+	for i in self.ropes:
+	    if i != None and i.collidewithrope(self, player):
+		return 2
+	return 0
+
+    def collide(self, player):	
+	for i in self.gameobjects:
+	    if i != None and i.collide(self, player):
+		return 2 # 1 kills game
+	for i in self.tileboxes:
+		if i != None and i.collide(self,player):
+			#self.undomove()
+	                # FIXME self.undomove()
+			return 2 
+	for i in self.pits:
+		if i != None and i.collide(self,player):
+			return 2
+	return 0
+
+    def collidewithenemy(self, enemy):
+	for t in self.tileboxes:
+		if t != None and t.collidewithenemy(self,enemy):
+                    enemy.undomove()
+                    return 2 # 1 kills game
+        return 0
+
+
+    def fall(self, player):
+        self.moveup()
+        for i in self.gameobjects:
+	    if i != None and i.fallcollide(self, player) != 0:
+                self.movedown()
+		return 2 # 1 kills game
+        
+        return 0
+	## NOTE override gameobj with i.collideup() == 2 when jumping high onto a platform
 
     def undomove(self):
         if self.direction == "north":
@@ -130,13 +174,24 @@ class MaproomBase:
                 return id# FIX 3 
         return 0
 
+    def collideswordmedium(self,player):
+        for i in self.enemies:
+	    if i != None:
+	        if i.collidewithswordmedium(self,player) != None:
+		    return i ## NOTE : returns collided entity (single)
+	return None
 
-    def collidesword(self,player):
-        for i in self.gameobjects:
+    def collideswordlow(self,player):
+        for i in self.enemies:
 	    if i!= None:
-	    	c = i.collide(self,player)
-		if c == 1:
-			return i ## NOTE : returns collided entity (single)
-		self.relativex = self.prevx
-		self.relativey = self.prevy
-        return None
+	    	if i.collidewithswordlow(self,player) != None:
+		    return i ## NOTE : returns collided entity (single)
+	return None
+
+    def collideup(self,player):
+	for i in self.roofs:
+		if i.collideup(self, player):
+			print ">>>>>>>>>>> collideup"
+			return 2
+	return 0
+
