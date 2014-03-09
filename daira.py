@@ -25,13 +25,15 @@ from rng import *
 
 class Daira(Gameobject):
     "Daira"
-    def __init__(self,xx,yy):
+    def __init__(self,xx,yy,hp):
 	Gameobject.__init__(self, xx, yy)
         self.w = 48
+        self.realw = 30 
         self.h = 64
-        self.hitpoints = 4
+        self.realh = 64
+
+        self.hitpoints = hp
         
-    
         self.stimlibleft = Stateimagelibrary()
         self.stimlibright = Stateimagelibrary()
         image = pygame.image.load('./pics/daira1-48x64.bmp').convert()
@@ -80,26 +82,26 @@ class Daira(Gameobject):
     def collide(self, room, player):
         # FIX BUG
         #print 'gameobject x=%d y=%d player x=%d y=%d' % (self.x,self.y,player.x-room.relativex,player.y-room.relativey)
-	if (player.x-room.relativex > self.x-self.w  and 
-	player.x-room.relativex < self.x+self.w+self.w and 
-	player.y-room.relativey > self.y-self.h and 
-	player.y-room.relativey < self.y + self.h +self.h):
-	    ###print "collision with Daira!"
+	if (player.x-room.relativex > self.x-player.w/2  and 
+	player.x-room.relativex < self.x+self.w and 
+	player.y-room.relativey > self.y-player.h/2 and 
+	player.y-room.relativey < self.y + self.h):
+	    print "collide() with Daira!"
 	    return 1 
 	else:
 	    return 0 ## for game self.talker
 
 
-    def collidewithsword(self, room, player):
-        ###print 'Daira x=%d y=%d player x=%d y=%d' % (self.x,self.y,player.x-room.relativex,player.y-room.relativey)
-	if (player.x-room.relativex > self.x -self.w  and 
-	player.x-room.relativex < self.x+self.w and 
-	player.y-room.relativey > self.y -self.h and 
-	player.y-room.relativey < self.y + self.h):
-	    print "collision with Sword Daira!"
-	    return 1 
+    def collidewithswordmedium(self, room, player):
+        print 'gameobject x=%d y=%d player x=%d y=%d' % (self.x,self.y,player.x-room.relativex,player.y-room.relativey)
+	if (player.x-room.relativex > self.x-self.w and 
+	player.x-room.relativex < self.x+self.w+self.w and 
+	player.y-room.relativey >= self.y - self.h/2 and 
+	player.y-room.relativey <= self.y + self.h):
+	    print "collidewithsword() with Daira!"
+	    return self 
 	else:
-	    return 0
+	    return None
 
     def collideup(self, room, player):
 	return 0

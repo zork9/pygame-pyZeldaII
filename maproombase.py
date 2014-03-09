@@ -56,7 +56,6 @@ class MaproomBase:
 	self.relativex = x
  
     def draw(self,screen):
-	##print "x=%d" % self.relativex 
         screen.blit(self.background, (0+self.relativex, 0+self.relativey))
 
     def undomove(self):

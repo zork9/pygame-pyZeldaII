@@ -30,7 +30,7 @@ class HealingheartItem(Gameobject):
         image.set_colorkey((0,0,0)) 
 	self.stimlib.addpicture(image)		
    	self.counter = 0 
-
+        self.hitpoints = 999999
 
     def update(self,room,player):
 	1	

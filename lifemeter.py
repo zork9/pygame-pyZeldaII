@@ -55,7 +55,7 @@ class LifeMeter:
     def set(self, hp):
 	self.index = hp	
 	for i in range(self.index/self.div, self.max/self.div):
-		print "123> %d" % self.index
+		### print "123> %d" % self.index
 		if self.index % self.div >= self.div/2 and self.index % self.div < self.div and i == self.index/self.div:  
 			self.hearts[i] = LifeHalfBlock() 
 		else:

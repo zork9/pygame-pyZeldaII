@@ -32,6 +32,7 @@ class MaproomDungeon(MaproomBase):
         self.southwalls = []
         self.westwalls = []
         self.eastwalls= []
+        self.enemies = []
         self.gameobjects = []
         self.tileboxes = []
         self.pits = []

@@ -112,12 +112,15 @@ class PlayerLink(PlayerBase):
     def fightmedium(self,room):
         self.fightcounter = 1
         
-        o = room.collidesword(self)
+        o = room.collideswordmedium(self)
         
         if o:
             print "MEDIUM-HIGH: fight scored hit on %s!" % o
             o.hitwithweapon(self.sword.roll())
-
+            if o.hitpoints <= 0:
+                room.enemies.remove(o)
+                print "%s dies !" % o
+ 
     def jump(self, room):
         self.jumpcounter = 20
         self.direction = 'north'

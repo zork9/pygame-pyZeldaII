@@ -1,5 +1,5 @@
 #!/usr/local/bin/python
-# Copyright (C) Johan Ceuppens 2010
+# Copyright (C) Johan Ceuppens 201-2014
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -18,7 +18,7 @@ import pygame
 from pygame.locals import *
 
 from tileroom1 import *
-from maproom1 import *
+from randomgoroom1 import *
 from maproomtown1 import *
 from maproomtown1inside1 import *
 from maproomtown1inside2 import *
@@ -54,9 +54,9 @@ class Game:
         self.x = 0
         self.y = 0
         
+        ###self.room = MaproomTown1(0,0)
         ### self.room = MaproomCatCastle1(0,0)
-        self.room = MaproomTown1(0,0)
-        ### self.room = Maproom1(0,0)
+        self.room = RandomGORoom1(0,0)
         ### self.room = Tileroom1(0,0,0,0)
         ### self.room = MaproomCave1(0,0,0,-2000+480)
         manameter = ManaMeter(0,0)
@@ -87,6 +87,8 @@ class Game:
                 if event.type == QUIT:
                     return
                 elif event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                         return
                     gameover = 1
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     gameover = 1
@@ -99,6 +101,8 @@ class Game:
                 if event.type == QUIT:
                     return
                 elif event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                         return
                     if event.key == K_z:
                         if self.keydown == 2 or self.player.duck:
                             self.player.fightlow(self.room)
@@ -344,7 +348,7 @@ class Game:
             if (roomnumber == 1):
                 self.talker = None
         	self.player = PlayerLink(lifemeter,manameter)
-                self.room = Maproom1(self.x,self.y)
+                self.room = RandomGORoom1(self.x,self.y)
             elif (roomnumber == 1.1):
                 self.talker = None
                 self.player = PlayerTileLink()

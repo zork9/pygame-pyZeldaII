@@ -34,14 +34,14 @@ class MaproomCave1(MaproomDungeon):
     def __init__(self,x,y,relx,rely):
         MaproomDungeon.__init__(self,x,y)
         self.background = pygame.image.load('./pics/bg-3-underground1-6000x2000.bmp').convert()
-        self.gameobjects.append(Daira(100,1890))
-        self.gameobjects.append(Daira(900,1890))
-        self.gameobjects.append(Daira(1400,1890))
+        self.enemies.append(Daira(100,1890,4))
+        self.enemies.append(Daira(900,1890,4))
+        self.enemies.append(Daira(1400,1890,4))
         ###self.gameobjects.append(HealingItem(140,1440))
         self.gameobjects.append(HealingheartItem(140,1440))
 	# NOTE put enemies before boxes
 	# ground level
-        self.gameobjects.append(Box(0,2000-40,1400,400))
+        self.gameobjects.append(Box(0,2000-40,6000,400))
 
 
         #self.gameobjects.append(Snake1(680,140))
@@ -71,7 +71,7 @@ class MaproomCave1(MaproomDungeon):
 
     def draw(self,screen,player):
         # draw bg
-        screen.blit(self.background, (0+self.relativex, 0+self.relativey))
+        MaproomBase.draw(self,screen)
         # draw walls
         MaproomDungeon.draw(self,screen)
         for t in self.tileboxes:
@@ -79,6 +79,10 @@ class MaproomCave1(MaproomDungeon):
         #self.southwall1.draw(screen,self.relativex,self.relativey)
         # draw gameobjects
         for i in self.gameobjects:
+	    if i != None:
+		i.update(self,player)
+		i.draw(screen,self)
+        for i in self.enemies:
 	    if i != None:
 		i.update(self,player)
 		i.draw(screen,self)
@@ -102,17 +106,15 @@ class MaproomCave1(MaproomDungeon):
 		return 1.1 
 	return 0 
  
-    def collidesword(self,player):
-        for i in self.gameobjects:
-	    if i!= None:
-	    	id = i.collidewithsword(self,player)
-		#self.relativex = self.prevx
-		#self.relativey = self.prevy
-		return i ## NOTE : returns collided entity (single)
+    def collideswordmedium(self,player):
+        for i in self.enemies:
+	    if i != None:
+	        if i.collidewithswordmedium(self,player) != None:
+		    return i ## NOTE : returns collided entity (single)
 	return None
 
     def collideswordlow(self,player):
-        for i in self.gameobjects:
+        for i in self.enemies:
 	    if i!= None:
 	    	id = i.collidewithswordlow(self,player)
 		#self.relativex = self.prevx
