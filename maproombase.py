@@ -21,12 +21,14 @@ from time import *
 
 class MaproomBase:
     "Room with a (big) map"
-    def __init__(self,x,y):
+    def __init__(self,x,y,worldx,worldy):
         ###Room.__init__(self)
         self.prevx = x
         self.prevy = y
         self.relativex = x
-        self.relativey = y 
+        self.relativey = y
+        self.worldx = worldx
+        self.worldy = worldy 
         self.enemies = []
         self.gameobjects = []
         self.tileboxes = []
@@ -195,3 +197,6 @@ class MaproomBase:
 			return 2
 	return 0
 
+    def morphroom(self, game):
+        game.roomnumber = self.changeroomnumber
+        return game.roomnumber

@@ -30,11 +30,8 @@ from daira import *
 
 class RandomGORoom1(MaproomBase):
     "Room with a (big) map"
-    def __init__(self,x,y,worldx,worldy):
-        MaproomBase.__init__(self,x,y)
-
-        self.tempworldx = worldx
-        self.tempworldy = worldy
+    def __init__(self):
+        MaproomBase.__init__(self,0,0,0,0)
 
         self.background = pygame.image.load('./pics/bg1-2400x600.bmp').convert()
         ###self.northwall1 = Tilebox(1,1,60,48,16,1,'./pics/walldungeonnorth2-beholderglass-60x48.bmp')
@@ -102,8 +99,8 @@ class RandomGORoom1(MaproomBase):
 
     def exit(self, game):
 	if self.isroomdownexit():
-                game.worldx = self.tempworldx
-                game.worldy = self.tempworldy 
+                game.worldx = self.worldx
+                game.worldy = self.worldy 
 		return 1.1
 	return 0 
  

@@ -61,6 +61,9 @@ class Game:
         ### self.room = RandomGORoom1(0,0)
         ### self.room = Tileroom1(0,0,0,0)
         self.room = MaproomCave1(0,0,0,-2000+480)
+        self.roomstate = RoomState()
+        self.roomchanger = RoomChanger()
+
         manameter = ManaMeter(0,0)
         lifemeter = LifeMeter(250,0)
         self.player = PlayerLink(lifemeter,manameter)
@@ -327,66 +330,63 @@ class Game:
             screen.blit(blankimage, (0,0))
 
 
-            roomnumber = self.room.exit(self)
+            self.roomnumber = self.room.exit(self)
+            if self.roomstate.checkeq(self.roomnumber):
+                self.roomstate.changeroom(self.roomchanger, self.roomstate):
+                self.room = self.roomstate.morphroom()
+                self.player = self.roomstate.getplayer(self.player)
 
-	    if f != None and f > 2:
-		roomnumber = f 
+            # NOTE: world 1
+            if self.roomnumber < 10:
 
-	### NOTE : if there is a change in roomnumber present
-	### this is the final change of the room then
-	    if self.room.changeroomnumber != 0:
-		roomnumber = self.room.changeroomnumber
-
-
-####            self.chooseroom(roomnumber,font)
-            if (roomnumber == 0):
-                1#return
-        # NOTE: woods 
-            if (roomnumber == 1):
-                self.talker = None
-        	self.player = PlayerLink(lifemeter,manameter)
-                self.room = RandomGORoom1(self.roomx,self.roomy,self.worldx,self.worldy)
-            elif (roomnumber == 1.1):
-                self.talker = None
-                self.player = PlayerTileLink()
-                self.room = Tileroom1(self.roomx,self.roomy,0,0)
-            elif (roomnumber == 2):
-                self.talker = None
-                self.player = PlayerLink(lifemeter,manameter)
-                self.room = Maproom2(self.roomx,self.roomy)
-            elif (roomnumber == 4):
-                self.talker = None
-                self.player = PlayerLink(lifemeter,manameter)
-                self.room = Maproom2(self.roomx,self.roomy)
+	        ### if self.room.changeroomnumber != 0:
+                self.roomnumber = self.room.morphroom(self)
+ 
+                if (self.roomnumber == 1):
+                    self.talker = None
+        	    self.player = PlayerLink(lifemeter,manameter)
+                    self.room = RandomGORoom1(self.roomx,self.roomy,self.worldx,self.worldy)
+                elif (self.roomnumber == 1.1):
+                    self.talker = None
+                    self.player = PlayerTileLink()
+                    self.room = Tileroom1(self.roomx,self.roomy,0,0)
+                elif (self.roomnumber == 2):
+                    self.talker = None
+                    self.player = PlayerLink(lifemeter,manameter)
+                    self.room = Maproom2(self.roomx,self.roomy)
+                elif (self.roomnumber == 4):
+                    self.talker = None
+                    self.player = PlayerLink(lifemeter,manameter)
+                    self.room = Maproom2(self.roomx,self.roomy)
 		### town 1 
-            elif (roomnumber == 3):
-                self.talker = None
-                self.player = PlayerLink(lifemeter,manameter)
-                self.room = MaproomTown1(self.roomx,self.roomy)
-		self.player.y = 360 
+                elif (self.roomnumber == 3):
+                    self.talker = None
+                    self.player = PlayerLink(lifemeter,manameter)
+                    self.room = MaproomTown1(self.roomx,self.roomy)
+		    self.player.y = 360 
 		### first house in town 1
-            elif (roomnumber == 3.1):
-                self.talker = None
-                self.player = PlayerLink(lifemeter,manameter)
-                self.room = MaproomTown1Inside1(self.roomx,self.roomy)
-		self.player.y = 350 
+                elif (self.roomnumber == 3.1):
+                    self.talker = None
+                    self.player = PlayerLink(lifemeter,manameter)
+                    self.room = MaproomTown1Inside1(self.roomx,self.roomy)
+		    self.player.y = 350 
 		### second house in town 1
-            elif (roomnumber == 3.2):
-                self.talker = None
-                self.player = PlayerLink(lifemeter,manameter)
-                self.room = MaproomTown1Inside2(self.roomx,self.roomy)
-		self.player.y = 350
-            elif (roomnumber == 5):
-                self.talker = None
-                self.player = PlayerLink(lifemeter,manameter)
+                elif (self.roomnumber == 3.2):
+                    self.talker = None
+                    self.player = PlayerLink(lifemeter,manameter)
+                    self.room = MaproomTown1Inside2(self.roomx,self.roomy)
+		    self.player.y = 350
+                elif (self.roomnumber == 5):
+                    self.talker = None
+                    self.player = PlayerLink(lifemeter,manameter)
                 ### self.room = MaproomCave1(self.roomx,self.roomy)
-                self.room = MaproomCave1(0,0,0,-2000+480)
-		self.player.y = 360 ### 382
-            elif (roomnumber == 6):
-                self.talker = None
-                self.player = PlayerLink(lifemeter,manameter)
-                self.room = MaproomCatCastle1(0,0)###,0,-2000+480)
-		self.player.y = 360 ### 382
+                    self.room = MaproomCave1(0,0,0,-2000+480)
+		    self.player.y = 360 ### 382
+                elif (self.roomnumber == 6):
+                    self.talker = None
+                    self.player = PlayerLink(lifemeter,manameter)
+                    self.room = MaproomCatCastle1(0,0)###,0,-2000+480)
+		    self.player.y = 360 ### 382
  
             if self.inventoryrubysword:
                 self.sethitf(self.room.gameobjects.hit2)
@@ -400,7 +400,7 @@ class Game:
         self.worldx = xx
         self.worldy = yy
 
-###    def chooseroom(self, roomnumber,font):
+###    def chooseroom(self, self.roomnumber,font):
             
 if __name__ == "__main__":
     foo = Game()
