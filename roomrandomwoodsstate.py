@@ -16,17 +16,6 @@
 
 import pygame
 from pygame.locals import *
-from maproom import *
-from maproombase import *
-from koboldwizard import *
-from tilebox import *
-from snakeflyer import *
-from rubysword import *
-from rope import *
-from daira import *
-from healingpotionitem import *
-from healingheartitem import *
-from healingitem import *
 
 ### Room State interface
 

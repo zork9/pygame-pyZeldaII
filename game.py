@@ -331,7 +331,7 @@ class Game:
 
 
             self.roomnumber = self.room.exit(self)
-            if self.roomstate.checkeq(self.roomnumber):
+            if self.roomstate.checkeq(self.roomnumber)
                 self.roomstate.changeroom(self.roomchanger, self.roomstate):
                 self.room = self.roomstate.morphroom()
                 self.player = self.roomstate.getplayer(self.player)

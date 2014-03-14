@@ -25,13 +25,14 @@ class RoomState:
         self.roomstate = None 
 
     def changeroom(self,roomchanger, roomstate):
-       self.roomchanger.changestate(roomstate)
+       if self.checkeq(roomstate.getn()):
+           self.roomchanger.changestate(roomstate)
 
     def checkeq(self, n):
        if n != self.roomstate.getn():
-           return True
+           return False 
        else:
-           return False
+           return True 
 
     def morphroom(self):
         pass 
