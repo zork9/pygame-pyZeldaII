@@ -41,6 +41,8 @@ class GhostyGO(CommonGO):
         self.hitf = self.hit1
 	self.directioncounter = 0
 
+        self.changeroomnumber = 1 ### random woods
+
 	### use a side and updown direction variable
     def update(self,room,player):
 	r = randint(0,30)

@@ -51,8 +51,10 @@ class Game:
         blankimage = pygame.image.load('./pics/blank.bmp').convert()
         ## There are several title screens in the ./pics/ directory
         titleimage = pygame.image.load('./pics/titlescreen-link3.bmp').convert()
-        self.x = 0
-        self.y = 0
+        self.roomx = 0
+        self.roomy = 0
+        self.worldx = 0
+        self.worldy = 0
         
         ###self.room = MaproomTown1(0,0)
         ### self.room = MaproomCatCastle1(0,0)
@@ -343,41 +345,41 @@ class Game:
             if (roomnumber == 1):
                 self.talker = None
         	self.player = PlayerLink(lifemeter,manameter)
-                self.room = RandomGORoom1(self.x,self.y)
+                self.room = RandomGORoom1(self.roomx,self.roomy,self.worldx,self.worldy)
             elif (roomnumber == 1.1):
                 self.talker = None
                 self.player = PlayerTileLink()
-                self.room = Tileroom1(self.x,self.y,0,0)
+                self.room = Tileroom1(self.roomx,self.roomy,0,0)
             elif (roomnumber == 2):
                 self.talker = None
                 self.player = PlayerLink(lifemeter,manameter)
-                self.room = Maproom2(self.x,self.y)
+                self.room = Maproom2(self.roomx,self.roomy)
             elif (roomnumber == 4):
                 self.talker = None
                 self.player = PlayerLink(lifemeter,manameter)
-                self.room = Maproom2(self.x,self.y)
+                self.room = Maproom2(self.roomx,self.roomy)
 		### town 1 
             elif (roomnumber == 3):
                 self.talker = None
                 self.player = PlayerLink(lifemeter,manameter)
-                self.room = MaproomTown1(self.x,self.y)
+                self.room = MaproomTown1(self.roomx,self.roomy)
 		self.player.y = 360 
 		### first house in town 1
             elif (roomnumber == 3.1):
                 self.talker = None
                 self.player = PlayerLink(lifemeter,manameter)
-                self.room = MaproomTown1Inside1(self.x,self.y)
+                self.room = MaproomTown1Inside1(self.roomx,self.roomy)
 		self.player.y = 350 
 		### second house in town 1
             elif (roomnumber == 3.2):
                 self.talker = None
                 self.player = PlayerLink(lifemeter,manameter)
-                self.room = MaproomTown1Inside2(self.x,self.y)
+                self.room = MaproomTown1Inside2(self.roomx,self.roomy)
 		self.player.y = 350
             elif (roomnumber == 5):
                 self.talker = None
                 self.player = PlayerLink(lifemeter,manameter)
-                ### self.room = MaproomCave1(self.x,self.y)
+                ### self.room = MaproomCave1(self.roomx,self.roomy)
                 self.room = MaproomCave1(0,0,0,-2000+480)
 		self.player.y = 360 ### 382
             elif (roomnumber == 6):
@@ -395,8 +397,8 @@ class Game:
             i.hitf = hitf
 
     def setxy(self,xx,yy):
-        self.x = xx
-        self.y = yy
+        self.worldx = xx
+        self.worldy = yy
 
 ###    def chooseroom(self, roomnumber,font):
             

@@ -740,8 +740,8 @@ class Tileroom1(TileroomBase):
     def collide(self,player):
 	for go in self.tileroomgameobjects:
 		if go.collidego(self,player):
-			self.undomove()
-			return 2	
+			### self.undomove()
+			return 0 ### 2	
 
 	r = TileroomBase.collide(self,player)
 	# tile 1 

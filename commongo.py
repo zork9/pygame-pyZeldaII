@@ -88,7 +88,7 @@ class CommonGO(Gameobject):
 	player.x-room.relativex < self.x+self.w and 
 	player.y-room.relativey > self.y and 
 	player.y-room.relativey < self.y + self.h):
-	    print "collision with OgreGO"
+	    print "collision with CommonGO"
 	    return 1 
 	else:
 	    return 0 ## for game self.talker
